@@ -3,6 +3,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChang
 import { getDatabase, ref, get, set, remove, serverTimestamp } from 'firebase/database';
 import { v4 as uuid } from 'uuid';
 import { HabitType } from '../pages/NewHabit';
+import { CheckType } from '../components/HabitTable';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -63,7 +64,12 @@ export async function addOrUpdateHabit(userId, habit: HabitType) {
   return null;
 }
 
-export async function getChecks(params: any) {}
+export async function getChecks(userId: any) {
+  return get(ref(database, `checkmarks/${userId}`)).then((snapshot) => {
+    const items: CheckType[] = snapshot.val() || {};
+    return Object.values(items);
+  });
+}
 
 export async function addOrUpdateCheck(userId, check: any) {
   const id = check.id ? check.id : uuid();
@@ -74,5 +80,7 @@ export async function addOrUpdateCheck(userId, check: any) {
 }
 
 export async function removeCheck(userId, checkId: any) {
-  return remove(ref(database, `carts/${userId}/${checkId}`));
+  console.log(userId, checkId);
+
+  return remove(ref(database, `checkmarks/${userId}/${checkId}`));
 }
