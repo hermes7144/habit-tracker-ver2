@@ -1,15 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import App from './App';
+import Index from './pages/Index';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
+import DashBoard from './pages/DashBoard';
+import NewHabit from './pages/NewHabit';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      { index: true, path: '/', element: <Index /> },
+      { path: '/auth/login', element: <Login /> },
+      { path: '/auth/register', element: <Register /> },
+      { path: '/habits', element: <DashBoard /> },
+      { path: '/habits/new', element: <NewHabit /> },
+    ],
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
@@ -17,3 +35,4 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
