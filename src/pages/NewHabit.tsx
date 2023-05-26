@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import UseHabits from '../hooks/useHabits';
+import useHabits from '../hooks/useHabits';
 import { useNavigate } from 'react-router-dom';
 
 type HabitType = {
@@ -18,7 +18,7 @@ const initialHabit = {
 const frequencies = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
 export default function NewHabit() {
-  const { addOrUpdateItem } = UseHabits();
+  const { addOrUpdateItem } = useHabits();
   const [habit, setHabit] = useState<HabitType>(initialHabit);
   const [success, setSuccess] = useState('');
 
@@ -45,7 +45,6 @@ export default function NewHabit() {
     });
   };
 
-  // const { user, login } = useAuthContext();
   return (
     <div className='flex content-center items-center justify-center h-full'>
       <div className='w-full lg:w-4/12 px-4'>

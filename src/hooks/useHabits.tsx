@@ -1,9 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuthContext } from '../context/AuthContext';
-import { addOrUpdateHabit, getHabits } from '../api/firebase';
+import { getHabits, addOrUpdateHabit, getChecks, addOrUpdateCheck, removeCheck } from '../api/firebase';
 import { HabitType } from '../pages/NewHabit';
 
-export default function UseHabits() {
+export default function useHabits() {
   const { uid } = useAuthContext();
   const queryClient = useQueryClient();
 
@@ -15,5 +15,19 @@ export default function UseHabits() {
     },
   });
 
-  return { habitsQuery, addOrUpdateItem };
+  const checksQuery = useQuery(['checks', uid || ''], () => getChecks(uid), { enabled: !!uid });
+
+  const addOrUpdateCheckItem = useMutation((check: any) => addOrUpdateCheck(uid, check), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['checks', uid]);
+    },
+  });
+
+  const removeCheckItem = useMutation((check: any) => removeCheck(uid, check.id), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['checks', uid]);
+    },
+  });
+
+  return { habitsQuery, addOrUpdateItem, checksQuery, addOrUpdateCheckItem, removeCheckItem };
 }

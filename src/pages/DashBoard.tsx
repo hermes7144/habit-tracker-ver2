@@ -1,9 +1,5 @@
-import Habits from '../components/Habits';
+import HabitTable from '../components/HabitTable';
 
 export default function DashBoard() {
-  return (
-    <section>
-      <Habits />
-    </section>
-  );
+  return <HabitTable />;
 }

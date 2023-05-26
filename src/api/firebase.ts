@@ -55,10 +55,24 @@ export async function getHabits(userId) {
   });
 }
 
-export async function addOrUpdateHabit(user_id, habit: HabitType) {
+export async function addOrUpdateHabit(userId, habit: HabitType) {
   const id = habit.id ? habit.id : uuid();
   const date = habit.id == null ? { createdAt: serverTimestamp() } : { updatedAt: serverTimestamp() };
 
-  set(ref(database, `habits/${user_id}/${id}`), { ...habit, ...date, user_id, id });
+  set(ref(database, `habits/${userId}/${id}`), { ...habit, ...date, id });
   return null;
+}
+
+export async function getChecks(params: any) {}
+
+export async function addOrUpdateCheck(userId, check: any) {
+  const id = check.id ? check.id : uuid();
+  const date = check.id == null ? { createdAt: serverTimestamp() } : { updatedAt: serverTimestamp() };
+
+  set(ref(database, `checkmarks/${userId}/${id}`), { ...check, ...date, id });
+  return null;
+}
+
+export async function removeCheck(userId, checkId: any) {
+  return remove(ref(database, `carts/${userId}/${checkId}`));
 }
