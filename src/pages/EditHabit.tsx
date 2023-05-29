@@ -10,7 +10,7 @@ Modal.setAppElement('#root');
 
 export default function EditHabit() {
   const {
-    habitsQuery: { isLoading, error, data: habits },
+    habitsQuery: { isLoading, data: habits },
     removeItem,
   } = useHabits();
 
@@ -31,6 +31,8 @@ export default function EditHabit() {
       removeItem.mutate(id);
     }
   };
+
+  if (isLoading) <p>Loading...</p>;
 
   return (
     <>

@@ -16,7 +16,7 @@ export type CheckType = {
 
 export default function DashBoard() {
   const {
-    habitsQuery: { isLoading, error, data: habits },
+    habitsQuery: { isLoading, data: habits },
     checksQuery: { isLoading: isLoading2, data: checkmarks },
     addOrUpdateCheckItem,
     removeCheckItem,

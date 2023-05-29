@@ -7,7 +7,6 @@ import HabitForm from '../components/HabitForm';
 Modal.setAppElement('#root');
 
 export default function MyWebsite() {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
