@@ -1,9 +1,9 @@
 import { useAuthContext } from '../context/AuthContext';
-import DashBoard from './DashBoard';
+import AuthPage from './AuthPage';
 import Landing from './Landing';
 
 export default function Index() {
   const { user } = useAuthContext();
 
-  return <>{user ? <DashBoard /> : <Landing />}</>;
+  return <>{user ? <AuthPage /> : <Landing />}</>;
 }

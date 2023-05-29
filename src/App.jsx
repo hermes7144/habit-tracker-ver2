@@ -7,10 +7,20 @@ function App() {
   const queryClient = new QueryClient();
 
   return (
+    // 여기서 쪼개면 될 거 같다.
     <QueryClientProvider client={queryClient}>
       <AuthContextProvider>
-        <Navbar />
-        <Outlet />
+        {1 + 1 === 2 ? (
+          <>
+            <Navbar />
+            <Outlet />
+          </>
+        ) : (
+          <>
+            <Navbar />
+            <Outlet />
+          </>
+        )}
       </AuthContextProvider>
     </QueryClientProvider>
   );

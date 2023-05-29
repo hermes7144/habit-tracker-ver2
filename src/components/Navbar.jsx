@@ -1,27 +1,34 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { FaArchive, FaPencilAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { FaPencilAlt } from 'react-icons/fa';
 import User from './User';
 import Button from './ui/Button';
 import { useAuthContext } from '../context/AuthContext';
 
 export default function Navbar() {
-  const { user, login, logout } = useAuthContext();
+  const { user, logout } = useAuthContext();
 
   return (
     <header className='flex justify-between border-b border-gray-300 p-2'>
-      <Link to='/' className='flex items-center text-4xl text-brand'>
-        <FaArchive />
-        <h1>Shoppy</h1>
+      <Link to='/' className='flex items-center text-2xl text-brand'>
+        <h1>HABITER</h1>
       </Link>
-      <nav className='flex items-center gap-4 font-semibold'>
-        <Link to='/products'>Products</Link>
 
-        {user && user.isAdmin && (
-          <Link to='/products/new' className='text-2xl'>
-            <FaPencilAlt />
+      <ul className='flex flex-col lg:flex-row list-none ml-6 mr-auto'>
+        <li className='flex items-center'>
+          <Link to='/' className='hover:text-blueGray-500 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold'>
+            DashBoard
           </Link>
-        )}
+        </li>
+
+        <li className='flex items-center'>
+          <Link to='/habits/edit' className='hover:text-blueGray-500 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold'>
+            Manage
+          </Link>
+        </li>
+      </ul>
+
+      <nav className='flex items-center gap-4 font-semibold'>
         {user && (
           <Link to='/habits/new' className='text-2xl'>
             <FaPencilAlt />

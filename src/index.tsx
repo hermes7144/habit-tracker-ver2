@@ -8,6 +8,7 @@ import Index from './pages/Index';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import NewHabit from './pages/NewHabit';
+import EditHabit from './pages/EditHabit';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       { path: '/auth/login', element: <Login /> },
       { path: '/auth/register', element: <Register /> },
       { path: '/habits/new', element: <NewHabit /> },
+      { path: '/habits/edit', element: <EditHabit /> },
     ],
   },
 ]);
