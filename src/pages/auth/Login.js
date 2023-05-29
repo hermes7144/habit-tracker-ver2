@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuthContext } from '../../context/AuthContext';
 
 export default function Login() {
-  const { user, login } = useAuthContext();
+  const { login } = useAuthContext();
   return (
     <main>
       <section className="relative w-full h-full py-40 min-h-screen">
