@@ -4,22 +4,22 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
-import Index from './pages/Index';
+import IndexPage from './pages/IndexPage';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
-import NewHabit from './pages/NewHabit';
-import EditHabit from './pages/EditHabit';
+import NewHabitPage from './pages/NewHabitPage';
+import EditHabitPage from './pages/EditHabitPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     children: [
-      { index: true, path: '/', element: <Index /> },
+      { index: true, path: '/', element: <IndexPage /> },
       { path: '/auth/login', element: <Login /> },
       { path: '/auth/register', element: <Register /> },
-      { path: '/habits/new', element: <NewHabit /> },
-      { path: '/habits/edit', element: <EditHabit /> },
+      { path: '/habits/new', element: <NewHabitPage /> },
+      { path: '/habits/edit', element: <EditHabitPage /> },
     ],
   },
 ]);

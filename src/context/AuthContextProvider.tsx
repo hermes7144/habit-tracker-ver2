@@ -13,13 +13,15 @@ type AuthContextProviderProps = {
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     onUserStateChange((user: User) => {
       setUser(user);
+      setIsLoading(false);
       navigate('/');
     });
   }, [navigate]);
 
-  return <AuthContext.Provider value={{ user, uid: user?.uid, login, logout }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ user, uid: user?.uid, login, logout, isLoading }}>{children}</AuthContext.Provider>;
 }

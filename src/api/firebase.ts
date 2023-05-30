@@ -1,8 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from 'firebase/auth';
-import { getDatabase, ref, get, set, remove, serverTimestamp } from 'firebase/database';
+import { getDatabase, ref, get, set, remove, serverTimestamp, query, orderByChild } from 'firebase/database';
 import { v4 as uuid } from 'uuid';
-import { HabitType } from '../pages/NewHabit';
+import { HabitType } from '../pages/NewHabitPage';
 import { CheckType } from '../pages/DashBoard';
 
 const firebaseConfig = {
@@ -50,9 +50,12 @@ async function adminUser(user) {
 }
 
 export async function getHabits(userId) {
-  return get(ref(database, `habits/${userId}`)).then((snapshot) => {
+  const habitsRef = ref(database, `habits/${userId}`);
+  const habitsQuery = query(habitsRef, orderByChild('createdAt'));
+
+  return get(habitsQuery).then((snapshot) => {
     const items = snapshot.val() || {};
-    return Object.values(items);
+    return Object.values(items).reverse();
   });
 }
 

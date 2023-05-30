@@ -6,6 +6,7 @@ type UserType = {
   uid?: string;
   login: () => {};
   logout: () => void;
+  isLoading: boolean;
 };
 
 export const AuthContext = createContext<UserType | null>(null);

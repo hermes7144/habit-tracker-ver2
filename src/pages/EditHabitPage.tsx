@@ -2,13 +2,13 @@ import { useState } from 'react';
 import Modal from 'react-modal';
 import FrequencyChip from '../components/FrequencyChip';
 import useHabits from '../hooks/useHabits';
-import { HabitType } from './NewHabit';
+import { HabitType } from './NewHabitPage';
 import { RiPencilFill, RiDeleteBin5Fill } from 'react-icons/ri';
 import HabitForm from '../components/HabitForm';
 
 Modal.setAppElement('#root');
 
-export default function EditHabit() {
+export default function EditHabitPage() {
   const {
     habitsQuery: { isLoading, data: habits },
     removeItem,
@@ -40,19 +40,19 @@ export default function EditHabit() {
         <tbody>
           {habits?.map((habit: HabitType) => (
             <tr key={habit.id}>
-              <th className='w-8/12 text-left'>
-                <p className='text-lg'>{habit.title}</p>
-                <p className='text-xs text-gray-300'>{habit.description}</p>
+              <th className='w-6/12 text-left '>
+                <p className='text-lg word break-all'>{habit.title}</p>
+                <p className='text-xs text-gray-300 break-all'>{habit.description}</p>
               </th>
-              <td className='w-2/12'>
+              <td className='w-3/12'>
                 <FrequencyChip frequency={habit.frequency} />
               </td>
-              <td className='text-2xl w-1/12 hover:text-gray-800 text-gray-500 cursor-pointer'>
+              <td className='w-1/12 text-2xl  hover:text-gray-800 text-gray-500 cursor-pointer'>
                 <div className='flex items-center justify-center'>
                   <RiPencilFill onClick={() => openModal(habit)} />
                 </div>
               </td>
-              <td className='text-2xl w-1/12 hover:text-gray-800 text-gray-500 cursor-pointer'>
+              <td className='w-1/12 text-2xl hover:text-gray-800 text-gray-500 cursor-pointer'>
                 <div className='flex items-center justify-center'>
                   <RiDeleteBin5Fill onClick={() => handleDelete(habit.id)} />
                 </div>
@@ -68,7 +68,7 @@ export default function EditHabit() {
         style={{
           content: {
             position: 'absolute',
-            top: '250px',
+            top: '20%',
             left: '50%',
             transform: 'translateX(-50%)',
             width: '510px',

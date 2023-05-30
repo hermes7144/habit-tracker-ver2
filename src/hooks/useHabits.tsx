@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuthContext } from '../context/AuthContext';
 import { getHabits, addOrUpdateHabit, getChecks, addOrUpdateCheck, removeCheck, removeHabit } from '../api/firebase';
-import { HabitType } from '../pages/NewHabit';
+import { HabitType } from '../pages/NewHabitPage';
 import { CheckType } from '../pages/DashBoard';
 
 export default function useHabits() {

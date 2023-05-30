@@ -16,7 +16,7 @@ const initialHabit = {
 };
 const frequencies = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
-export default function NewHabit() {
+export default function NewHabitPage() {
   const { addOrUpdateItem } = useHabits();
   const [habit, setHabit] = useState<HabitType>(initialHabit);
   const [success, setSuccess] = useState('');
