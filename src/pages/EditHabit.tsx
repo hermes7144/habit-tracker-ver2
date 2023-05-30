@@ -14,16 +14,16 @@ export default function EditHabit() {
     removeItem,
   } = useHabits();
 
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [habit, setHabit] = useState({});
 
   function openModal(habit) {
-    setIsOpen(true);
+    setModalIsOpen(true);
     setHabit(habit);
   }
 
   function closeModal() {
-    setIsOpen(false);
+    setModalIsOpen(false);
   }
 
   const handleDelete = (id) => {
@@ -61,6 +61,7 @@ export default function EditHabit() {
           ))}
         </tbody>
       </table>
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -68,9 +69,10 @@ export default function EditHabit() {
           content: {
             position: 'absolute',
             top: '250px',
-            left: '700px',
-            right: '700px',
-            bottom: '200px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '510px',
+            height: '460px',
           },
         }}>
         <HabitForm closeModal={closeModal} habitProp={habit} />

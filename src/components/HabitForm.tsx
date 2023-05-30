@@ -34,6 +34,8 @@ export default function HabitForm({ closeModal, habitProp }: { closeModal: any; 
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!habit.title || !habit.frequency.length) return;
     addOrUpdateItem.mutate(habit, {
       onSuccess: () => {
         closeModal();

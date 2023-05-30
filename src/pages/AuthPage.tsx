@@ -7,24 +7,24 @@ import HabitForm from '../components/HabitForm';
 Modal.setAppElement('#root');
 
 export default function MyWebsite() {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   function openModal() {
-    setIsOpen(true);
+    setModalIsOpen(true);
   }
 
   function closeModal() {
-    setIsOpen(false);
+    setModalIsOpen(false);
   }
 
   return (
     <div>
-      {/* 웹사이트 컨텐츠 */}
       <DashBoard />
-      {/* 하단 아이콘 */}
-      <div className='fixed bottom-0 right-0 m-4 bg-blue-500 rounded-full p-4 cursor-pointer' onClick={openModal}>
+
+      <div className='fixed bottom-0 right-0 m-7 bg-brand rounded-full p-4 cursor-pointer' onClick={openModal}>
         <AiOutlinePlus className='text-white' />
       </div>
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -32,9 +32,10 @@ export default function MyWebsite() {
           content: {
             position: 'absolute',
             top: '250px',
-            left: '700px',
-            right: '700px',
-            bottom: '200px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '510px',
+            height: '460px',
           },
         }}>
         <HabitForm closeModal={closeModal} habitProp={null} />
