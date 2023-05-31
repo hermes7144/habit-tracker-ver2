@@ -48,42 +48,44 @@ export default function DashBoard() {
 
   return (
     <div className='mt-2'>
-      <div className='flex m-5'>
+      <div className='flex m-2'>
         <Calendar onChange={setValue} value={value} calendarType='US' />
       </div>
-      <div className={`relative flex flex-col min-w-0 break-words w-full my-6 shadow-lg rounded`}>
-        <div className='block w-full overflow-x-auto'>
-          <table className='items-center w-full bg-transparent border-collapse'>
-            <thead>
-              <tr>
-                <th className={`w-5/12 px-6 align-middle border border-solid py-3 text-xs whitespace-nowrap font-semibold text-center bg-blueGray-50 text-blueGray-500 border-blueGray-100`}>Habit</th>
-                {weeklyData.map((date) => (
-                  <th key={date} className={`w-1/12 px-6 align-middle border border-solid py-3 text-xs font-semibold text-center bg-blueGray-50 text-blueGray-500 border-blueGray-100`}>
-                    {date}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {habits?.map((habit: HabitType) => (
-                <tr key={habit.id}>
-                  <th className='px-6 align-middle text-xs p-4'>{habit.title}</th>
-                  {checkmarks &&
-                    weeklyData.map((date, index) => {
-                      const freq = habit.frequency.includes(String(index));
-                      const isChecked = checkmarks?.some((checkmark) => checkmark.title === habit.title && checkmark.date === date);
-                      const isToday = date === String(today);
-
-                      return (
-                        <td className='text-center' key={date}>
-                          {freq && <input type='checkbox' className={isToday ? '' : 'opacity-50 bg-gray-100'} name={habit.id} checked={isChecked} disabled={!isToday} onChange={(e) => handleChange(e, habit, date)} />}
-                        </td>
-                      );
-                    })}
+      <div className='m-2'>
+        <div className={`relative flex flex-col min-w-0 break-words w-full my-6 shadow-lg rounded`}>
+          <div className='block w-full overflow-x-auto'>
+            <table className='items-center w-full bg-transparent border-collapse'>
+              <thead>
+                <tr>
+                  <th className={`w-5/12 px-6 align-middle border border-solid py-3 text-xs whitespace-nowrap font-semibold text-center bg-blueGray-50 text-blueGray-500 border-blueGray-100`}>Habit</th>
+                  {weeklyData.map((date) => (
+                    <th key={date} className={`w-1/12 px-6 align-middle border border-solid py-3 text-xs font-semibold text-center bg-blueGray-50 text-blueGray-500 border-blueGray-100`}>
+                      {date}
+                    </th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {habits?.map((habit: HabitType) => (
+                  <tr key={habit.id}>
+                    <th className='px-6 align-middle text-xs p-4'>{habit.title}</th>
+                    {checkmarks &&
+                      weeklyData.map((date, index) => {
+                        const freq = habit.frequency.includes(String(index));
+                        const isChecked = checkmarks?.some((checkmark) => checkmark.title === habit.title && checkmark.date === date);
+                        const isToday = date === String(today);
+
+                        return (
+                          <td className='text-center' key={date}>
+                            {freq && <input type='checkbox' className={isToday ? '' : 'opacity-50 bg-gray-100'} name={habit.id} checked={isChecked} disabled={!isToday} onChange={(e) => handleChange(e, habit, date)} />}
+                          </td>
+                        );
+                      })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
