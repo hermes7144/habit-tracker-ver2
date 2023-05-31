@@ -19,8 +19,6 @@ const initialHabit = {
 const frequencies = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
 export default function HabitForm({ closeModal, habitProp }: { closeModal: any; habitProp: any | null }) {
-  console.log(habitProp);
-
   const { addOrUpdateItem } = useHabits();
   const [habit, setHabit] = useState<HabitType>(habitProp || initialHabit);
 
@@ -54,23 +52,23 @@ export default function HabitForm({ closeModal, habitProp }: { closeModal: any; 
       <div className='flex w-full justify-end'>
         <AiOutlineClose className='text-2xl' onClick={closeModal} />
       </div>
-      <div className=' w-[500px] px-4'>
-        <div className='relative flex flex-col min-w-0 break-words mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0'>
-          <div className='rounded-t mb-0 px-6 py-6'>
-            <div className='text-center mb-3'>
+      <div className=' w-[350px] md:w-[500px] px-4'>
+        <div className='relative flex flex-col min-w-0 break-words shadow-lg rounded-lg bg-blueGray-200 border-0'>
+          <div className='rounded-t mb-0 px-6'>
+            <div className='text-center my-3'>
               <h6 className='text-blueGray-500 text-sm font-bold'>{habitProp ? 'Manage Habit' : 'Create new Habit'}</h6>
             </div>
-            <hr className='mt-6 border-b-1 border-blueGray-300' />
+            <hr className=' border-b-1 border-blueGray-300' />
           </div>
-          <div className='flex-auto px-4 lg:px-10 py-10 pt-0'>
+          <div className='flex-auto px-4 lg:px-10 pb-5'>
             <form onSubmit={handleSubmit}>
-              <input type='text' className='w-full mb-3' id='title' name='title' value={habit?.title} onChange={handleChange} placeholder='Habit Name' required />
+              <input type='text' className='w-full my-2' id='title' name='title' value={habit?.title} onChange={handleChange} placeholder='Habit Name' required />
 
-              <input type='text' className='w-full mb-3' name='description' value={habit?.description} onChange={handleChange} placeholder='Description' />
+              <input type='text' className='w-full my-2' name='description' value={habit?.description} onChange={handleChange} placeholder='Description' />
 
               <span className='ml-2 text-sm font-semibold text-blueGray-600'>Frequency</span>
 
-              <div className='flex justify-around mb-5'>
+              <div className='flex justify-around mb-3'>
                 {frequencies.map((frequency, index) => {
                   const isChecked = habit?.frequency.includes(String(index));
                   return (

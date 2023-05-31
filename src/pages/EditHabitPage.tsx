@@ -5,6 +5,7 @@ import useHabits from '../hooks/useHabits';
 import { HabitType } from './NewHabitPage';
 import { RiPencilFill, RiDeleteBin5Fill } from 'react-icons/ri';
 import HabitForm from '../components/HabitForm';
+import { useMediaQuery } from 'react-responsive';
 
 Modal.setAppElement('#root');
 
@@ -33,6 +34,26 @@ export default function EditHabitPage() {
   };
 
   if (isLoading) <p>Loading...</p>;
+
+  const isDesktopOrMobile = useMediaQuery({ minWidth: 768 });
+
+  const content = isDesktopOrMobile
+    ? {
+        position: 'absolute',
+        top: '20%',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '510px',
+        height: '380px',
+      }
+    : {
+        position: 'absolute',
+        top: '15%',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '360px',
+        height: '380px',
+      };
 
   return (
     <>
@@ -66,14 +87,7 @@ export default function EditHabitPage() {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={{
-          content: {
-            position: 'absolute',
-            top: '20%',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '510px',
-            height: '460px',
-          },
+          content,
         }}>
         <HabitForm closeModal={closeModal} habitProp={habit} />
       </Modal>
