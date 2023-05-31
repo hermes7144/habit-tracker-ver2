@@ -3,10 +3,10 @@ export default function FrequencyChip({ frequency }) {
 
   return (
     <>
-      <div className='flex my-2'>
+      <div className='flex justify-center'>
         {frequency &&
           week.map((day, index) => (
-            <div key={index} className={'flex items-center justify-center w-10 h-10 rounded-full ' + (frequency.includes(String(index)) ? 'bg-brand' : 'bg-gray-300')}>
+            <div key={index} className={'flex items-center justify-center text-sm md:text-lg w-4 h-4 md:w-10 md:h-10 rounded-full ' + (frequency.includes(String(index)) ? 'bg-brand' : 'bg-gray-300')}>
               {day}
             </div>
           ))}

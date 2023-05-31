@@ -15,11 +15,11 @@ export default function Navbar() {
 
       {user && (
         <ul className='flex  list-none ml-6 mr-auto'>
-          <li className='flex items-center'>
+          {/* <li className='flex items-center'>
             <Link to='/' className='hover:text-blueGray-500 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold'>
               DashBoard
             </Link>
-          </li>
+          </li> */}
 
           <li className='flex items-center'>
             <Link to='/habits/edit' className='hover:text-blueGray-500 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold'>

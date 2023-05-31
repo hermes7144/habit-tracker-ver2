@@ -40,19 +40,19 @@ export default function EditHabitPage() {
         <tbody>
           {habits?.map((habit: HabitType) => (
             <tr key={habit.id}>
-              <th className='w-6/12 text-left '>
-                <p className='text-lg word break-all'>{habit.title}</p>
+              <th className='w-6/12 text-left'>
+                <p className='text-sm md:text-lg word break-all'>{habit.title}</p>
                 <p className='text-xs text-gray-300 break-all'>{habit.description}</p>
               </th>
-              <td className='w-3/12'>
+              <td className='w-4/12'>
                 <FrequencyChip frequency={habit.frequency} />
               </td>
-              <td className='w-1/12 text-2xl  hover:text-gray-800 text-gray-500 cursor-pointer'>
+              <td className='w-1/12 text-lg md:text-2xl hover:text-gray-800 text-gray-500 cursor-pointer'>
                 <div className='flex items-center justify-center'>
                   <RiPencilFill onClick={() => openModal(habit)} />
                 </div>
               </td>
-              <td className='w-1/12 text-2xl hover:text-gray-800 text-gray-500 cursor-pointer'>
+              <td className='w-1/12 text-lg md:text-2xl hover:text-gray-800 text-gray-500 cursor-pointer'>
                 <div className='flex items-center justify-center'>
                   <RiDeleteBin5Fill onClick={() => handleDelete(habit.id)} />
                 </div>
