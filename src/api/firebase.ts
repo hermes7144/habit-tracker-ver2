@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from 'firebase/auth';
-import { getDatabase, ref, get, set, remove, serverTimestamp, query, orderByChild } from 'firebase/database';
+import { getDatabase, ref, get, set, remove, serverTimestamp, query, orderByChild, equalTo } from 'firebase/database';
 import { v4 as uuid } from 'uuid';
 import { HabitType } from '../pages/NewHabitPage';
 import { CheckType } from '../pages/DashBoard';
@@ -68,7 +68,13 @@ export async function addOrUpdateHabit(userId, habit: HabitType) {
 }
 
 export async function removeHabit(userId, habitId) {
-  return remove(ref(database, `habits/${userId}/${habitId}`));
+  get(query(ref(database, `checkmarks/${userId}`), orderByChild('habitId'), equalTo(habitId))).then((checkmarks) =>
+    checkmarks.forEach((checkmark) => {
+      remove(ref(database, `checkmarks/${userId}/${checkmark.key}`));
+    })
+  );
+  remove(ref(database, `habits/${userId}/${habitId}`));
+  return null;
 }
 
 export async function getChecks(userId: any) {
@@ -86,5 +92,6 @@ export async function addOrUpdateCheck(userId, check: any) {
 }
 
 export async function removeCheck(userId, checkId: any) {
-  return remove(ref(database, `checkmarks/${userId}/${checkId}`));
+  remove(ref(database, `checkmarks/${userId}/${checkId}`));
+  return null;
 }

@@ -6,12 +6,12 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function DoughnutChart({ pct }) {
   const data = {
-    labels: ['Data'],
+    labels: ['Completed', 'Active'],
     datasets: [
       {
-        data: [pct, 1 - pct], // 데이터 값 (예: 60%)
-        backgroundColor: ['#36a2eb', '#eeeeee'], // 도넛 채우는 색상
-        hoverBackgroundColor: ['#36a2eb', '#eeeeee'], // 마우스 오버 시 색상
+        data: [pct.pct, 100 - pct.pct], // 데이터 값 (예: 60%)
+        backgroundColor: ['rgb(1, 118, 214)', '#eeeeee'], // 도넛 채우는 색상
+        hoverBackgroundColor: ['rgb(1, 118, 214)', '#eeeeee'], // 마우스 오버 시 색상
       },
     ],
   };

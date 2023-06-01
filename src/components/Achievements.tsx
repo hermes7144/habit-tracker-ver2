@@ -10,13 +10,12 @@ export default function Achievements({ habits, checkmarks, weeklyData, laskWeekD
 
   const todayAchieved = checkmarks.filter((checkmark) => checkmark.date.includes(String(today))).length;
 
-  const weekPct = Math.round((weeklyAchieved / totalHabits) * 10) / 10;
-  const lastweekPct = Math.round((lastWeekAchieved / totalHabits) * 10) / 10;
-
-  const todayPct = Math.round((todayAchieved / todayTotalAchieved) * 10) / 10;
+  const weekPct = { title: 'this week', pct: Math.round((weeklyAchieved / totalHabits) * 100) };
+  const lastweekPct = { title: 'last week', pct: Math.round((lastWeekAchieved / totalHabits) * 100) };
+  const todayPct = { title: 'today', pct: Math.round((todayAchieved / todayTotalAchieved) * 100) };
 
   return (
-    <div className='flex flex-col max-w-md lg:w-full'>
+    <div className='flex flex-col'>
       <div className='text-xl text-brand text-center '>Your performance</div>
       <div className='flex '>
         <ChartWrapper pct={lastweekPct} />
@@ -24,8 +23,8 @@ export default function Achievements({ habits, checkmarks, weeklyData, laskWeekD
         <ChartWrapper pct={todayPct} />
       </div>
       <hr />
-      <div className='flex justify-center items-center pt-3'>
-        <span>Overall All Time Performance:{64}%</span>
+      <div className='flex justify-center items-center py-3'>
+        <span className='text-gray-400'>Overall All Time Performance: {64}%</span>
       </div>
     </div>
   );

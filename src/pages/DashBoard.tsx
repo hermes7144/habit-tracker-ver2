@@ -56,17 +56,17 @@ export default function DashBoard() {
 
   return (
     <div className='mt-2'>
-      <div className={`flex flex-col md:flex-row  ${window.innerWidth <= 768 ? 'items-center' : 'justify-between'} m-5 `}>
-        <div className='max-w-sm lg:w-4/12 px-4 pt-10'>{<BarChart dates={weeklyData} labels={weeklyDataMMDD} habits={habits} checkmarks={checkmarks} />}</div>
-        <div className='max-w-sm lg:w-4/12 px-4'>
+      <div className={`flex flex-col md:flex-row  ${window.innerWidth <= 768 ? 'items-center' : 'justify-between'} m-5 gap-4`}>
+        <div className='max-w-sm lg:w-4/12 px-4 pt-10 shadow-lg rounded'>{<BarChart dates={weeklyData} labels={weeklyDataMMDD} habits={habits} checkmarks={checkmarks} />}</div>
+        <div className='max-w-sm lg:w-4/12 px-4 shadow-lg rounded'>
           <Achievements habits={habits} checkmarks={checkmarks} weeklyData={weeklyData} laskWeekData={laskWeekData} today={today} freq={freq} />
         </div>
-        <div className='max-w-sm lg:w-4/12'>
+        <div className=' lg:w-4/12'>
           <Calendar onChange={setValue} value={value} calendarType='US' />
         </div>
       </div>
       <div className='m-2'>
-        <div className={`relative flex flex-col min-w-0 break-words w-full my-6 shadow-lg rounded`}>
+        <div className={`relative flex flex-col min-w-0 break-words w-full shadow-lg rounded`}>
           <div className='block w-full overflow-x-auto'>
             <table className='items-center w-full bg-transparent border-collapse'>
               <thead>
