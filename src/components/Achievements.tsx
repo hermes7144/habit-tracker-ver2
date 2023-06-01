@@ -20,17 +20,15 @@ export default function Achievements() {
   const laskWeekData = Array.from({ length: 7 }, (_, i) => beforeWeek.clone().add(i, 'day').format('YYYY-MM-DD'));
 
   const totalHabits = habits.reduce((acc, habit) => acc + habit.frequency.length, 0);
+  const todayTotalHabits = habits.filter((habit) => habit.frequency.includes(dateIndex)).length;
 
-  const weeklyAchieved = checkmarks.filter((checkmark) => weeklyData.includes(checkmark.date)).length;
   const lastWeekAchieved = checkmarks.filter((checkmark) => laskWeekData.includes(checkmark.date)).length;
-  const todayTotalAchieved = habits.filter((habit) => habit.frequency.includes(dateIndex)).length;
-  const todayAchieved = checkmarks?.filter((checkmark) => checkmark.date.includes(today)).length;
-
-  console.log(todayTotalAchieved, todayAchieved);
+  const weeklyAchieved = checkmarks.filter((checkmark) => weeklyData.includes(checkmark.date)).length;
+  const todayAchieved = checkmarks.filter((checkmark) => checkmark.date.includes(today)).length;
 
   const weekPct = { title: 'this week', pct: Math.round((weeklyAchieved / totalHabits) * 100) || 0 };
   const lastweekPct = { title: 'last week', pct: Math.round((lastWeekAchieved / totalHabits) * 100) || 0 };
-  const todayPct = { title: 'today', pct: Math.round((todayAchieved / todayTotalAchieved) * 100) || 0 };
+  const todayPct = { title: 'today', pct: Math.round((todayAchieved / todayTotalHabits) * 100) || 0 };
 
   return (
     <div className='flex flex-col'>
