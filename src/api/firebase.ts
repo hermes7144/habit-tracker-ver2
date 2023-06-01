@@ -79,10 +79,9 @@ export async function getChecks(userId: any) {
 }
 
 export async function addOrUpdateCheck(userId, check: any) {
-  const id = check.id ? check.id : uuid();
-  const date = check.id == null ? { createdAt: serverTimestamp() } : { updatedAt: serverTimestamp() };
+  const id = uuid();
 
-  set(ref(database, `checkmarks/${userId}/${id}`), { ...check, ...date, id });
+  set(ref(database, `checkmarks/${userId}/${id}`), { ...check, id, createdAt: serverTimestamp() });
   return null;
 }
 

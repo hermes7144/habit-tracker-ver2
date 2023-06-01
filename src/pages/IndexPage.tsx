@@ -5,7 +5,6 @@ import Landing from './LandingPage';
 
 export default function IndexPage() {
   const { user, isLoading } = useAuthContext();
-  console.log(isLoading);
 
   if (isLoading) {
     return (
