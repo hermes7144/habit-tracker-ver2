@@ -16,7 +16,7 @@ export default function Achievements({ habits, checkmarks, weeklyData, laskWeekD
 
   return (
     <div className='flex flex-col'>
-      <div className='text-xl text-brand text-center '>Your performance</div>
+      <div className='text-xl text-brand text-center'>Your performance</div>
       <div className='flex '>
         <ChartWrapper pct={lastweekPct} />
         <ChartWrapper pct={weekPct} />
