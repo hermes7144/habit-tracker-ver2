@@ -56,9 +56,9 @@ export default function DashBoard() {
 
   return (
     <div className='mt-2'>
-      <div className={`flex flex-col md:flex-row ${window.innerWidth <= 768 ? 'items-center' : 'justify-between'} m-5 `}>
-        <div className='max-w-md lg:w-4/12 px-4 pt-10'>{<BarChart dates={weeklyData} labels={weeklyDataMMDD} habits={habits} checkmarks={checkmarks} />}</div>
-        <div className='max-w-md lg:w-4/12 px-4'>
+      <div className={`flex flex-col md:flex-row  ${window.innerWidth <= 768 ? 'items-center' : 'justify-between'} m-5 `}>
+        <div className='max-w-sm lg:w-4/12 px-4 pt-10'>{<BarChart dates={weeklyData} labels={weeklyDataMMDD} habits={habits} checkmarks={checkmarks} />}</div>
+        <div className='max-w-sm lg:w-4/12 px-4'>
           <Achievements habits={habits} checkmarks={checkmarks} weeklyData={weeklyData} laskWeekData={laskWeekData} today={today} freq={freq} />
         </div>
         <div className='max-w-md lg:w-4/12'>
