@@ -61,7 +61,7 @@ export default function DashBoard() {
         <div className='max-w-sm lg:w-4/12 px-4'>
           <Achievements habits={habits} checkmarks={checkmarks} weeklyData={weeklyData} laskWeekData={laskWeekData} today={today} freq={freq} />
         </div>
-        <div className='max-w-md lg:w-4/12'>
+        <div className='max-w-sm lg:w-4/12'>
           <Calendar onChange={setValue} value={value} calendarType='US' />
         </div>
       </div>
