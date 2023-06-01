@@ -34,7 +34,7 @@ export default function Achievements() {
 
   return (
     <div className='flex flex-col'>
-      <div className='text-xl text-brand text-center'>Your performance</div>
+      <div className='text-xl text-brand text-center font-bold'>Your performance</div>
       <div className='flex justify-center'>
         <ChartWrapper pct={lastweekPct} />
         <ChartWrapper pct={weekPct} />

@@ -17,7 +17,6 @@ export type HabitType = {
 export type CheckType = {
   id: string;
   title: string;
-  status: string;
   date: string;
   createdAt: Date;
   habitId: string;
@@ -41,11 +40,10 @@ export default function DashBoard() {
   const weeklyDataMMDD = Array.from({ length: 7 }, (_, i) => startOfWeek.clone().add(i, 'day').format('MM-DD'));
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, habit: HabitType, date: String) => {
-    const status = e.target.checked ? 'completed' : '';
     const { id } = habit;
 
-    if (status) {
-      addOrUpdateCheckItem.mutate({ habitId: id, date, status });
+    if (e.target.checked) {
+      addOrUpdateCheckItem.mutate({ habitId: id, date });
     } else {
       const checkmark = checkmarks.find((checkmark) => checkmark.habitId === id && checkmark.date === date);
       if (checkmark) {
