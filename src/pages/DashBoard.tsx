@@ -3,10 +3,16 @@ import Calendar from 'react-calendar';
 import '../Calendar.css';
 import moment from 'moment';
 import 'moment/locale/fr';
-import { HabitType } from './NewHabitPage';
 import useHabits from '../hooks/useHabits';
 import BarChart from '../components/BarChart';
 import Achievements from '../components/Achievements';
+
+export type HabitType = {
+  id?: string;
+  title?: string;
+  description?: string;
+  frequency: number[];
+};
 
 export type CheckType = {
   id: string;
@@ -30,13 +36,9 @@ export default function DashBoard() {
 
   const [value, setValue] = useState<any>(date);
   const startOfWeek = moment(value).startOf('week');
-  const beforeWeek = moment(value).subtract(1, 'w').startOf('week');
 
   const weeklyData = Array.from({ length: 7 }, (_, i) => startOfWeek.clone().add(i, 'day').format('YYYY-MM-DD'));
-  const laskWeekData = Array.from({ length: 7 }, (_, i) => beforeWeek.clone().add(i, 'day').format('YYYY-MM-DD'));
   const weeklyDataMMDD = Array.from({ length: 7 }, (_, i) => startOfWeek.clone().add(i, 'day').format('MM-DD'));
-
-  const freq = weeklyData.indexOf(today);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, habit: HabitType, date: String) => {
     const status = e.target.checked ? 'completed' : '';
@@ -59,9 +61,9 @@ export default function DashBoard() {
       <div className={`flex flex-col md:flex-row  ${window.innerWidth <= 768 ? 'items-center' : 'justify-between'} m-5 gap-4`}>
         <div className='w-full lg:max-w-md lg:w-4/12 px-2 pt-10 shadow-lg rounded flex justify-center'>{<BarChart dates={weeklyData} labels={weeklyDataMMDD} habits={habits} checkmarks={checkmarks} />}</div>
         <div className='w-full lg:max-w-md lg:w-4/12 px-2 shadow-lg rounded'>
-          <Achievements habits={habits} checkmarks={checkmarks} weeklyData={weeklyData} laskWeekData={laskWeekData} today={today} freq={freq} />
+          <Achievements />
         </div>
-        <div className='lg:w-4/12'>
+        <div className='w-full lg:w-4/12'>
           <Calendar onChange={setValue} value={value} calendarType='US' />
         </div>
       </div>
@@ -85,13 +87,14 @@ export default function DashBoard() {
                     <th className='px-6 text-left text-xs p-4 whitespace-nowrap'>{habit.title}</th>
                     {checkmarks &&
                       weeklyData.map((date, index) => {
-                        const freq = habit.frequency.includes(String(index));
+                        const freq = habit.frequency.includes(index);
                         const isChecked = checkmarks?.some((checkmark) => checkmark.habitId === habit.id && checkmark.date === date);
                         const isToday = date === String(today);
 
                         return (
                           <td className='text-center ' key={date}>
                             {freq && <input type='checkbox' className={isToday ? '' : 'opacity-50 bg-gray-100'} name={habit.id} checked={isChecked} onChange={(e) => handleChange(e, habit, date)} />}
+                            {/* {freq && <input type='checkbox' className={isToday ? '' : 'opacity-50 bg-gray-100'} name={habit.id} checked={isChecked} disabled={!isToday} onChange={(e) => handleChange(e, habit, date)} />} */}
                           </td>
                         );
                       })}

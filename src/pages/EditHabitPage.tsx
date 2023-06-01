@@ -2,10 +2,10 @@ import { useState } from 'react';
 import Modal from 'react-modal';
 import FrequencyChip from '../components/FrequencyChip';
 import useHabits from '../hooks/useHabits';
-import { HabitType } from './NewHabitPage';
 import { RiPencilFill, RiDeleteBin5Fill } from 'react-icons/ri';
 import HabitForm from '../components/HabitForm';
 import { useMediaQuery } from 'react-responsive';
+import { HabitType } from './DashBoard';
 
 Modal.setAppElement('#root');
 

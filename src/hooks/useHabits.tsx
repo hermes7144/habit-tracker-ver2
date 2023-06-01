@@ -1,14 +1,13 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient, UseQueryResult } from '@tanstack/react-query';
 import { useAuthContext } from '../context/AuthContext';
 import { getHabits, addOrUpdateHabit, getChecks, addOrUpdateCheck, removeCheck, removeHabit } from '../api/firebase';
-import { HabitType } from '../pages/NewHabitPage';
-import { CheckType } from '../pages/DashBoard';
+import { CheckType, HabitType } from '../pages/DashBoard';
 
 export default function useHabits() {
   const { uid } = useAuthContext();
   const queryClient = useQueryClient();
 
-  const habitsQuery = useQuery(['habits', uid || ''], () => getHabits(uid), { enabled: !!uid });
+  const habitsQuery: UseQueryResult<HabitType[]> = useQuery(['habits', uid || ''], () => getHabits(uid), { enabled: !!uid });
 
   const addOrUpdateItem = useMutation((habit: HabitType) => addOrUpdateHabit(uid, habit), {
     onSuccess: () => {

@@ -2,13 +2,7 @@ import React, { useState } from 'react';
 import useHabits from '../hooks/useHabits';
 import { AiOutlineClose } from 'react-icons/ai';
 import ButtonFull from './ui/ButtonFull';
-
-export type HabitType = {
-  id?: string;
-  title?: string;
-  description?: string;
-  frequency: string[];
-};
+import { HabitType } from '../pages/DashBoard';
 
 // Initial habit
 const initialHabit = {
@@ -23,11 +17,18 @@ export default function HabitForm({ closeModal, habitProp }: { closeModal: any; 
   const [habit, setHabit] = useState<HabitType>(habitProp || initialHabit);
 
   const handleChange = (e) => {
-    const { name, value, type } = e.target;
+    const { name, value, type, checked } = e.target;
 
     if (type === 'checkbox') {
-      const frequency = habit.frequency.includes(name) ? habit.frequency.filter((v) => v !== name) : [...habit.frequency, name];
-      setHabit({ ...habit, frequency });
+      const index = parseInt(value); // 체크박스 값(인덱스)를 숫자로 변환
+
+      if (checked) {
+        // 선택된 요일을 추가
+        setHabit({ ...habit, frequency: [...habit.frequency, index] });
+      } else {
+        // 선택 해제된 요일을 제거
+        setHabit({ ...habit, frequency: habit.frequency.filter((freq) => freq !== index) });
+      }
     } else {
       setHabit({ ...habit, [name]: value });
     }
@@ -70,10 +71,10 @@ export default function HabitForm({ closeModal, habitProp }: { closeModal: any; 
 
               <div className='flex justify-around mb-3'>
                 {frequencies.map((frequency, index) => {
-                  const isChecked = habit?.frequency.includes(String(index));
+                  const isChecked = habit?.frequency.includes(index);
                   return (
                     <div id={frequency} key={index} className='flex flex-col items-center'>
-                      <input type='checkbox' id={String(index)} name={String(index)} checked={isChecked} onChange={handleChange} />
+                      <input type='checkbox' id={String(index)} name={String(index)} value={index} checked={isChecked} onChange={handleChange} />
                       <label htmlFor={String(index)}>{frequency}</label>
                     </div>
                   );

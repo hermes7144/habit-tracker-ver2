@@ -2,8 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from 'firebase/auth';
 import { getDatabase, ref, get, set, remove, serverTimestamp, query, orderByChild, equalTo } from 'firebase/database';
 import { v4 as uuid } from 'uuid';
-import { HabitType } from '../pages/NewHabitPage';
-import { CheckType } from '../pages/DashBoard';
+import { CheckType, HabitType } from '../pages/DashBoard';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,

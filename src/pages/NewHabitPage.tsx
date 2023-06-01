@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 import useHabits from '../hooks/useHabits';
-
-type HabitType = {
-  id?: string;
-  title?: string;
-  description?: string;
-  frequency: string[];
-};
+import { HabitType } from './DashBoard';
 
 // Initial habit
 const initialHabit = {
@@ -91,5 +85,3 @@ export default function NewHabitPage() {
     </div>
   );
 }
-
-export type { HabitType };
