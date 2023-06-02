@@ -1,41 +1,39 @@
-import { Link } from 'react-router-dom';
+import coolBackground from '../assets/img/cool-background.png';
 import pattern_react from '../assets/img/pattern_react.png';
 import documentation from '../assets/img/documentation.png';
+import { Link } from 'react-router-dom';
 export default function LandingPage() {
   return (
     <main>
       {/* 처음 배경 */}
-      <section className='header relative pt-16 items-center flex h-screen max-h-860-px'>
-        <div className='container mx-auto items-center flex flex-wrap'>
-          <div className='w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4'>
-            <div className='pt-32 sm:pt-0'>
-              <h2 className='font-semibold text-4xl text-blueGray-600'>Notus React - A beautiful extension for Tailwind CSS.</h2>
-              <p className='mt-4 text-lg leading-relaxed text-blueGray-500'>
-                Notus React is Free and Open Source. It does not change any of the CSS from{' '}
-                <a href='https://tailwindcss.com/?ref=creativetim' className='text-blueGray-600' target='_blank'>
-                  Tailwind CSS
-                </a>
-                . It features multiple HTML elements and it comes with dynamic components for ReactJS, Vue and Angular.
-              </p>
-              <div className='mt-12'>
-                <a href='https://www.creative-tim.com/learning-lab/tailwind/react/overview/notus?ref=nr-index' target='_blank' className='get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-lightBlue-500 active:bg-lightBlue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150'>
-                  Get started
-                </a>
-                <a href='https://github.com/creativetimofficial/notus-react?ref=nr-index' className='github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150' target='_blank'>
-                  Github Star
-                </a>
+      <div className='relative pt-16 pb-32 flex content-center items-center justify-center min-h-screen-75'>
+        <img className='absolute top-0 w-full h-full bg-center bg-cover opacity-80' src={'https://images.unsplash.com/photo-1685555845405-1503f76a5462?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'} alt='...' />
+        <div className='container relative mx-auto'>
+          <div className='items-center flex flex-wrap'>
+            <div className='w-full lg:w-6/12 px-4 ml-auto mr-auto text-center'>
+              <div className='mb-10'>
+                <h1 className='text-white font-semibold text-5xl'>HABITER</h1>
+                <p className='mt-4 text-lg leading-relaxed text-white font-semibold'>습관은 정체성을 만들고, 정체성은 습관을 만든다.</p>
+                <p className='mt-4 text-lg leading-relaxed text-white'>- 아주 작은 습관의 힘(Atomic Habits) - </p>
               </div>
+              <Link to='/auth/login'>
+                <button className='get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-lightBlue-500 hover:bg-lightBlue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150'>Get started</button>
+              </Link>
             </div>
           </div>
         </div>
-
-        <img className='absolute top-0 b-auto right-0 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860px' src={pattern_react} alt='...' />
-      </section>
-      <section className='mt-48 md:mt-40 pb-40 relative bg-blueGray-100'>
-        <div className='-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20' style={{ transform: 'translateZ(0)' }}>
+        <div className='top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px' style={{ transform: 'translateZ(0)' }}>
           <svg className='absolute bottom-0 overflow-hidden' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' version='1.1' viewBox='0 0 2560 100' x='0' y='0'>
             <polygon className='text-blueGray-100 fill-current' points='2560 0 2560 100 0 100'></polygon>
           </svg>
+        </div>
+      </div>
+
+      <section className='pt-48 md:pt-40 pb-40 relative bg-blueGray-100'>
+        <div className='-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20' style={{ transform: 'translateZ(0)' }}>
+          {/* <svg className='absolute bottom-0 overflow-hidden' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' version='1.1' viewBox='0 0 2560 100' x='0' y='0'>
+            <polygon className='text-blueGray-100 fill-current' points='2560 0 2560 100 0 100'></polygon>
+          </svg> */}
         </div>
         {/* Great for your awesome project      */}
 
@@ -100,7 +98,7 @@ export default function LandingPage() {
           </div>
         </div>
 
-        <section className='relative py-20'>
+        {/* <section className='relative py-20'>
           <div className='bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20 h-20' style={{ transform: 'translateZ(0)' }}></div>
 
           <div className='container mx-auto px-4'>
@@ -157,10 +155,20 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
-        {/* <div className='container mx-auto overflow-hidden pb-20'>
+        <div className='container mx-auto overflow-hidden pb-20'>
           <div className='flex flex-wrap items-center'>
+            <div className='w-full md:w-5/12 px-4 mr-auto ml-auto mt-32'>
+              <div className='relative flex flex-col min-w-0 w-full mb-6 mt-48 md:mt-0'>
+                <img alt='...' src={require('../assets/img/component-btn.png').default} className='w-full align-middle rounded absolute shadow-lg max-w-100-px z-3 left-145-px -top-29-px' />
+                <img alt='...' src={require('../assets/img/component-profile-card.png').default} className='w-full align-middle rounded-lg absolute shadow-lg -top-160-px left-260-px max-w-210-px' />
+                <img alt='...' src={require('../assets/img/component-info-card.png').default} className='w-full align-middle rounded-lg absolute shadow-lg max-w-180-px -top-225-px left-40-px z-2' />
+                <img alt='...' src={require('../assets/img/component-info-2.png').default} className='w-full align-middle rounded-lg absolute shadow-2xl max-w-200-px -left-50-px top-25-px' />
+                <img alt='...' src={require('../assets/img/component-menu.png').default} className='w-full align-middle rounded absolute shadow-lg max-w-580-px -left-20-px top-210-px' />
+                <img alt='...' src={require('../assets/img/component-btn-pink.png').default} className='w-full align-middle rounded absolute shadow-xl max-w-120-px left-195-px top-95-px' />
+              </div>
+            </div>
             <div className='w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48'>
               <div className='text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white'>
                 <i className='fas fa-sitemap text-xl'></i>
@@ -181,20 +189,9 @@ export default function LandingPage() {
                 View All <i className='fa fa-angle-double-right ml-1 leading-relaxed'></i>
               </a>
             </div>
-
-            <div className='w-full md:w-5/12 px-4 mr-auto ml-auto mt-32'>
-              <div className='relative flex flex-col min-w-0 w-full mb-6 mt-48 md:mt-0'>
-                <img alt='...' src={require('../assets/img/component-btn.png').default} className='w-full align-middle rounded absolute shadow-lg max-w-100-px z-3 left-145-px -top-29-px' />
-                <img alt='...' src={require('../assets/img/component-profile-card.png').default} className='w-full align-middle rounded-lg absolute shadow-lg -top-160-px left-260-px max-w-210-px' />
-                <img alt='...' src={require('../assets/img/component-info-card.png').default} className='w-full align-middle rounded-lg absolute shadow-lg max-w-180-px -top-225-px left-40-px z-2' />
-                <img alt='...' src={require('../assets/img/component-info-2.png').default} className='w-full align-middle rounded-lg absolute shadow-2xl max-w-200-px -left-50-px top-25-px' />
-                <img alt='...' src={require('../assets/img/component-menu.png').default} className='w-full align-middle rounded absolute shadow-lg max-w-580-px -left-20-px top-210-px' />
-                <img alt='...' src={require('../assets/img/component-btn-pink.png').default} className='w-full align-middle rounded absolute shadow-xl max-w-120-px left-195-px top-95-px' />
-              </div>
-            </div>
           </div>
 
-          <div className='flex flex-wrap items-center pt-32'>
+          {/* <div className='flex flex-wrap items-center pt-32'>
             <div className='w-full md:w-6/12 px-4 mr-auto ml-auto mt-32'>
               <div className='justify-center flex flex-wrap relative'>
                 <div className='my-4 w-full lg:w-6/12 px-4'>
@@ -261,8 +258,8 @@ export default function LandingPage() {
                 View all <i className='fa fa-angle-double-right ml-1 leading-relaxed'></i>
               </a>
             </div>
-          </div>
-        </div> */}
+          </div> */}
+        </div>
 
         {/* Complex Documentation */}
         <div className='container mx-auto px-4 pb-32 pt-48'>
