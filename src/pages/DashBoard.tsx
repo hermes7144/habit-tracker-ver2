@@ -56,7 +56,7 @@ export default function DashBoard() {
 
   return (
     <div className='mt-2'>
-      <div className={`flex flex-col md:flex-row  ${window.innerWidth <= 768 ? 'items-center' : 'justify-between'} m-5 gap-4`}>
+      <div className={`flex flex-col md:flex-row  ${window.innerWidth <= 768 ? 'items-center' : 'justify-between'} m-2 gap-4`}>
         <div className='w-full lg:max-w-md lg:w-4/12 px-2 pt-10 shadow-lg rounded flex justify-center'>{<BarChart dates={weeklyData} labels={weeklyDataMMDD} habits={habits} checkmarks={checkmarks} />}</div>
         <div className='w-full lg:max-w-md lg:w-4/12 px-2 shadow-lg rounded'>
           <Achievements />
@@ -90,9 +90,8 @@ export default function DashBoard() {
                         const isToday = date === String(today);
 
                         return (
-                          <td className='text-center ' key={date}>
-                            {freq && <input type='checkbox' className={isToday ? '' : 'opacity-50 bg-gray-100'} name={habit.id} checked={isChecked} onChange={(e) => handleChange(e, habit, date)} />}
-                            {/* {freq && <input type='checkbox' className={isToday ? '' : 'opacity-50 bg-gray-100'} name={habit.id} checked={isChecked} disabled={!isToday} onChange={(e) => handleChange(e, habit, date)} />} */}
+                          <td className='text-center' key={date}>
+                            {freq && <input type='checkbox' className={isToday ? '' : 'opacity-50 bg-gray-100'} checked={isChecked} disabled={isToday} onChange={(e) => handleChange(e, habit, date)} />}
                           </td>
                         );
                       })}

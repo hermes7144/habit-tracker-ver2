@@ -64,7 +64,6 @@ export default function HabitForm({ closeModal, habitProp }: { closeModal: any; 
           <div className='flex-auto px-4 lg:px-10 pb-5'>
             <form onSubmit={handleSubmit}>
               <input type='text' className='w-full my-2' id='title' name='title' value={habit?.title} onChange={handleChange} placeholder='Habit Name' required />
-
               <input type='text' className='w-full my-2' name='description' value={habit?.description} onChange={handleChange} placeholder='Description' />
 
               <span className='ml-2 text-sm font-semibold text-blueGray-600'>Frequency</span>
@@ -74,7 +73,7 @@ export default function HabitForm({ closeModal, habitProp }: { closeModal: any; 
                   const isChecked = habit?.frequency.includes(index);
                   return (
                     <div id={frequency} key={index} className='flex flex-col items-center'>
-                      <input type='checkbox' id={String(index)} name={String(index)} value={index} checked={isChecked} onChange={handleChange} />
+                      <input type='checkbox' id={String(index)} value={index} checked={isChecked} onChange={handleChange} />
                       <label htmlFor={String(index)}>{frequency}</label>
                     </div>
                   );

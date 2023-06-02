@@ -4,19 +4,21 @@ import { Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function DoughnutChart({ pct }) {
+export default function DoughnutChart({ chartObj }) {
   const data = {
     labels: ['Completed', 'Active'],
     datasets: [
       {
-        data: [pct.pct, 100 - pct.pct], // 데이터 값 (예: 60%)
+        data: [chartObj.completed, 100 - chartObj.completed], // 데이터 값 (예: 60%)
         backgroundColor: ['rgb(1, 118, 214)', '#eeeeee'], // 도넛 채우는 색상
         hoverBackgroundColor: ['rgb(1, 118, 214)', '#eeeeee'], // 마우스 오버 시 색상
+        borderColor: ['rgb(1, 118, 214)', '#eeeeee'],
       },
     ],
   };
 
   const options = {
+    cutout: 30,
     responsive: true,
     plugins: {
       datalabels: {
