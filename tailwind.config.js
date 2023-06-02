@@ -73,6 +73,9 @@ module.exports = {
       backgroundSize: {
         full: "100%",
       },
+      backgroundImage: {
+        banner: `url('../public/images/banner.png')`
+      }
     },
   },
   variants: [

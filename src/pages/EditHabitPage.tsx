@@ -57,11 +57,11 @@ export default function EditHabitPage() {
 
   return (
     <>
-      <table className='w-full mt-5'>
+      <table className='w-full mt-5 border-separate border-spacing-5'>
         <tbody>
           {habits?.map((habit: HabitType) => (
             <tr key={habit.id}>
-              <th className='w-6/12 text-left'>
+              <th className='w-6/12 text-left '>
                 <p className='text-sm md:text-lg word break-all'>{habit.title}</p>
                 <p className='text-xs text-gray-300 break-all'>{habit.description}</p>
               </th>

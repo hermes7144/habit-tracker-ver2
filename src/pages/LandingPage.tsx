@@ -1,20 +1,26 @@
-import coolBackground from '../assets/img/cool-background.png';
-import pattern_react from '../assets/img/pattern_react.png';
-import documentation from '../assets/img/documentation.png';
+import { BsFire, BsFillGiftFill } from 'react-icons/bs';
+import { FaRunning } from 'react-icons/fa';
+import { HiOutlineLightBulb } from 'react-icons/hi';
+import habitPlanner from '../assets/img/habit-planner.jpg';
+import dashboard from '../assets/img/dashboard.png';
+import habitList from '../assets/img/habitList.png';
+import BarChart from '../assets/img/barChart.png';
+import performance from '../assets/img/performance.png';
+import editHabit from '../assets/img/editHabit.png';
 import { Link } from 'react-router-dom';
+
 export default function LandingPage() {
   return (
     <main>
       {/* 처음 배경 */}
-      <div className='relative pt-16 pb-32 flex content-center items-center justify-center min-h-screen-75'>
-        <img className='absolute top-0 w-full h-full bg-center bg-cover opacity-80' src={'https://images.unsplash.com/photo-1685555845405-1503f76a5462?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'} alt='...' />
+      <div className='relative pt-16 pb-32 flex content-center items-center justify-center min-h-'>
+        <div className='absolute top-0 w-full h-full bg-center bg-cover bg-banner opacity-85'></div>
         <div className='container relative mx-auto'>
           <div className='items-center flex flex-wrap'>
             <div className='w-full lg:w-6/12 px-4 ml-auto mr-auto text-center'>
               <div className='mb-10'>
-                <h1 className='text-white font-semibold text-5xl'>HABITER</h1>
-                <p className='mt-4 text-lg leading-relaxed text-white font-semibold'>습관은 정체성을 만들고, 정체성은 습관을 만든다.</p>
-                <p className='mt-4 text-lg leading-relaxed text-white'>- 아주 작은 습관의 힘(Atomic Habits) - </p>
+                <p className='mt-4 text-2xl leading-relaxed text-white font-semibold'>We are what we repeatedly do… therefore excellence is not an act, but a habit</p>
+                <p className='text-lg text-white italic text-end'>- Will Durant</p>
               </div>
               <Link to='/auth/login'>
                 <button className='get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-lightBlue-500 hover:bg-lightBlue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150'>Get started</button>
@@ -29,6 +35,48 @@ export default function LandingPage() {
         </div>
       </div>
 
+      <section className='pb-20 bg-blueGray-100 -mt-24'>
+        <div className='container mx-auto px-4'>
+          <div className='flex flex-wrap'>
+            <div className='lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center'>
+              <div className='relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg'>
+                <div className='px-4 py-5 flex-auto'>
+                  <div className='text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-300'>
+                    <i className='fas fa-award'></i>
+                  </div>
+                  <h6 className='text-xl font-semibold'>내적 동기</h6>
+                  <p className='mt-2 mb-4 text-blueGray-500'>습관 추적은 자신의 발전을 눈으로 보고 이를 되돌리고 싶지 않다는 내적 동기를 일으킵니다.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className='w-full md:w-4/12 px-4 text-center'>
+              <div className='relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg'>
+                <div className='px-4 py-5 flex-auto'>
+                  <div className='text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-300'>
+                    <i className='fas fa-retweet'></i>
+                  </div>
+                  <h6 className='text-xl font-semibold'>시각적 신호</h6>
+                  <p className='mt-2 mb-4 text-blueGray-500'>습관추적은 행동을 일깨우는 시각적 신호를 만들어냅니다.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className='pt-6 w-full md:w-4/12 px-4 text-center'>
+              <div className='relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg'>
+                <div className='px-4 py-5 flex-auto'>
+                  <div className='text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-emerald-300'>
+                    <i className='fas fa-fingerprint'></i>
+                  </div>
+                  <h6 className='text-xl font-semibold'>만족감</h6>
+                  <p className='mt-2 mb-4 text-blueGray-500'>성공적으로 습관을 추적하고 기록하는 순간 만족감을 느끼게 해줍니다.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className='pt-48 md:pt-40 pb-40 relative bg-blueGray-100'>
         <div className='-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20' style={{ transform: 'translateZ(0)' }}>
           {/* <svg className='absolute bottom-0 overflow-hidden' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' version='1.1' viewBox='0 0 2560 100' x='0' y='0'>
@@ -41,35 +89,36 @@ export default function LandingPage() {
           <div className='flex flex-wrap items-center'>
             <div className='w-10/12 md:w-6/12 lg:w-4/12 px-12 md:px-4 mr-auto ml-auto -mt-32'>
               <div className='relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-lightBlue-500'>
-                <img alt='...' src='https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80' className='w-full align-middle rounded-t-lg' />
+                <img alt='...' src={habitPlanner} className='w-full align-middle rounded-t-lg max-h-72' />
                 <blockquote className='relative p-8 mb-4'>
                   <svg preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 583 95' className='absolute left-0 w-full block h-95-px -top-94-px'>
                     <polygon points='-30,95 583,95 583,65' className='text-lightBlue-500 fill-current'></polygon>
                   </svg>
-                  <h4 className='text-xl font-bold text-white'>Great for your awesome project</h4>
+                  <h4 className='text-xl font-bold text-white'>당신의 정체성을 찾아라</h4>
                   <p className='text-md font-light mt-2 text-white'>Putting together a page has never been easier than matching together pre-made components. From landing pages presentation to login areas, you can easily customise and built your pages.</p>
                 </blockquote>
               </div>
             </div>
+
             <div className='w-full md:w-6/12 px-4'>
               <div className='flex flex-wrap'>
                 <div className='w-full md:w-6/12 px-4'>
                   <div className='relative flex flex-col mt-4'>
                     <div className='px-4 py-5 flex-auto'>
                       <div className='text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white'>
-                        <i className='fas fa-sitemap'></i>
+                        <HiOutlineLightBulb className='text-2xl' />
                       </div>
-                      <h6 className='text-xl mb-1 font-semibold'>CSS Components</h6>
-                      <p className='mb-4 text-blueGray-500'>Notus React comes with a huge number of Fully Coded CSS components.</p>
+                      <h6 className='text-xl mb-1 font-semibold'>신호(인지)</h6>
+                      <p className='mb-4 text-blueGray-500'>분명하게 만들어라!</p>
                     </div>
                   </div>
                   <div className='relative flex flex-col min-w-0'>
                     <div className='px-4 py-5 flex-auto'>
                       <div className='text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white'>
-                        <i className='fas fa-drafting-compass'></i>
+                        <BsFillGiftFill className='text-2xl' />
                       </div>
-                      <h6 className='text-xl mb-1 font-semibold'>JavaScript Components</h6>
-                      <p className='mb-4 text-blueGray-500'>We also feature many dynamic components for React, NextJS, Vue and Angular.</p>
+                      <h6 className='text-xl mb-1 font-semibold'>보상</h6>
+                      <p className='mb-4 text-blueGray-500'>만족스럽게 만들어라</p>
                     </div>
                   </div>
                 </div>
@@ -77,19 +126,19 @@ export default function LandingPage() {
                   <div className='relative flex flex-col min-w-0 mt-4'>
                     <div className='px-4 py-5 flex-auto'>
                       <div className='text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white'>
-                        <i className='fas fa-newspaper'></i>
+                        <BsFire className='text-2xl' />
                       </div>
-                      <h6 className='text-xl mb-1 font-semibold'>Pages</h6>
-                      <p className='mb-4 text-blueGray-500'>This extension also comes with 3 sample pages. They are fully coded so you can start working instantly.</p>
+                      <h6 className='text-xl mb-1 font-semibold'>열망(욕구)</h6>
+                      <p className='mb-4 text-blueGray-500'>매력적으로 만들어라!</p>
                     </div>
                   </div>
                   <div className='relative flex flex-col min-w-0'>
                     <div className='px-4 py-5 flex-auto'>
                       <div className='text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white'>
-                        <i className='fas fa-file-alt'></i>
+                        <FaRunning className='text-2xl' />
                       </div>
-                      <h6 className='text-xl mb-1 font-semibold'>Documentation</h6>
-                      <p className='mb-4 text-blueGray-500'>Built by developers for developers. You will love how easy is to to work with Notus React.</p>
+                      <h6 className='text-xl mb-1 font-semibold'>반응</h6>
+                      <p className='mb-4 text-blueGray-500'>하기 쉽게 만들어라</p>
                     </div>
                   </div>
                 </div>
@@ -161,12 +210,13 @@ export default function LandingPage() {
           <div className='flex flex-wrap items-center'>
             <div className='w-full md:w-5/12 px-4 mr-auto ml-auto mt-32'>
               <div className='relative flex flex-col min-w-0 w-full mb-6 mt-48 md:mt-0'>
-                <img alt='...' src={require('../assets/img/component-btn.png').default} className='w-full align-middle rounded absolute shadow-lg max-w-100-px z-3 left-145-px -top-29-px' />
-                <img alt='...' src={require('../assets/img/component-profile-card.png').default} className='w-full align-middle rounded-lg absolute shadow-lg -top-160-px left-260-px max-w-210-px' />
-                <img alt='...' src={require('../assets/img/component-info-card.png').default} className='w-full align-middle rounded-lg absolute shadow-lg max-w-180-px -top-225-px left-40-px z-2' />
-                <img alt='...' src={require('../assets/img/component-info-2.png').default} className='w-full align-middle rounded-lg absolute shadow-2xl max-w-200-px -left-50-px top-25-px' />
-                <img alt='...' src={require('../assets/img/component-menu.png').default} className='w-full align-middle rounded absolute shadow-lg max-w-580-px -left-20-px top-210-px' />
-                <img alt='...' src={require('../assets/img/component-btn-pink.png').default} className='w-full align-middle rounded absolute shadow-xl max-w-120-px left-195-px top-95-px' />
+                {/* <img alt='...' src={require('../assets/img/component-btn.png').default} className='w-full align-middle rounded absolute shadow-lg max-w-100-px z-3 left-145-px -top-29-px' /> */}
+
+                <img alt='...' src={editHabit} className='w-full align-middle rounded absolute shadow-lg max-w-md -left-20-px top-180-px' />
+                <img alt='...' src={BarChart} className='w-full align-middle rounded-lg absolute shadow-lg max-w-[250px] -top-225-px left-25-px z-2' />
+                <img alt='...' src={habitList} className='w-full align-middle rounded-lg absolute shadow-lg max-w-md -top-94-px left-56 z-3' />
+                <img alt='...' src={performance} className='w-full align-middle rounded-lg absolute shadow-2xl max-w-xs left-20 top-40' />
+                {/* <img alt='...' src={require('../assets/img/component-btn-pink.png').default} className='w-full align-middle rounded absolute shadow-xl max-w-120-px left-195-px top-95-px' /> */}
               </div>
             </div>
             <div className='w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48'>
@@ -319,7 +369,7 @@ export default function LandingPage() {
                 style={{
                   transform: 'scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg)',
                 }}
-                src={documentation}
+                src={dashboard}
               />
             </div>
           </div>
