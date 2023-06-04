@@ -22,9 +22,12 @@ const options = {
           return null;
         } else {
           let result = value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
-
           return Math.round(Number(result * 10)) / 10;
         }
+      },
+      font: {
+        size: 12,
+        weight: 800,
       },
     },
     legend: {

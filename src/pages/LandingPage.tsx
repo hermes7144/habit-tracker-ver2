@@ -1,6 +1,5 @@
-import { BsFire, BsFillGiftFill } from 'react-icons/bs';
-import { FaRunning } from 'react-icons/fa';
-import { HiOutlineLightBulb } from 'react-icons/hi';
+import { BsFillBarChartFill, BsMagic, BsSignpostSplitFill, BsMusicNoteBeamed, BsListCheck } from 'react-icons/bs';
+import { FaCalendarCheck } from 'react-icons/fa';
 import habitPlanner from '../assets/img/habit-planner.jpg';
 import dashboard from '../assets/img/dashboard.png';
 import habitList from '../assets/img/habitList.png';
@@ -8,240 +7,134 @@ import BarChart from '../assets/img/barChart.png';
 import performance from '../assets/img/performance.png';
 import editHabit from '../assets/img/editHabit.png';
 import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
 
 export default function LandingPage() {
   return (
-    <main>
-      {/* 처음 배경 */}
-      <div className='relative pt-16 pb-32 flex content-center items-center justify-center min-h-'>
-        <div className='absolute top-0 w-full h-full bg-center bg-cover bg-banner opacity-85'></div>
-        <div className='container relative mx-auto'>
-          <div className='items-center flex flex-wrap'>
-            <div className='w-full lg:w-6/12 px-4 ml-auto mr-auto text-center'>
-              <div className='mb-10'>
-                <p className='mt-4 text-2xl leading-relaxed text-white font-semibold'>We are what we repeatedly do… therefore excellence is not an act, but a habit</p>
-                <p className='text-lg text-white italic text-end'>- Will Durant</p>
-              </div>
-              <Link to='/auth/login'>
-                <button className='get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-lightBlue-500 hover:bg-lightBlue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150'>Get started</button>
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className='top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px' style={{ transform: 'translateZ(0)' }}>
-          <svg className='absolute bottom-0 overflow-hidden' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' version='1.1' viewBox='0 0 2560 100' x='0' y='0'>
-            <polygon className='text-blueGray-100 fill-current' points='2560 0 2560 100 0 100'></polygon>
-          </svg>
-        </div>
-      </div>
-
-      <section className='pb-20 bg-blueGray-100 -mt-24'>
-        <div className='container mx-auto px-4'>
-          <div className='flex flex-wrap'>
-            <div className='lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center'>
-              <div className='relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg'>
-                <div className='px-4 py-5 flex-auto'>
-                  <div className='text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-300'>
-                    <i className='fas fa-award'></i>
-                  </div>
-                  <h6 className='text-xl font-semibold'>내적 동기</h6>
-                  <p className='mt-2 mb-4 text-blueGray-500'>습관 추적은 자신의 발전을 눈으로 보고 이를 되돌리고 싶지 않다는 내적 동기를 일으킵니다.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className='w-full md:w-4/12 px-4 text-center'>
-              <div className='relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg'>
-                <div className='px-4 py-5 flex-auto'>
-                  <div className='text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-300'>
-                    <i className='fas fa-retweet'></i>
-                  </div>
-                  <h6 className='text-xl font-semibold'>시각적 신호</h6>
-                  <p className='mt-2 mb-4 text-blueGray-500'>습관추적은 행동을 일깨우는 시각적 신호를 만들어냅니다.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className='pt-6 w-full md:w-4/12 px-4 text-center'>
-              <div className='relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg'>
-                <div className='px-4 py-5 flex-auto'>
-                  <div className='text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-emerald-300'>
-                    <i className='fas fa-fingerprint'></i>
-                  </div>
-                  <h6 className='text-xl font-semibold'>만족감</h6>
-                  <p className='mt-2 mb-4 text-blueGray-500'>성공적으로 습관을 추적하고 기록하는 순간 만족감을 느끼게 해줍니다.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className='pt-48 md:pt-40 pb-40 relative bg-blueGray-100'>
-        <div className='-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20' style={{ transform: 'translateZ(0)' }}>
-          {/* <svg className='absolute bottom-0 overflow-hidden' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' version='1.1' viewBox='0 0 2560 100' x='0' y='0'>
-            <polygon className='text-blueGray-100 fill-current' points='2560 0 2560 100 0 100'></polygon>
-          </svg> */}
-        </div>
-        {/* Great for your awesome project      */}
-
-        <div className='container mx-auto'>
-          <div className='flex flex-wrap items-center'>
-            <div className='w-10/12 md:w-6/12 lg:w-4/12 px-12 md:px-4 mr-auto ml-auto -mt-32'>
-              <div className='relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-lightBlue-500'>
-                <img alt='...' src={habitPlanner} className='w-full align-middle rounded-t-lg max-h-72' />
-                <blockquote className='relative p-8 mb-4'>
-                  <svg preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 583 95' className='absolute left-0 w-full block h-95-px -top-94-px'>
-                    <polygon points='-30,95 583,95 583,65' className='text-lightBlue-500 fill-current'></polygon>
-                  </svg>
-                  <h4 className='text-xl font-bold text-white'>당신의 정체성을 찾아라</h4>
-                  <p className='text-md font-light mt-2 text-white'>Putting together a page has never been easier than matching together pre-made components. From landing pages presentation to login areas, you can easily customise and built your pages.</p>
-                </blockquote>
-              </div>
-            </div>
-
-            <div className='w-full md:w-6/12 px-4'>
-              <div className='flex flex-wrap'>
-                <div className='w-full md:w-6/12 px-4'>
-                  <div className='relative flex flex-col mt-4'>
-                    <div className='px-4 py-5 flex-auto'>
-                      <div className='text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white'>
-                        <HiOutlineLightBulb className='text-2xl' />
-                      </div>
-                      <h6 className='text-xl mb-1 font-semibold'>신호(인지)</h6>
-                      <p className='mb-4 text-blueGray-500'>분명하게 만들어라!</p>
-                    </div>
-                  </div>
-                  <div className='relative flex flex-col min-w-0'>
-                    <div className='px-4 py-5 flex-auto'>
-                      <div className='text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white'>
-                        <BsFillGiftFill className='text-2xl' />
-                      </div>
-                      <h6 className='text-xl mb-1 font-semibold'>보상</h6>
-                      <p className='mb-4 text-blueGray-500'>만족스럽게 만들어라</p>
-                    </div>
-                  </div>
-                </div>
-                <div className='w-full md:w-6/12 px-4'>
-                  <div className='relative flex flex-col min-w-0 mt-4'>
-                    <div className='px-4 py-5 flex-auto'>
-                      <div className='text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white'>
-                        <BsFire className='text-2xl' />
-                      </div>
-                      <h6 className='text-xl mb-1 font-semibold'>열망(욕구)</h6>
-                      <p className='mb-4 text-blueGray-500'>매력적으로 만들어라!</p>
-                    </div>
-                  </div>
-                  <div className='relative flex flex-col min-w-0'>
-                    <div className='px-4 py-5 flex-auto'>
-                      <div className='text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white'>
-                        <FaRunning className='text-2xl' />
-                      </div>
-                      <h6 className='text-xl mb-1 font-semibold'>반응</h6>
-                      <p className='mb-4 text-blueGray-500'>하기 쉽게 만들어라</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* <section className='relative py-20'>
-          <div className='bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20 h-20' style={{ transform: 'translateZ(0)' }}></div>
-
-          <div className='container mx-auto px-4'>
+    <>
+      <main>
+        <div className='relative pt-16 pb-1 flex content-center justify-center min-h-screen-75'>
+          <div className='absolute top-0 w-full h-full bg-center bg-cover bg-banner opacity-85'></div>
+          <div className='container relative mx-auto'>
             <div className='items-center flex flex-wrap'>
-              <div className='w-full md:w-5/12 ml-auto mr-auto px-4'>
-                <div className='md:pr-12'>
-                  <div className='text-lightBlue-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-lightBlue-300'>
-                    <i className='fas fa-rocket text-xl'></i>
+              <div className='w-full lg:w-6/12 px-4 ml-auto mr-auto text-center mt-20'>
+                <div className='mb-3'>
+                  <p className='mt-4 text-2xl leading-relaxed text-white font-semibold'>우리는 우리가 반복적으로 하는 것 그 자체입니다. 그러므로 탁월함은 행위가 아니라 습관입니다.</p>
+                  <p className='text-lg text-white italic text-end'>- 아리스토텔레스</p>
+                </div>
+                <Link to='/auth/login'>
+                  <button className='text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-lightBlue-500 hover:bg-lightBlue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150'>Get started</button>
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className='top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px' style={{ transform: 'translateZ(0)' }}>
+            <svg className='absolute bottom-0 overflow-hidden' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' version='1.1' viewBox='0 0 2560 100' x='0' y='0'>
+              <polygon className='text-blueGray-100 fill-current' points='2560 0 2560 100 0 100'></polygon>
+            </svg>
+          </div>
+        </div>
+
+        <section className='pb-20 bg-blueGray-100 -mt-24'>
+          <div className='container mx-auto px-4'>
+            <div className='flex flex-wrap'>
+              <div className='lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center'>
+                <div className='relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg'>
+                  <div className='px-4 py-5 flex-auto'>
+                    <div className='text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-300'>
+                      <BsMagic className='text-2xl' />
+                    </div>
+                    <h6 className='text-xl font-semibold'>매력적이다</h6>
+                    <p className='mt-2 mb-4 text-blueGray-500'>Habiter는 시각적으로 진전의 증거를 제공하여 내적 동기를 부여합니다.</p>
                   </div>
-                  <h3 className='text-3xl font-semibold'>A growing company</h3>
-                  <p className='mt-4 text-lg leading-relaxed text-blueGray-500'>The extension comes with three pre-built pages to help you get started faster. You can change the text and images and you're good to go.</p>
-                  <ul className='list-none mt-6'>
-                    <li className='py-2'>
-                      <div className='flex items-center'>
-                        <div>
-                          <span className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-lightBlue-600 bg-lightBlue-200 mr-3'>
-                            <i className='fas fa-fingerprint'></i>
-                          </span>
-                        </div>
-                        <div>
-                          <h4 className='text-blueGray-500'>Carefully crafted components</h4>
-                        </div>
-                      </div>
-                    </li>
-                    <li className='py-2'>
-                      <div className='flex items-center'>
-                        <div>
-                          <span className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-lightBlue-600 bg-lightBlue-200 mr-3'>
-                            <i className='fab fa-html5'></i>
-                          </span>
-                        </div>
-                        <div>
-                          <h4 className='text-blueGray-500'>Amazing page examples</h4>
-                        </div>
-                      </div>
-                    </li>
-                    <li className='py-2'>
-                      <div className='flex items-center'>
-                        <div>
-                          <span className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-lightBlue-600 bg-lightBlue-200 mr-3'>
-                            <i className='far fa-paper-plane'></i>
-                          </span>
-                        </div>
-                        <div>
-                          <h4 className='text-blueGray-500'>Dynamic components</h4>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
                 </div>
               </div>
-              <div className='w-full md:w-4/12 ml-auto mr-auto px-4'>
-                <img alt='...' className='max-w-full rounded-lg shadow-lg' src='https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80' />
+
+              <div className='w-full md:w-4/12 px-4 text-center'>
+                <div className='relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg'>
+                  <div className='px-4 py-5 flex-auto'>
+                    <div className='text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-300'>
+                      <BsSignpostSplitFill className='text-2xl' />
+                    </div>
+                    <h6 className='text-xl font-semibold'>분명하다</h6>
+                    <p className='mt-2 mb-4 text-blueGray-500'>Habiter는 행동을 일깨우는 시각적 신호를 만듭니다.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className='pt-6 w-full md:w-4/12 px-4 text-center'>
+                <div className='relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg'>
+                  <div className='px-4 py-5 flex-auto'>
+                    <div className='text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-emerald-300'>
+                      <BsMusicNoteBeamed className='text-2xl' />
+                    </div>
+                    <h6 className='text-xl font-semibold'>만족스럽다</h6>
+                    <p className='mt-2 mb-4 text-blueGray-500'>Habiter는 성공적으로 습관을 추적하고 기록하는 순간 만족감을 느끼게 해줍니다.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='flex flex-wrap items-center mt-32'>
+              <div className='w-full md:w-5/12 px-4 mr-auto ml-auto'>
+                <div className='text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white'>
+                  <BsFillBarChartFill className='text-2xl' />
+                </div>
+                <h3 className='text-3xl mb-2 font-semibold leading-normal'>습관은 복리로 작용합니다!</h3>
+                <p className='text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600'>성공은 일상적인 습관의 결과입니다. 우리의 삶은 한순간의 변화로 만들어지는 것이 아닙니다.</p>
+                <p className='text-lg font-light leading-relaxed mt-0 mb-4 text-blueGray-600'>습관은 목표가 아닌 시스템에 달려 있습니다. 목표는 우리가 얻어내고자 하는 결과이며, 시스템은 그 결과로 이끄는 과정입니다.</p>
+              </div>
+
+              <div className='w-full md:w-4/12 px-4 mr-auto ml-auto'>
+                <div className='relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-lightBlue-500'>
+                  <img alt='habitPlanner' src={habitPlanner} className='w-full align-middle rounded-t-lg' />
+                  <blockquote className='relative p-8 mb-4'>
+                    <svg preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 583 95' className='absolute left-0 w-full block h-95-px -top-94-px'>
+                      <polygon points='-30,95 583,95 583,65' className='text-lightBlue-500 fill-current'></polygon>
+                    </svg>
+                    <h4 className='text-xl font-bold text-white'>인생을 효율적으로</h4>
+                    <p className='text-md font-light mt-2 text-white'>습관은 인생을 따분하게 만든다고 의심할 수도 있습니다. </p>
+                    <p className='text-md font-light mt-2 text-white'>습관을 조정하고, 삶의 기본적인 일들을 더 쉽게 만들면 우리의 마음은 새로운 도전들을 포착하고 다음에 벌어질 문제들을 해결하는데 더 자유로워집니다.</p>
+                  </blockquote>
+                </div>
               </div>
             </div>
           </div>
-        </section> */}
+        </section>
 
-        <div className='container mx-auto overflow-hidden pb-20'>
-          <div className='flex flex-wrap items-center'>
-            <div className='w-full md:w-5/12 px-4 mr-auto ml-auto mt-32'>
-              <div className='relative flex flex-col min-w-0 w-full mb-6 mt-48 md:mt-0'>
-                {/* <img alt='...' src={require('../assets/img/component-btn.png').default} className='w-full align-middle rounded absolute shadow-lg max-w-100-px z-3 left-145-px -top-29-px' /> */}
+        <section className='pt-48 md:pt-40 pb-40 relative bg-blueGray-100'>
+          <div className='container mx-auto overflow-hidden pb-20'>
+            <div className='flex flex-wrap items-center'>
+              <div className='w-full md:w-5/12 px-4 mr-auto ml-auto mt-32'>
+                <div className='relative flex flex-col min-w-0 w-full mb-6 mt-48 md:mt-0'>
+                  {/* <img alt='...' src={require('../assets/img/component-btn.png').default} className='w-full align-middle rounded absolute shadow-lg max-w-100-px z-3 left-145-px -top-29-px' /> */}
 
-                <img alt='...' src={editHabit} className='w-full align-middle rounded absolute shadow-lg max-w-md -left-20-px top-180-px' />
-                <img alt='...' src={BarChart} className='w-full align-middle rounded-lg absolute shadow-lg max-w-[250px] -top-225-px left-25-px z-2' />
-                <img alt='...' src={habitList} className='w-full align-middle rounded-lg absolute shadow-lg max-w-md -top-94-px left-56 z-3' />
-                <img alt='...' src={performance} className='w-full align-middle rounded-lg absolute shadow-2xl max-w-xs left-20 top-40' />
-                {/* <img alt='...' src={require('../assets/img/component-btn-pink.png').default} className='w-full align-middle rounded absolute shadow-xl max-w-120-px left-195-px top-95-px' /> */}
+                  <img alt='...' src={BarChart} className='w-full align-middle rounded-lg absolute shadow-lg max-w-180-px -top-80 left-25-px z-2' />
+                  <img alt='...' src={editHabit} className='w-full align-middle rounded absolute shadow-lg max-w-210-px -top-60 left-260-px' />
+                  <img alt='...' src={habitList} className='w-full align-middle rounded-lg absolute shadow-lg max-w-sm  z-3' />
+                  <img alt='...' src={performance} className='w-full align-middle rounded-lg absolute shadow-2xl max-w-210-px -top-36 left-20 ' />
+                  {/* <img alt='...' src={require('../assets/img/component-btn-pink.png').default} className='w-full align-middle rounded absolute shadow-xl max-w-120-px left-195-px top-95-px' /> */}
+                </div>
+              </div>
+              <div className='w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48'>
+                <div className='text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white'>
+                  <BsListCheck className='text-3xl' />
+                </div>
+                <h3 className='text-3xl mb-2 font-semibold leading-normal'>습관 도구들</h3>
+                <p className='text-lg font-light leading-relaxed mt-4 mb-32 text-blueGray-600'>Habiter는 습관을 생성하고, 기록하고, 습관의 진행 사항을 효율적으로 확인할 수 있습니다.</p>
+                {/* <div className='block pb-6'>
+                <span className='text-xs font-semibold inline-block py-1 px-2 rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2'>Buttons</span>
+                <span className='text-xs font-semibold inline-block py-1 px-2 rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2'>Inputs</span>
+                <span className='text-xs font-semibold inline-block py-1 px-2 rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2'>Labels</span>
+                <span className='text-xs font-semibold inline-block py-1 px-2 rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2'>Menus</span>
+                <span className='text-xs font-semibold inline-block py-1 px-2 rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2'>Navbars</span>
+                <span className='text-xs font-semibold inline-block py-1 px-2 rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2'>Pagination</span>
+                <span className='text-xs font-semibold inline-block py-1 px-2 rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2'>Progressbars</span>
+                <span className='text-xs font-semibold inline-block py-1 px-2 rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2'>Typography</span>
+              </div> */}
               </div>
             </div>
-            <div className='w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48'>
-              <div className='text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white'>
-                <i className='fas fa-sitemap text-xl'></i>
-              </div>
-              <h3 className='text-3xl mb-2 font-semibold leading-normal'>CSS Components</h3>
-              <p className='text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600'>Every element that you need in a product comes built in as a component. All components fit perfectly with each other and can have different colours.</p>
-              <div className='block pb-6'>
-                <span className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2'>Buttons</span>
-                <span className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2'>Inputs</span>
-                <span className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2'>Labels</span>
-                <span className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2'>Menus</span>
-                <span className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2'>Navbars</span>
-                <span className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2'>Pagination</span>
-                <span className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2'>Progressbars</span>
-                <span className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white uppercase last:mr-0 mr-2 mt-2'>Typography</span>
-              </div>
-              <a href='https://www.creative-tim.com/learning-lab/tailwind/react/alerts/notus?ref=nr-index' target='_blank' className='font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150'>
-                View All <i className='fa fa-angle-double-right ml-1 leading-relaxed'></i>
-              </a>
-            </div>
-          </div>
 
-          {/* <div className='flex flex-wrap items-center pt-32'>
+            {/* <div className='flex flex-wrap items-center pt-32'>
             <div className='w-full md:w-6/12 px-4 mr-auto ml-auto mt-32'>
               <div className='justify-center flex flex-wrap relative'>
                 <div className='my-4 w-full lg:w-6/12 px-4'>
@@ -309,19 +202,19 @@ export default function LandingPage() {
               </a>
             </div>
           </div> */}
-        </div>
+          </div>
 
-        {/* Complex Documentation */}
-        <div className='container mx-auto px-4 pb-32 pt-48'>
-          <div className='items-center flex flex-wrap'>
-            <div className='w-full md:w-5/12 ml-auto px-12 md:px-4'>
-              <div className='md:pr-12'>
-                <div className='text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white'>
-                  <i className='fas fa-file-alt text-xl'></i>
-                </div>
-                <h3 className='text-3xl font-semibold'>Complex Documentation</h3>
-                <p className='mt-4 text-lg leading-relaxed text-blueGray-500'>This extension comes a lot of fully coded examples that help you get started faster. You can adjust the colors and also the programming language. You can change the text and images and you're good to go.</p>
-                <ul className='list-none mt-6'>
+          {/* Complex Documentation */}
+          <div className='container mx-auto px-4 pb-32 pt-48'>
+            <div className='items-center flex flex-wrap'>
+              <div className='w-full md:w-5/12 ml-auto px-12 md:px-4'>
+                <div className='md:pr-12'>
+                  <div className='text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white'>
+                    <FaCalendarCheck className='text-2xl' />
+                  </div>
+                  <h3 className='text-3xl font-semibold'>직관적인 대시보드</h3>
+                  <p className='mt-4 text-lg leading-relaxed text-blueGray-500'>날짜를 선택하면 선택한 주의 각 습관 확인 및 체크할 수 있으며, 연동되는 차트로 진척도를 한눈에 확인할 수 있습니다.</p>
+                  {/* <ul className='list-none mt-6'>
                   <li className='py-2'>
                     <div className='flex items-center'>
                       <div>
@@ -358,126 +251,25 @@ export default function LandingPage() {
                       </div>
                     </div>
                   </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className='w-full md:w-6/12 mr-auto px-4 pt-24 md:pt-0'>
-              <img
-                alt='...'
-                className='max-w-full rounded-lg shadow-xl'
-                style={{
-                  transform: 'scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg)',
-                }}
-                src={dashboard}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className='justify-center text-center flex flex-wrap mt-24'>
-          <div className='w-full md:w-6/12 px-12 md:px-4'>
-            <h2 className='font-semibold text-4xl'>Beautiful Example Pages</h2>
-            <p className='text-lg leading-relaxed mt-4 mb-4 text-blueGray-500'>Notus React is a completly new product built using our past experience in web templates. Take the examples we made for you and start playing with them.</p>
-          </div>
-        </div>
-      </section>
-      {/* <section className='block relative z-1 bg-blueGray-600'>
-        <div className='container mx-auto'>
-          <div className='justify-center flex flex-wrap'>
-            <div className='w-full lg:w-12/12 px-4  -mt-24'>
-              <div className='flex flex-wrap'>
-                <div className='w-full lg:w-4/12 px-4'>
-                  <h5 className='text-xl font-semibold pb-4 text-center'>Login Page</h5>
-                  <Link to='/auth/login'>
-                    <div className='hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150'>
-                      <img alt='...' className='align-middle border-none max-w-full h-auto rounded-lg' src={require('../assets/img/login.jpg').default} />
-                    </div>
-                  </Link>
-                </div>
-
-                <div className='w-full lg:w-4/12 px-4'>
-                  <h5 className='text-xl font-semibold pb-4 text-center'>Profile Page</h5>
-                  <Link to='/profile'>
-                    <div className='hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150'>
-                      <img alt='...' className='align-middle border-none max-w-full h-auto rounded-lg' src={require('../assets/img/profile.jpg').default} />
-                    </div>
-                  </Link>
-                </div>
-
-                <div className='w-full lg:w-4/12 px-4'>
-                  <h5 className='text-xl font-semibold pb-4 text-center'>Landing Page</h5>
-                  <Link to='/landing'>
-                    <div className='hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150'>
-                      <img alt='...' className='align-middle border-none max-w-full h-auto rounded-lg' src={require('../assets/img/landing.jpg').default} />
-                    </div>
-                  </Link>
+                </ul> */}
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
 
-      {/* <section className='py-20 bg-blueGray-600 overflow-hidden'>
-        <div className='container mx-auto pb-64'>
-          <div className='flex flex-wrap justify-center'>
-            <div className='w-full md:w-5/12 px-12 md:px-4 ml-auto mr-auto md:mt-64'>
-              <div className='text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white'>
-                <i className='fas fa-code-branch text-xl'></i>
+              <div className='w-full md:w-6/12 mr-auto px-4 pt-24 md:pt-0'>
+                <img
+                  alt='...'
+                  className='max-w-full rounded-lg shadow-xl'
+                  style={{
+                    transform: 'scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg)',
+                  }}
+                  src={dashboard}
+                />
               </div>
-              <h3 className='text-3xl mb-2 font-semibold leading-normal text-white'>Open Source</h3>
-              <p className='text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-400'>
-                Since{' '}
-                <a href='https://tailwindcss.com/?ref=creativetim' className='text-blueGray-300' target='_blank'>
-                  Tailwind CSS
-                </a>{' '}
-                is an open source project we wanted to continue this movement too. You can give this version a try to feel the design and also test the quality of the code!
-              </p>
-              <p className='text-lg font-light leading-relaxed mt-0 mb-4 text-blueGray-400'>Get it free on Github and please help us spread the news with a Star!</p>
-              <a href='https://github.com/creativetimofficial/notus-react?ref=nr-index' target='_blank' className='github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg'>
-                Github Star
-              </a>
-            </div>
-
-            <div className='w-full md:w-4/12 px-4 mr-auto ml-auto mt-32 relative'>
-              <i className='fab fa-github text-blueGray-700 absolute -top-150-px -right-100 left-auto opacity-80 text-55'></i>
             </div>
           </div>
-        </div>
-      </section> */}
-
-      {/* <section className='pb-16 bg-blueGray-200 relative pt-32'>
-        <div className='-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20' style={{ transform: 'translateZ(0)' }}>
-          <svg className='absolute bottom-0 overflow-hidden' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' version='1.1' viewBox='0 0 2560 100' x='0' y='0'>
-            <polygon className='text-blueGray-200 fill-current' points='2560 0 2560 100 0 100'></polygon>
-          </svg>
-        </div>
-
-        <div className='container mx-auto'>
-          <div className='flex flex-wrap justify-center bg-white shadow-xl rounded-lg -mt-64 py-16 px-12 relative z-10'>
-            <div className='w-full text-center lg:w-8/12'>
-              <p className='text-4xl text-center'>
-                <span role='img' aria-label='love'>
-                  😍
-                </span>
-              </p>
-              <h3 className='font-semibold text-3xl'>Do you love this Starter Kit?</h3>
-              <p className='text-blueGray-500 text-lg leading-relaxed mt-4 mb-4'>Cause if you do, it can be yours now. Hit the buttons below to navigate to get the Free version for your next project. Build a new web app or give an old project a new look!</p>
-              <div className='sm:block flex flex-col mt-10'>
-                <a href='https://www.creative-tim.com/learning-lab/tailwind/react/overview/notus?ref=nr-index' target='_blank' className='get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-2 bg-lightBlue-500 active:bg-lightBlue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150'>
-                  Get started
-                </a>
-                <a href='https://github.com/creativetimofficial/notus-react?ref=nr-index' target='_blank' className='github-star sm:ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg'>
-                  <i className='fab fa-github text-lg mr-1'></i>
-                  <span>Help With a Star</span>
-                </a>
-              </div>
-              <div className='text-center mt-16'></div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-    </main>
+        </section>
+      </main>
+      <Footer />
+    </>
   );
 }

@@ -91,7 +91,7 @@ export default function DashBoard() {
 
                         return (
                           <td className='text-center' key={date}>
-                            {freq && <input type='checkbox' className={isToday ? '' : 'opacity-50 bg-gray-100'} checked={isChecked} disabled={isToday} onChange={(e) => handleChange(e, habit, date)} />}
+                            {freq && <input type='checkbox' className={isToday ? '' : 'opacity-50 bg-gray-100'} checked={isChecked} disabled={!isToday} onChange={(e) => handleChange(e, habit, date)} />}
                           </td>
                         );
                       })}
