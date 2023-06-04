@@ -115,7 +115,7 @@ export default function LandingPage() {
                   {/* <img alt='...' src={require('../assets/img/component-btn.png').default} className='w-full align-middle rounded absolute shadow-lg max-w-100-px z-3 left-145-px -top-29-px' /> */}
 
                   <img alt='...' src={BarChart} className='w-full align-middle rounded-lg absolute shadow-lg max-w-180-px -top-80 left-25-px z-2' />
-                  <img alt='...' src={editHabit} className='w-full align-middle rounded absolute shadow-lg max-w-210-px -top-60 left-260-px' />
+                  <img alt='...' src={editHabit} className='w-full align-middle rounded absolute shadow-lg max-w-210-px -top-60 left-145-px' />
                   <img alt='...' src={habitList} className='w-full align-middle rounded-lg absolute shadow-lg max-w-sm  z-3' />
                   <img alt='...' src={performance} className='w-full align-middle rounded-lg absolute shadow-2xl max-w-210-px -top-36 left-20 ' />
                   {/* <img alt='...' src={require('../assets/img/component-btn-pink.png').default} className='w-full align-middle rounded absolute shadow-xl max-w-120-px left-195-px top-95-px' /> */}
