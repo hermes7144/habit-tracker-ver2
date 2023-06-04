@@ -33,12 +33,7 @@ export default function Navbar() {
         {user && <User user={user} />}
         {!user && (
           <Link to='/auth/login'>
-            <Button text={'Sign in'} />
-          </Link>
-        )}
-        {!user && (
-          <Link to='/auth/register'>
-            <Button text={'Sign up'} />
+            <Button text={'Login'} />
           </Link>
         )}
         {user && <Button text={'Logout'} onClick={logout} />}

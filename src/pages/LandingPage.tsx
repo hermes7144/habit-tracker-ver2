@@ -41,11 +41,13 @@ export default function LandingPage() {
               <div className='lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center'>
                 <div className='relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg'>
                   <div className='px-4 py-5 flex-auto'>
-                    <div className='text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-300'>
+                    <div className='text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400'>
                       <BsMagic className='text-2xl' />
                     </div>
                     <h6 className='text-xl font-semibold'>매력적이다</h6>
-                    <p className='mt-2 mb-4 text-blueGray-500'>Habiter는 시각적으로 진전의 증거를 제공하여 내적 동기를 부여합니다.</p>
+                    <p className='mt-2 mb-4 text-blueGray-500'>
+                      <b>Habiter</b>는 시각적으로 진전의 증거를 제공하여 내적 동기를 부여합니다.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -53,11 +55,13 @@ export default function LandingPage() {
               <div className='w-full md:w-4/12 px-4 text-center'>
                 <div className='relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg'>
                   <div className='px-4 py-5 flex-auto'>
-                    <div className='text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-300'>
+                    <div className='text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-400'>
                       <BsSignpostSplitFill className='text-2xl' />
                     </div>
                     <h6 className='text-xl font-semibold'>분명하다</h6>
-                    <p className='mt-2 mb-4 text-blueGray-500'>Habiter는 행동을 일깨우는 시각적 신호를 만듭니다.</p>
+                    <p className='mt-2 mb-4 text-blueGray-500'>
+                      <b>Habiter</b>는 행동을 일깨우는 시각적 신호를 만듭니다.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -65,11 +69,13 @@ export default function LandingPage() {
               <div className='pt-6 w-full md:w-4/12 px-4 text-center'>
                 <div className='relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg'>
                   <div className='px-4 py-5 flex-auto'>
-                    <div className='text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-emerald-300'>
+                    <div className='text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-emerald-400'>
                       <BsMusicNoteBeamed className='text-2xl' />
                     </div>
                     <h6 className='text-xl font-semibold'>만족스럽다</h6>
-                    <p className='mt-2 mb-4 text-blueGray-500'>Habiter는 성공적으로 습관을 추적하고 기록하는 순간 만족감을 느끼게 해줍니다.</p>
+                    <p className='mt-2 mb-4 text-blueGray-500'>
+                      <b>Habiter</b>는 성공적으로 습관을 추적하고 기록하는 순간 만족감을 느끼게 해줍니다.
+                    </p>
                   </div>
                 </div>
               </div>
