@@ -31,14 +31,30 @@ export default function IndexNavbar() {
                 </li>
               </ul>
             )}
-            <div className='flex justify-end list-none lg:ml-auto gap-4'>
-              {user && <User user={user} />}
+            <div className='flex justify-end lg:ml-auto gap-4'>
+              {user && (
+                <div className='hidden lg:block'>
+                  <User user={user} />
+                </div>
+              )}
               {!user && (
-                <Link to='/auth/login'>
+                <Link
+                  to='/auth/login'
+                  onClick={() => {
+                    setNavbarOpen(false);
+                  }}>
                   <Button text={'Login'} />
                 </Link>
               )}
-              {user && <Button text={'Logout'} onClick={logout} />}
+              {user && (
+                <Button
+                  text={'Logout'}
+                  onClick={() => {
+                    logout();
+                    setNavbarOpen(false);
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>
