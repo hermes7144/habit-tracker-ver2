@@ -7,7 +7,7 @@ import { useMediaQuery } from 'react-responsive';
 
 Modal.setAppElement('#root');
 
-export default function MyWebsite() {
+export default function AuthedPage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   function openModal() {

@@ -12,6 +12,7 @@ export type HabitType = {
   title?: string;
   description?: string;
   frequency: number[];
+  date?: any;
 };
 
 export type CheckType = {

@@ -56,8 +56,10 @@ export async function getHabits(userId) {
   const habitsQuery = query(habitsRef, orderByChild('createdAt'));
 
   return get(habitsQuery).then((snapshot) => {
-    const items = snapshot.val() || {};
-    return Object.values(items).reverse();
+    const items: HabitType = snapshot.val() || {};
+    const sortedItems = Object.values(items).sort((a, b) => a.createdAt - b.createdAt);
+
+    return sortedItems;
   });
 }
 

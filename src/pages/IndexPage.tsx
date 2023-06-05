@@ -1,6 +1,6 @@
 import { PropagateLoader } from 'react-spinners';
 import { useAuthContext } from '../context/AuthContext';
-import AuthPage from './AuthPage';
+import AuthedPage from './AuthedPage';
 import Landing from './LandingPage';
 
 export default function IndexPage() {
@@ -14,5 +14,5 @@ export default function IndexPage() {
     );
   }
 
-  return <>{user ? <AuthPage /> : <Landing />}</>;
+  return <>{user ? <AuthedPage /> : <Landing />}</>;
 }
