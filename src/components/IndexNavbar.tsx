@@ -11,7 +11,7 @@ export default function IndexNavbar() {
 
   return (
     <>
-      <header className='top-0 z-50 w-full flex flex-wrap items-center px-2 py-3 bg-white shadow'>
+      <header className='top-0 z-50 w-full flex flex-wrap items-center px-2 py-3 bg-white'>
         <div className='w-full px-4 mx-auto flex flex-wrap items-center justify-between'>
           <div className='w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start'>
             <Link to='/' className='text-brand font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap'>
