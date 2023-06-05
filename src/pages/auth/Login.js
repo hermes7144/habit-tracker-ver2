@@ -21,8 +21,8 @@ export default function Login() {
                   </div>
                   <div className="btn-wrapper text-center">
                     <button
-                      className="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                      type="button"
+                      className="bg-white active:bg-blueGray-50 text-blueGray-700  px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
+                      type="button" onClick={() => login('github')}
                     >
                       <img
                         alt="..."
@@ -32,8 +32,8 @@ export default function Login() {
                       Github
                     </button>
                     <button
-                      className="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                      type="button" onClick={login}
+                      className="bg-white active:bg-blueGray-50 text-blueGray-700 px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
+                      type="button" onClick={() => login('google')}
                     >
                       <img
                         alt="..."
@@ -53,28 +53,30 @@ export default function Login() {
                     <div className="relative w-full mb-3">
                       <label
                         className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                        htmlFor="grid-password"
+                        htmlFor="email"
                       >
                         Email
                       </label>
                       <input
                         type="email"
+                        id='email'
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="Email"
+                        placeholder="To be updated..."
                       />
                     </div>
 
                     <div className="relative w-full mb-3">
                       <label
                         className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                        htmlFor="grid-password"
+                        htmlFor="password"
                       >
                         Password
                       </label>
                       <input
                         type="password"
+                        id='password'
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="Password"
+                        placeholder="To be updated..."
                       />
                     </div>
                     <div>
@@ -101,7 +103,7 @@ export default function Login() {
                   </form>
                 </div>
               </div>
-              <div className="flex flex-wrap mt-6 relative">
+              {/* <div className="flex flex-wrap mt-6 relative">
                 <div className="w-1/2">
                   <a
                     href="#pablo"
@@ -116,7 +118,7 @@ export default function Login() {
                     <small>Create new account</small>
                   </Link>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

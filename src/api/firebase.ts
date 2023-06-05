@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, GithubAuthProvider } from 'firebase/auth';
 import { getDatabase, ref, get, set, remove, serverTimestamp, query, orderByChild, equalTo } from 'firebase/database';
 import { v4 as uuid } from 'uuid';
 import { CheckType, HabitType } from '../pages/DashBoard';
@@ -13,10 +13,13 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
 const database = getDatabase(app);
 
-export async function login() {
+export async function login(param) {
+  const provider = param === 'google' ? googleProvider : githubProvider;
+
   return signInWithPopup(auth, provider)
     .then((result) => {
       const user = result.user;
