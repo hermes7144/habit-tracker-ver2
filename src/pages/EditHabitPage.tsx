@@ -70,12 +70,12 @@ export default function EditHabitPage() {
               </td>
               <td className='w-1/12 text-lg md:text-2xl hover:text-gray-800 text-gray-500 cursor-pointer'>
                 <div className='flex items-center justify-center'>
-                  <RiPencilFill onClick={() => openModal(habit)} />
+                  <RiPencilFill className='text-2xl' onClick={() => openModal(habit)} />
                 </div>
               </td>
               <td className='w-1/12 text-lg md:text-2xl hover:text-gray-800 text-gray-500 cursor-pointer'>
                 <div className='flex items-center justify-center'>
-                  <RiDeleteBin5Fill onClick={() => handleDelete(habit.id)} />
+                  <RiDeleteBin5Fill className='text-2xl' onClick={() => handleDelete(habit.id)} />
                 </div>
               </td>
             </tr>
