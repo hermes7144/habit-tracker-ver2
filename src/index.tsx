@@ -9,6 +9,7 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import EditHabitPage from './pages/EditHabitPage';
 import DetailPage from './pages/DetailPage';
+import ProtectedRoute from './pages/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -18,8 +19,22 @@ const router = createBrowserRouter([
       { index: true, path: '/', element: <IndexPage /> },
       { path: '/auth/login', element: <Login /> },
       { path: '/auth/register', element: <Register /> },
-      { path: '/habits/:id', element: <DetailPage /> },
-      { path: '/habits/edit', element: <EditHabitPage /> },
+      {
+        path: '/habits/:id',
+        element: (
+          <ProtectedRoute>
+            <DetailPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/habits/edit',
+        element: (
+          <ProtectedRoute>
+            <EditHabitPage />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);

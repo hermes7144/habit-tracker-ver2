@@ -58,14 +58,13 @@ export default function BarChart({ dates, labels, habits, checkmarks }) {
   const completionRateByDate = Object.keys(countByDate).map((date) => {
     const totalCount = countByDate[date];
     const completedCount = completedByDate[date];
-    return totalCount === 0 ? 0 : (completedCount / totalCount) * 100;
+    return totalCount === 0 ? 0 : Math.round((completedCount / totalCount) * 100);
   });
 
   const data = {
     labels,
     datasets: [
       {
-        label: '',
         data: completionRateByDate,
         backgroundColor: 'rgb(1, 118, 214)',
         max: 110,

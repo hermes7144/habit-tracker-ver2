@@ -11,8 +11,8 @@ export default function Achievements() {
   const today = moment().format('YYYY-MM-DD');
   const dayOfWeek = (moment().day() + 6) % 7;
 
-  const startOfWeek = moment(today).startOf('week');
-  const beforeWeek = moment(today).subtract(1, 'w').startOf('week');
+  const startOfWeek = moment().startOf('week');
+  const beforeWeek = moment().subtract(1, 'w').startOf('week');
 
   const weeklyData = Array.from({ length: 7 }, (_, i) => startOfWeek.clone().add(i, 'day').format('YYYY-MM-DD'));
   const lastWeekData = Array.from({ length: 7 }, (_, i) => beforeWeek.clone().add(i, 'day').format('YYYY-MM-DD'));
@@ -30,14 +30,12 @@ export default function Achievements() {
 
   return (
     <div className='flex flex-col'>
-      <div className='text-xl text-brand text-center font-bold'>Your performance</div>
+      <div className='text-xl text-brand text-center font-bold my-5'>Your performance</div>
       <div className='flex justify-center'>
         <ChartWrapper chartObj={lastWeekObj} />
         <ChartWrapper chartObj={thisWeekObj} />
         <ChartWrapper chartObj={todayObj} />
       </div>
-      <hr />
-      <div className='flex justify-center items-center py-3'>{/* <span className='text-gray-400'>Overall All Time Performance: {64}%</span> */}</div>
     </div>
   );
 }

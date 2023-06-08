@@ -10,23 +10,8 @@ import { RiDeleteBin5Fill, RiPencilFill } from 'react-icons/ri';
 import HabitForm from '../components/HabitForm';
 import { useMediaQuery } from 'react-responsive';
 import LineChart from '../components/LineChart';
-import Achievement from '../components/Achievement';
-
-export type HabitType = {
-  id?: string;
-  title?: string;
-  description?: string;
-  frequency: number[];
-  date?: any;
-};
-
-export type CheckType = {
-  id: string;
-  title: string;
-  date: string;
-  createdAt: Date;
-  habitId: string;
-};
+import Calendar from 'react-calendar';
+import DetailAchievement from '../components/DatailAchievement';
 
 export default function DetailPage() {
   const navigate = useNavigate();
@@ -52,6 +37,38 @@ export default function DetailPage() {
       navigate('/');
     }
   };
+
+  const checkDates = checkmarks.filter((checkmark) => checkmark.habitId === habit.id && habit.frequency.includes((moment(checkmark.date).day() + 6) % 7)).map((checkmark) => checkmark.date);
+
+  const startDate = moment(habit.createdAt);
+
+  const getDatesInRange = (startDate) => {
+    const dates = [];
+
+    const currentDate = moment();
+    const days = currentDate.diff(startDate, 'days');
+    if (days >= 0) {
+      let current = moment(startDate);
+
+      // 시작 날짜부터 오늘까지의 날짜를 계산하여 목록에 추가
+      for (let i = 0; i <= days; i++) {
+        dates.push(current.format('YYYY-MM-DD'));
+        current = current.add(1, 'day');
+      }
+    }
+    return dates;
+  };
+
+  const dateRange = getDatesInRange(startDate);
+  const isDateIncluded = dateRange.map((date) => checkDates.includes(date));
+
+  let result = 1;
+  const multipliedData = isDateIncluded.map((value) => {
+    if (value) {
+      result *= 1.01;
+    }
+    return result;
+  });
 
   const isDesktopOrMobile = useMediaQuery({ minWidth: 768 });
 
@@ -104,12 +121,13 @@ export default function DetailPage() {
             </table>
           </div>
           <div className='w-full lg:max-w-md lg:w-4/12 px-2 shadow-lg rounded'>
-            <Achievement />
+            <DetailAchievement habit={habit} totalDates={dateRange} checkDates={checkDates} />
           </div>
-          <div className='w-full lg:max-w-md lg:w-4/12 px-2 shadow-lg rounded'>sdfdsds</div>
+          <div className='w-full lg:max-w-md lg:w-4/12 px-2 shadow-lg rounded'>
+            <Calendar calendarType='US' tileClassName={({ date }) => (checkDates.find((val) => val === moment(date).format('YYYY-MM-DD')) ? 'highlight' : '')} />
+          </div>
         </div>
-
-        <LineChart habit={habit} checkmarks={checkmarks} />
+        <LineChart labels={dateRange} data={multipliedData} />
       </div>
 
       <Modal

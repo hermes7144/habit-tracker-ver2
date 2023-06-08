@@ -9,11 +9,12 @@ import Achievements from '../components/Achievements';
 import { Link, useNavigate } from 'react-router-dom';
 
 export type HabitType = {
-  id?: string;
+  id?: any;
   title?: string;
   description?: string;
   frequency: number[];
   date?: any;
+  createdAt?: any;
 };
 
 export type CheckType = {
