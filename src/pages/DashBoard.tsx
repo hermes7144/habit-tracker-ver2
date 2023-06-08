@@ -6,6 +6,7 @@ import 'moment/locale/fr';
 import useHabits from '../hooks/useHabits';
 import BarChart from '../components/BarChart';
 import Achievements from '../components/Achievements';
+import { Link, useNavigate } from 'react-router-dom';
 
 export type HabitType = {
   id?: string;
@@ -24,6 +25,7 @@ export type CheckType = {
 };
 
 export default function DashBoard() {
+  const navigate = useNavigate();
   const {
     habitsQuery: { isLoading, data: habits },
     checksQuery: { isLoading: isLoading2, data: checkmarks },
@@ -83,7 +85,14 @@ export default function DashBoard() {
               <tbody>
                 {habits?.map((habit: HabitType) => (
                   <tr key={habit.id}>
-                    <th className='px-6 text-left text-xs p-4 whitespace-nowrap'>{habit.title}</th>
+                    <th
+                      className='px-6 text-left text-xs p-4 whitespace-nowrap hover:underline'
+                      onClick={() => {
+                        navigate(`/habits/${habit.id}`, { state: { habit, checkmarks } });
+                      }}>
+                      {habit.title}
+                    </th>
+
                     {checkmarks &&
                       weeklyData.map((date, index) => {
                         const freq = habit.frequency.includes(index);

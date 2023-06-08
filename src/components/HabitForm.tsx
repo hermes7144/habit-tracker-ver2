@@ -3,6 +3,7 @@ import useHabits from '../hooks/useHabits';
 import { AiOutlineClose } from 'react-icons/ai';
 import ButtonFull from './ui/ButtonFull';
 import { HabitType } from '../pages/DashBoard';
+import { useNavigate } from 'react-router-dom';
 
 // Initial habit
 const initialHabit = {
@@ -14,6 +15,7 @@ const frequencies = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
 export default function HabitForm({ closeModal, habitProp }: { closeModal: any; habitProp: any | null }) {
   const { addOrUpdateItem } = useHabits();
+  const navigate = useNavigate();
   const [habit, setHabit] = useState<HabitType>(habitProp || initialHabit);
 
   const handleChange = (e) => {
@@ -44,6 +46,7 @@ export default function HabitForm({ closeModal, habitProp }: { closeModal: any; 
     addOrUpdateItem.mutate(habit, {
       onSuccess: () => {
         closeModal();
+        navigate('/');
       },
     });
   };
@@ -87,5 +90,3 @@ export default function HabitForm({ closeModal, habitProp }: { closeModal: any; 
     </div>
   );
 }
-
-// export type { HabitType };

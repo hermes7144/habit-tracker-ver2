@@ -25,9 +25,6 @@ export default function IndexNavbar() {
             {user && (
               <ul className='flex flex-col lg:flex-row list-none mr-auto'>
                 <li className='flex items-center'>
-                  <Link to='/habits/detail' className='hover:text-blueGray-500 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold'>
-                    Detail
-                  </Link>
                   <Link to='/habits/edit' className='hover:text-blueGray-500 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold'>
                     Manage
                   </Link>

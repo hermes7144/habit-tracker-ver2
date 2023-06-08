@@ -22,7 +22,7 @@ const options = {
           return null;
         } else {
           let result = value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
-          return Math.round(Number(result * 10)) / 10;
+          return Math.round(Number(result));
         }
       },
       font: {

@@ -51,6 +51,18 @@ async function adminUser(user) {
     });
 }
 
+export async function getHabit(userId, habitId) {
+  const habitsRef = ref(database, `habits/${userId}/${habitId}`);
+  const habitsQuery = query(habitsRef, orderByChild('createdAt'));
+
+  return get(habitsQuery).then((snapshot) => {
+    const items: HabitType = snapshot.val() || {};
+    const sortedItems = Object.values(items).sort((a, b) => a.createdAt - b.createdAt);
+
+    return sortedItems;
+  });
+}
+
 export async function getHabits(userId) {
   const habitsRef = ref(database, `habits/${userId}`);
   const habitsQuery = query(habitsRef, orderByChild('createdAt'));
@@ -79,6 +91,13 @@ export async function removeHabit(userId, habitId) {
   );
   remove(ref(database, `habits/${userId}/${habitId}`));
   return null;
+}
+
+export async function getCheck(userId: any, habitId) {
+  return get(ref(database, `checkmarks/${userId}/${habitId}`)).then((snapshot) => {
+    const items: CheckType[] = snapshot.val() || {};
+    return Object.values(items);
+  });
 }
 
 export async function getChecks(userId: any) {

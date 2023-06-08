@@ -4,7 +4,7 @@ import moment from 'moment';
 import 'moment/locale/fr';
 import useHabits from '../hooks/useHabits';
 
-export default function Achievements() {
+export default function Achievement() {
   const { data: habits } = useHabits().habitsQuery;
   const { data: checkmarks } = useHabits().checksQuery;
 

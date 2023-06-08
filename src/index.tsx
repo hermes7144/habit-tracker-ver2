@@ -18,7 +18,7 @@ const router = createBrowserRouter([
       { index: true, path: '/', element: <IndexPage /> },
       { path: '/auth/login', element: <Login /> },
       { path: '/auth/register', element: <Register /> },
-      { path: '/habits/detail', element: <DetailPage /> },
+      { path: '/habits/:id', element: <DetailPage /> },
       { path: '/habits/edit', element: <EditHabitPage /> },
     ],
   },
@@ -35,4 +35,3 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
