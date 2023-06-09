@@ -75,9 +75,9 @@ export default function DashBoard() {
             <table className='items-center w-full bg-transparent border-collapse'>
               <thead>
                 <tr>
-                  <th className={`w-5/12 px-2 align-middle border border-solid py-3 text-xs whitespace-nowrap font-semibold text-center bg-blueGray-50 text-blueGray-500 border-blueGray-100`}>Habit</th>
+                  <th className={`w-5/12 px-2 align-middle border border-solid py-3 text-xs whitespace-nowrap font-bold text-center bg-blueGray-50 text-blueGray-500 border-blueGray-100`}>Habit</th>
                   {weeklyDataMMDD.map((date) => (
-                    <th key={date} className={`w-1/12 px-3 align-middle border border-solid py-3 text-xs font-semibold text-center whitespace-nowrap bg-blueGray-50 text-blueGray-500 border-blueGray-100`}>
+                    <th key={date} className={`w-1/12 px-3 align-middle border border-solid py-3 text-xs font-bold text-center whitespace-nowrap bg-blueGray-50 text-blueGray-500 border-blueGray-100`}>
                       {date}
                     </th>
                   ))}
@@ -87,7 +87,7 @@ export default function DashBoard() {
                 {habits?.map((habit: HabitType) => (
                   <tr key={habit.id}>
                     <th
-                      className='px-6 text-left text-xs p-4 whitespace-nowrap hover:underline'
+                      className='px-6 text-left text-xs p-4 whitespace-nowrap  text-blueGray-800 underline hover:cursor-pointer'
                       onClick={() => {
                         navigate(`/habits/${habit.id}`, { state: { habit, checkmarks } });
                       }}>

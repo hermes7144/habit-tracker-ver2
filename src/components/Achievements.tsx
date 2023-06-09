@@ -14,18 +14,37 @@ export default function Achievements() {
   const startOfWeek = moment().startOf('week');
   const beforeWeek = moment().subtract(1, 'w').startOf('week');
 
-  const weeklyData = Array.from({ length: 7 }, (_, i) => startOfWeek.clone().add(i, 'day').format('YYYY-MM-DD'));
-  const lastWeekData = Array.from({ length: 7 }, (_, i) => beforeWeek.clone().add(i, 'day').format('YYYY-MM-DD'));
+  const lastWeekDates = Array.from({ length: 7 }, (_, i) => beforeWeek.clone().add(i, 'day').format('YYYY-MM-DD'));
+  const weeklyDates = Array.from({ length: 7 }, (_, i) => startOfWeek.clone().add(i, 'day').format('YYYY-MM-DD'));
 
-  const totalHabits = habits.reduce((acc, habit) => acc + habit.frequency.length, 0);
   const todayTotalHabits = habits.filter((habit) => habit.frequency.includes(dayOfWeek)).length;
 
-  const lastWeekAchieved = checkmarks.filter((checkmark) => lastWeekData.includes(checkmark.date)).length;
-  const weeklyAchieved = checkmarks.filter((checkmark) => weeklyData.includes(checkmark.date)).length;
+  const lastWeekHabit = habits.flatMap((habit) =>
+    lastWeekDates.filter((date) => {
+      const habitCreatedAt = moment(habit.createdAt);
+      const currentDate = moment(date);
+      const isDateAfterHabitCreatedAt = currentDate.isSameOrAfter(habitCreatedAt, 'day');
+      const isDayInFrequency = habit.frequency.includes((currentDate.day() + 6) % 7);
+      return isDateAfterHabitCreatedAt && isDayInFrequency;
+    })
+  );
+
+  const weeklyHabitFilter = habits.flatMap((habit) =>
+    weeklyDates.filter((date) => {
+      const habitCreatedAt = moment(habit.createdAt);
+      const currentDate = moment(date);
+      const isDateAfterHabitCreatedAt = currentDate.isSameOrAfter(habitCreatedAt, 'day');
+      const isDayInFrequency = habit.frequency.includes((currentDate.day() + 6) % 7);
+      return isDateAfterHabitCreatedAt && isDayInFrequency;
+    })
+  );
+
+  const lastWeekAchieved = checkmarks.filter((checkmark) => lastWeekDates.includes(checkmark.date)).length;
+  const weeklyAchieved = checkmarks.filter((checkmark) => weeklyDates.includes(checkmark.date)).length;
   const todayAchieved = checkmarks.filter((checkmark) => checkmark.date.includes(today)).length;
 
-  const thisWeekObj = { title: 'this week', completed: Math.round((weeklyAchieved / totalHabits) * 100) || 0 };
-  const lastWeekObj = { title: 'last week', completed: Math.round((lastWeekAchieved / totalHabits) * 100) || 0 };
+  const lastWeekObj = { title: 'last week', completed: Math.round((lastWeekAchieved / lastWeekHabit.length) * 100) || 0 };
+  const thisWeekObj = { title: 'this week', completed: Math.round((weeklyAchieved / weeklyHabitFilter.length) * 100) || 0 };
   const todayObj = { title: 'today', completed: Math.round((todayAchieved / todayTotalHabits) * 100) || 0 };
 
   return (

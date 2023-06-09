@@ -5,21 +5,22 @@ import 'moment/locale/fr';
 import useHabits from '../hooks/useHabits';
 import Modal from 'react-modal';
 import { useLocation, useNavigate } from 'react-router-dom';
-import FrequencyChip from '../components/FrequencyChip';
 import { RiDeleteBin5Fill, RiPencilFill } from 'react-icons/ri';
 import HabitForm from '../components/HabitForm';
 import { useMediaQuery } from 'react-responsive';
 import LineChart from '../components/LineChart';
 import Calendar from 'react-calendar';
 import DetailAchievement from '../components/DatailAchievement';
+import { CheckType, HabitType } from './DashBoard';
+import FrequencyChipDetail from '../components/FrequencyChipDetail';
 
 export default function DetailPage() {
   const navigate = useNavigate();
   const { removeItem } = useHabits();
 
-  const {
-    state: { habit, checkmarks },
-  } = useLocation();
+  const location = useLocation();
+
+  const { habit, checkmarks } = location.state as { habit: HabitType; checkmarks: CheckType[] };
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -37,6 +38,8 @@ export default function DetailPage() {
       navigate('/');
     }
   };
+
+  const habitDays = moment().diff(habit.createdAt, 'days') + 2;
 
   const checkDates = checkmarks.filter((checkmark) => checkmark.habitId === habit.id && habit.frequency.includes((moment(checkmark.date).day() + 6) % 7)).map((checkmark) => checkmark.date);
 
@@ -59,7 +62,25 @@ export default function DetailPage() {
     return dates;
   };
 
+  const getDatesInRangeMMDD = (startDate) => {
+    const dates = [];
+
+    const currentDate = moment();
+    const days = currentDate.diff(startDate, 'days');
+    if (days >= 0) {
+      let current = moment(startDate);
+
+      // 시작 날짜부터 오늘까지의 날짜를 계산하여 목록에 추가
+      for (let i = 0; i <= days; i++) {
+        dates.push(current.format('MM-DD'));
+        current = current.add(1, 'day');
+      }
+    }
+    return dates;
+  };
+
   const dateRange = getDatesInRange(startDate);
+  const dateRangeMMDD = getDatesInRangeMMDD(startDate);
   const isDateIncluded = dateRange.map((date) => checkDates.includes(date));
 
   let result = 1;
@@ -93,41 +114,36 @@ export default function DetailPage() {
   return (
     <>
       <div className='mt-2'>
-        <div className={`flex flex-col md:flex-row  ${window.innerWidth <= 768 ? 'items-center' : 'justify-between'} m-2 gap-4`}>
-          <div className='w-full lg:max-w-md lg:w-4/12 px-2 shadow-lg rounded'>
-            <p className='text-sm md:text-lg word break-all'>{habit.title}</p>
-            <p className='text-xs text-gray-300 break-all'>설명: {habit.description}</p>
-            {/* <p className='text-xs text-gray-300 break-all'>시작일자: {startDate.format('YYYY년 MM월 DD일')}</p>
-            시작한지 {days}일 째 */}
-            <table className='w-full mt-5 border-separate border-spacing-5'>
-              <tbody>
-                <tr key={habit.id}>
-                  <th className='w-6/12 text-left'></th>
-                  <td className='w-4/12'>
-                    <FrequencyChip frequency={habit.frequency} />
-                  </td>
-                  <td className='w-1/12 text-lg md:text-2xl hover:text-gray-800 text-gray-500 cursor-pointer'>
-                    <div className='flex items-center justify-center'>
-                      <RiPencilFill className='text-2xl' onClick={openModal} />
-                    </div>
-                  </td>
-                  <td className='w-1/12 text-lg md:text-2xl hover:text-gray-800 text-gray-500 cursor-pointer'>
-                    <div className='flex items-center justify-center'>
-                      <RiDeleteBin5Fill className='text-2xl' onClick={handleDelete} />
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        <div className={`flex flex-col md:flex-row ${window.innerWidth <= 768 ? 'items-center' : 'justify-between'} m-2 gap-4`}>
+          <div className='flex flex-col w-full lg:w-4/12 px-2 shadow-lg rounded min-h-[272px]'>
+            <div className='flex justify-between p-5'>
+              <div>
+                <p className='text-lg font-bold word break-all'>{habit.title}</p>
+                <p className='text-xs text-gray-500 break-all'>{habit.description}</p>
+                <p className='text-xs text-gray-500 break-all'>
+                  시작일자: {startDate.format('YYYY년 MM월 DD일')}({habitDays}일 째)
+                </p>
+              </div>
+              <div className='flex gap-3 justify-center items-center'>
+                <RiPencilFill className='text-2xl text-gray-500' onClick={openModal} />
+                <RiDeleteBin5Fill className='text-2xl text-gray-500' onClick={handleDelete} />
+              </div>
+            </div>
+            <div className='flex w-full justify-center items-center flex-1'>
+              <FrequencyChipDetail frequency={habit.frequency} />
+            </div>
           </div>
+
           <div className='w-full lg:max-w-md lg:w-4/12 px-2 shadow-lg rounded'>
             <DetailAchievement habit={habit} totalDates={dateRange} checkDates={checkDates} />
           </div>
-          <div className='w-full lg:max-w-md lg:w-4/12 px-2 shadow-lg rounded'>
+          <div className='w-full lg:w-4/12'>
             <Calendar calendarType='US' tileClassName={({ date }) => (checkDates.find((val) => val === moment(date).format('YYYY-MM-DD')) ? 'highlight' : '')} />
           </div>
         </div>
-        <LineChart labels={dateRange} data={multipliedData} />
+        <div className='flex justify-center max-w-screen-2xl h-auto lg:h-[500px] shadow-lg rounded mx-2'>
+          <LineChart labels={dateRangeMMDD} data={multipliedData} />
+        </div>
       </div>
 
       <Modal

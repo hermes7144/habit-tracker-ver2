@@ -1,13 +1,12 @@
 import { useQuery, useMutation, useQueryClient, UseQueryResult } from '@tanstack/react-query';
 import { useAuthContext } from '../context/AuthContext';
-import { getHabits, addOrUpdateHabit, getChecks, addOrUpdateCheck, removeCheck, removeHabit, getHabit } from '../api/firebase';
+import { getHabits, addOrUpdateHabit, getChecks, addOrUpdateCheck, removeCheck, removeHabit } from '../api/firebase';
 import { CheckType, HabitType } from '../pages/DashBoard';
 
 export default function useHabits(habitId?: String) {
   const { uid } = useAuthContext();
   const queryClient = useQueryClient();
 
-  const habitQuery: UseQueryResult<HabitType> = useQuery(['habit'], (habitId) => getHabit(uid, habitId), { enabled: !!uid });
   const habitsQuery: UseQueryResult<HabitType[]> = useQuery(['habits'], () => getHabits(uid), { enabled: !!uid });
 
   const addOrUpdateItem = useMutation((habit: HabitType) => addOrUpdateHabit(uid, habit), {
@@ -36,5 +35,5 @@ export default function useHabits(habitId?: String) {
     },
   });
 
-  return { habitsQuery, habitQuery, addOrUpdateItem, removeItem, checksQuery, addOrUpdateCheckItem, removeCheckItem };
+  return { habitsQuery, addOrUpdateItem, removeItem, checksQuery, addOrUpdateCheckItem, removeCheckItem };
 }

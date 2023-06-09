@@ -51,13 +51,6 @@ async function adminUser(user) {
     });
 }
 
-export async function getHabit(userId, habitId) {
-  return get(ref(database, `habits/${userId}/${habitId}`)).then((snapshot) => {
-    const items: CheckType[] = snapshot.val() || {};
-    return Object.values(items);
-  });
-}
-
 export async function getHabits(userId) {
   const habitsRef = ref(database, `habits/${userId}`);
   const habitsQuery = query(habitsRef, orderByChild('createdAt'));
