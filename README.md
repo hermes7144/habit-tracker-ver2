@@ -39,7 +39,10 @@ Habit tracker는 장기적 발전을 위해 시스템을 만들어 계속해서 
   ![Alt text](image-2.png)
 - 대시보드에서 습관을 추적 및 기록할 수 있습니다.
   ![Alt text](image-3.png)
+
+  ![Alt text](image-6.png)
+
 - 습관 이름, 내용 및 빈도를 등록, 수정할 수 있습니다.
   ![Alt text](image-4.png)
 - 상세페이지에서는 습관을 수정, 삭제할 수 있고, 습관의 진척도를 확인할 수 있습니다.
-  ![Alt text](image-5.png)
+  ![Alt text](image-7.png)
