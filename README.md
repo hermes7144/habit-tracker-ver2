@@ -38,9 +38,7 @@ Habit tracker는 장기적 발전을 위해 시스템을 만들어 계속해서 
 - Github, Google을 활용한 로그인
   ![Alt text](image-2.png)
 - 대시보드에서 습관을 추적 및 기록할 수 있습니다.
-  ![Alt text](image-3.png)
-
-  ![Alt text](image-6.png)
+  ![Alt text](image-5.png)
 
 - 습관 이름, 내용 및 빈도를 등록, 수정할 수 있습니다.
   ![Alt text](image-4.png)
