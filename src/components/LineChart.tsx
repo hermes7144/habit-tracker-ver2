@@ -1,10 +1,10 @@
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Plugin } from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import 'moment/locale/fr';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-export default function LineChart({ labels, data }) {
+export default function LineChart({ data }) {
   const options = {
     plugins: {
       title: {
@@ -49,11 +49,10 @@ export default function LineChart({ labels, data }) {
 
   const plugins: any = {
     id: 'customLegend',
-    afterDraw: (chart, args, pluginOptions) => {
+    afterDraw: (chart) => {
       const {
         ctx,
-        chartArea: { left, right, top, bottom, width, height },
-        scales: { x, y },
+        chartArea: { left },
       } = chart;
       ctx.font = 'bolder 15px sans-serif';
       ctx.fillStyle = '#e5a0a0';

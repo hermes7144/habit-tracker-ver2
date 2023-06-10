@@ -62,25 +62,7 @@ export default function DetailPage() {
     return dates;
   };
 
-  const getDatesInRangeMMDD = (startDate) => {
-    const dates = [];
-
-    const currentDate = moment();
-    const days = currentDate.diff(startDate, 'days');
-    if (days >= 0) {
-      let current = moment(startDate);
-
-      // 시작 날짜부터 오늘까지의 날짜를 계산하여 목록에 추가
-      for (let i = 0; i <= days; i++) {
-        dates.push(current.format('MM-DD'));
-        current = current.add(1, 'day');
-      }
-    }
-    return dates;
-  };
-
   const dateRange = getDatesInRange(startDate);
-  const dateRangeMMDD = getDatesInRangeMMDD(startDate);
   const isDateIncluded = dateRange.map((date) => checkDates.includes(date));
 
   let result = 1;
@@ -142,7 +124,7 @@ export default function DetailPage() {
           </div>
         </div>
         <div className='flex justify-center max-w-screen-2xl h-auto lg:h-[500px] shadow-lg rounded mx-2'>
-          <LineChart labels={dateRangeMMDD} data={multipliedData} />
+          <LineChart data={multipliedData} />
         </div>
       </div>
 
