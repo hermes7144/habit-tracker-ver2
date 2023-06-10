@@ -5,8 +5,6 @@
 - [About](#about)
 - [Features and Stack](#features-and-stack)
 - [Screenshots](#screenshots)
-- [Getting Started](#getting-started)- [Challenges](#challenges)
-- [Create React App](#bootstrapped-with-create-react-app)
 
 ## About
 
@@ -14,7 +12,7 @@ Habit tracker는 장기적 발전을 위해 시스템을 만들어 계속해서 
 
 ## Features and Stack
 
-###Features
+### Features
 
 - GitHub 또는 Google을 사용하여 인증
 - 습관 추가, 수정 및 삭제
