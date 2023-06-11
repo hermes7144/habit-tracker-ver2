@@ -34,7 +34,7 @@ Habit tracker는 장기적 발전을 위해 시스템을 만들어 계속해서 
 ### Screenshots
 
 - 랜딩페이지
-  ![Alt text](image.png)
+  ![Alt text](image-7.png)
 - Github, Google을 활용한 로그인
   ![Alt text](image-2.png)
 - 대시보드에서 습관을 추적 및 기록할 수 있습니다.
