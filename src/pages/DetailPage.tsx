@@ -37,7 +37,7 @@ export default function DetailPage() {
     }
   };
 
-  const habitDays = moment().diff(habit.createdAt, 'days') + 2;
+  const habitDays = moment().diff(moment(habit.createdAt).format('YYYY-MM-DD'), 'days') + 1;
 
   const checkDates = checkmarks.filter((checkmark) => checkmark.habitId === habit.id && habit.frequency.includes((moment(checkmark.date).day() + 6) % 7)).map((checkmark) => checkmark.date);
 
@@ -75,9 +75,6 @@ export default function DetailPage() {
       return (initValue *= consecutiveFailures > 1 ? 0.99 : 1);
     }
   });
-  // dateRange = [...dateRange, '2020-10-10'];
-
-  // achievement = [...achievement, 4];
 
   const isDesktopOrMobile = useMediaQuery({ minWidth: 768 });
 
