@@ -3,16 +3,17 @@ import { Line } from 'react-chartjs-2';
 import 'moment/locale/fr';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+// Minimum Habit Rate
+const MHR = 2;
 
-export default function LineChart({ data }) {
+export default function LineChart({ labels, data }) {
   const options = {
     plugins: {
       title: {
         display: true,
-        text: `당신의 습관은 처음보다 ${Math.round(data[data.length - 1] * 100) / 100}배 더 나아졌습니다.`,
+        text: `당신의 습관은 처음보다 ${data[data.length - 1].toFixed(2)}배 더 나아졌습니다.`,
         padding: {
           top: 50,
-          // bottom: 30,
         },
         size: 20,
       },
@@ -22,30 +23,64 @@ export default function LineChart({ data }) {
     },
     responsive: true,
     scales: {
-      x: { grid: { display: false } },
+      x: {
+        grid: { display: false },
+        ticks: {
+          display: true,
+          autoSkip: true,
+          maxTicksLimit: 5,
+        },
+      },
       y: { grid: { display: false }, max: Math.ceil(Math.max(...data, 2.1)), display: false },
     },
   };
 
-  const datas = {
-    labels: ['Start', '', '', ''],
+  const skipped = (ctx, value) => {
+    return ctx.p1DataIndex === data.length ? value : undefined;
+  };
+
+  const achievedDatas = {
+    labels,
     datasets: [
       {
-        data: [1, data[Math.floor(data.length / 3)], data[data.length - 1]],
+        data,
         borderColor: 'rgb(1, 118, 214)',
-        backgroundColor: 'rgb(1, 118, 214)',
-        pointRadius: 3, // Set pointRadius to 0 to hide the data points
+        pointRadius: 0,
         tension: 0.3,
       },
       {
-        data: [2, 2, 2, 2],
+        data: Array.from({ length: data.length }, () => MHR),
         borderColor: 'rgba(255,0,0,0.3)',
-        backgroundColor: 'rgba(255,0,0,0.3)',
-
-        pointRadius: 0, // Set pointRadius to 0 to hide the data points
+        pointRadius: 0,
       },
     ],
   };
+
+  const unAchieveddatas = {
+    labels: [...labels, ''],
+    datasets: [
+      {
+        data: [...data, MHR],
+        borderColor: 'rgb(1, 118, 214)',
+        pointRadius: 0,
+        tension: 0.3,
+
+        segment: {
+          borderColor: (ctx) => skipped(ctx, 'rgba(0,0,0,0.2)'),
+          borderDash: (ctx) => skipped(ctx, [6, 6]),
+        },
+        spanGaps: true,
+      },
+      {
+        data: Array.from({ length: data.length + 1 }, () => MHR),
+        borderColor: 'rgba(255,0,0,0.3)',
+        pointRadius: 0,
+      },
+    ],
+  };
+
+  const isDataAchieved = data[data.length - 1] > MHR;
+  const datas = isDataAchieved ? achievedDatas : unAchieveddatas;
 
   const plugins: any = {
     id: 'customLegend',

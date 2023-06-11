@@ -15,13 +15,11 @@ import { CheckType, HabitType } from './DashBoard';
 import FrequencyChipDetail from '../components/FrequencyChipDetail';
 
 export default function DetailPage() {
-  const navigate = useNavigate();
-  const { removeItem } = useHabits();
-
   const location = useLocation();
+  const navigate = useNavigate();
 
   const { habit, checkmarks } = location.state as { habit: HabitType; checkmarks: CheckType[] };
-
+  const { removeItem } = useHabits();
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   function openModal() {
@@ -47,31 +45,39 @@ export default function DetailPage() {
 
   const getDatesInRange = (startDate) => {
     const dates = [];
-
     const currentDate = moment();
     const days = currentDate.diff(startDate, 'days');
+
     if (days >= 0) {
       let current = moment(startDate);
 
       // 시작 날짜부터 오늘까지의 날짜를 계산하여 목록에 추가
       for (let i = 0; i <= days; i++) {
         dates.push(current.format('YYYY-MM-DD'));
-        current = current.add(1, 'day');
+        current.add(1, 'day');
       }
     }
     return dates;
   };
 
-  const dateRange = getDatesInRange(startDate);
+  let dateRange = getDatesInRange(startDate);
+
   const isDateIncluded = dateRange.map((date) => checkDates.includes(date));
 
-  let result = 1;
-  const multipliedData = isDateIncluded.map((value) => {
-    if (value) {
-      result *= 1.01;
+  let consecutiveFailures = 0;
+  let initValue = 1;
+  let achievement = isDateIncluded.map((isChecked) => {
+    if (isChecked) {
+      consecutiveFailures = 0;
+      return (initValue *= 1.01);
+    } else {
+      consecutiveFailures++;
+      return (initValue *= consecutiveFailures > 1 ? 0.99 : 1);
     }
-    return result;
   });
+  // dateRange = [...dateRange, '2020-10-10'];
+
+  // achievement = [...achievement, 4];
 
   const isDesktopOrMobile = useMediaQuery({ minWidth: 768 });
 
@@ -124,7 +130,7 @@ export default function DetailPage() {
           </div>
         </div>
         <div className='flex justify-center max-w-screen-2xl h-auto lg:h-[500px] shadow-lg rounded mx-2'>
-          <LineChart data={multipliedData} />
+          <LineChart labels={dateRange} data={achievement} />
         </div>
       </div>
 
