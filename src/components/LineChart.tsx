@@ -49,7 +49,7 @@ export default function LineChart({ labels, data }) {
         tension: 0.3,
       },
       {
-        data: Array.from({ length: data.length }, () => MHR),
+        data: Array(data.length).fill(MHR),
         borderColor: 'rgba(255,0,0,0.3)',
         pointRadius: 0,
       },
@@ -72,7 +72,7 @@ export default function LineChart({ labels, data }) {
         spanGaps: true,
       },
       {
-        data: Array.from({ length: data.length + 1 }, () => MHR),
+        data: Array(data.length + 1).fill(MHR),
         borderColor: 'rgba(255,0,0,0.3)',
         pointRadius: 0,
       },

@@ -6,7 +6,7 @@ import 'moment/locale/fr';
 import useHabits from '../hooks/useHabits';
 import BarChart from '../components/BarChart';
 import Achievements from '../components/Achievements';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export type HabitType = {
   id?: any;
@@ -43,7 +43,7 @@ export default function DashBoard() {
   const weeklyData = Array.from({ length: 7 }, (_, i) => startOfWeek.clone().add(i, 'day').format('YYYY-MM-DD'));
   const weeklyDataMMDD = Array.from({ length: 7 }, (_, i) => startOfWeek.clone().add(i, 'day').format('MM-DD'));
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, habit: HabitType, date: String) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, habit, date: String) => {
     const { id } = habit;
 
     if (e.target.checked) {
