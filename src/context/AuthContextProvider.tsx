@@ -21,7 +21,8 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
       setIsLoading(false);
       navigate('/');
     });
-  }, [navigate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return <AuthContext.Provider value={{ user, uid: user?.uid, login, logout, isLoading }}>{children}</AuthContext.Provider>;
 }
