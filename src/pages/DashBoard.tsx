@@ -15,6 +15,7 @@ export type HabitType = {
   frequency: number[];
   date?: any;
   createdAt?: any;
+  completed?: boolean;
 };
 
 export type CheckType = {
@@ -33,6 +34,8 @@ export default function DashBoard() {
     addOrUpdateCheckItem,
     removeCheckItem,
   } = useHabits();
+
+  const filteredHabits = habits?.filter((habit) => !habit.completed);
 
   const date = new Date();
   const today = moment(date).format('YYYY-MM-DD');
@@ -61,7 +64,7 @@ export default function DashBoard() {
   return (
     <div className='mt-2'>
       <div className={`flex flex-col lg:flex-row  ${window.innerWidth <= 1024 ? 'items-center' : 'justify-between'} m-2 gap-4`}>
-        <div className='w-full lg:max-w-md lg:w-4/12 px-2 pt-10 shadow-lg rounded flex justify-center'>{<BarChart dates={weeklyData} labels={weeklyDataMMDD} habits={habits} checkmarks={checkmarks} />}</div>
+        <div className='w-full lg:max-w-md lg:w-4/12 px-2 pt-10 shadow-lg rounded flex justify-center'>{<BarChart dates={weeklyData} labels={weeklyDataMMDD} habits={filteredHabits} checkmarks={checkmarks} />}</div>
         <div className='w-full lg:max-w-md lg:w-4/12 px-2 shadow-lg rounded'>
           <Achievements />
         </div>
@@ -101,7 +104,7 @@ export default function DashBoard() {
                 </tr>
               </thead>
               <tbody>
-                {habits?.map((habit: HabitType) => (
+                {filteredHabits?.map((habit: HabitType) => (
                   <tr key={habit.id}>
                     <th
                       className='px-6 text-left text-xs p-4 whitespace-nowrap  text-blueGray-800 underline hover:cursor-pointer'

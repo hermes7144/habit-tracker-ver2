@@ -8,6 +8,8 @@ export default function Achievements() {
   const { data: habits } = useHabits().habitsQuery;
   const { data: checkmarks } = useHabits().checksQuery;
 
+  const filteredHabits = habits?.filter((habit) => !habit.completed);
+
   const today = moment().format('YYYY-MM-DD');
   const dayOfWeek = (moment().day() + 6) % 7;
 
@@ -17,9 +19,9 @@ export default function Achievements() {
   const lastWeekDates = Array.from({ length: 7 }, (_, i) => beforeWeek.clone().add(i, 'day').format('YYYY-MM-DD'));
   const weeklyDates = Array.from({ length: 7 }, (_, i) => startOfWeek.clone().add(i, 'day').format('YYYY-MM-DD'));
 
-  const todayTotalHabits = habits.filter((habit) => habit.frequency.includes(dayOfWeek)).length;
+  const todayTotalHabits = filteredHabits.filter((habit) => habit.frequency.includes(dayOfWeek)).length;
 
-  const lastWeekHabit = habits.flatMap((habit) =>
+  const lastWeekHabit = filteredHabits.flatMap((habit) =>
     lastWeekDates.filter((date) => {
       const habitCreatedAt = moment(habit.createdAt);
       const currentDate = moment(date);
@@ -29,7 +31,7 @@ export default function Achievements() {
     })
   );
 
-  const weeklyHabitFilter = habits.flatMap((habit) =>
+  const weeklyHabitFilter = filteredHabits.flatMap((habit) =>
     weeklyDates.filter((date) => {
       const habitCreatedAt = moment(habit.createdAt);
       const currentDate = moment(date);
@@ -43,9 +45,9 @@ export default function Achievements() {
   const weeklyAchieved = checkmarks.filter((checkmark) => weeklyDates.includes(checkmark.date)).length;
   const todayAchieved = checkmarks.filter((checkmark) => checkmark.date.includes(today)).length;
 
-  const lastWeekObj = { title: 'last week', completed: Math.round((lastWeekAchieved / lastWeekHabit.length) * 100) || 0 };
-  const thisWeekObj = { title: 'this week', completed: Math.round((weeklyAchieved / weeklyHabitFilter.length) * 100) || 0 };
-  const todayObj = { title: 'today', completed: Math.round((todayAchieved / todayTotalHabits) * 100) || 0 };
+  const lastWeekObj = { title: 'last week', completed: ((lastWeekAchieved / lastWeekHabit.length) * 100).toFixed(1) || 0 };
+  const thisWeekObj = { title: 'this week', completed: ((weeklyAchieved / weeklyHabitFilter.length) * 100).toFixed(1) || 0 };
+  const todayObj = { title: 'today', completed: ((todayAchieved / todayTotalHabits) * 100).toFixed(1) || 0 };
 
   return (
     <div className='flex flex-col'>

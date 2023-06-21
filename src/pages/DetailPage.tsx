@@ -16,24 +16,31 @@ import FrequencyChipDetail from '../components/FrequencyChipDetail';
 import Button from '../components/ui/Button';
 
 export default function DetailPage() {
+  const { addOrUpdateItem, removeItem } = useHabits();
   const location = useLocation();
   const navigate = useNavigate();
-
   const { habit, checkmarks } = location.state as { habit: HabitType; checkmarks: CheckType[] };
-  const { removeItem } = useHabits();
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  function openModal() {
-    setModalIsOpen(true);
-  }
-
-  function closeModal() {
-    setModalIsOpen(false);
-  }
+  const openModal = () => setModalIsOpen(true);
+  const closeModal = () => setModalIsOpen(false);
 
   const handleDelete = () => {
     if (window.confirm('삭제하시겠습니까?')) {
       removeItem.mutate(habit.id);
+      navigate('/');
+    }
+  };
+
+  const handleComplete = () => {
+    if (window.confirm('완료하시겠습니까?')) {
+      const completeHabit = { ...habit, completed: !habit.completed };
+      addOrUpdateItem.mutate(completeHabit, {
+        onSuccess: () => {
+          closeModal();
+          navigate('/');
+        },
+      });
       navigate('/');
     }
   };
@@ -93,7 +100,6 @@ export default function DetailPage() {
         width: '360px',
         height: '380px',
       };
-  const temp = () => {};
 
   return (
     <>
@@ -109,16 +115,16 @@ export default function DetailPage() {
                 </p>
               </div>
               <div className='flex gap-3 justify-center items-center'>
-                <RiPencilFill className='text-2xl text-gray-500' onClick={openModal} />
-                <RiDeleteBin5Fill className='text-2xl text-gray-500' onClick={handleDelete} />
+                <RiPencilFill className='text-2xl text-gray-500 cursor-pointer hover:text-gray-600' onClick={openModal} />
+                <RiDeleteBin5Fill className='text-2xl text-gray-500 cursor-pointer hover:text-gray-600' onClick={handleDelete} />
               </div>
             </div>
             <div className='flex w-full justify-center items-center flex-1'>
               <FrequencyChipDetail frequency={habit.frequency} />
             </div>
             <div className='flex justify-end gap-2 '>
-              <Button text={'중지'} onClick={temp} />
-              <Button text={'중지'} onClick={temp} />
+              <Button text={`습관 ${habit.completed ? '재시작' : '완료'}`} onClick={handleComplete} />
+              {/* <Button text={'중지'} onClick={temp} /> */}
             </div>
           </div>
 
