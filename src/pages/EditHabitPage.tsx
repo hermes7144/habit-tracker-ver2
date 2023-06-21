@@ -5,7 +5,7 @@ import useHabits from '../hooks/useHabits';
 import { RiPencilFill, RiDeleteBin5Fill } from 'react-icons/ri';
 import HabitForm from '../components/HabitForm';
 import { useMediaQuery } from 'react-responsive';
-import { HabitType } from './DashBoard';
+import { HabitType } from '../types/types';
 
 Modal.setAppElement('#root');
 

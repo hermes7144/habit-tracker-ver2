@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useHabits from '../hooks/useHabits';
 import { AiOutlineClose } from 'react-icons/ai';
 import ButtonFull from './ui/ButtonFull';
-import { HabitType } from '../pages/DashBoard';
+import { HabitType } from '../types/types';
 import { useNavigate } from 'react-router-dom';
 
 // Initial habit

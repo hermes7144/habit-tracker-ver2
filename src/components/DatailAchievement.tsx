@@ -3,12 +3,12 @@ import ChartWrapper from './ChartWrapper';
 import moment from 'moment';
 import 'moment/locale/fr';
 
-export default function DetailAchievement({ habit, checkDates, totalDates }) {
+export default function DetailAchievement({ habit, total, check }) {
   const startOfWeek = moment().startOf('week');
   const beforeWeek = moment().subtract(1, 'w').startOf('week');
   const startOfMonth = moment().startOf('month');
 
-  const achievement = Math.round((checkDates.length / totalDates.length) * 10000) / 100;
+  const achievement = ((check.length / total.length) * 100).toFixed(1);
 
   const lastWeekDates = Array.from({ length: 7 }, (_, i) => beforeWeek.clone().add(i, 'day').format('YYYY-MM-DD'));
   const weeklyDates = Array.from({ length: 7 }, (_, i) => startOfWeek.clone().add(i, 'day').format('YYYY-MM-DD'));
@@ -18,13 +18,13 @@ export default function DetailAchievement({ habit, checkDates, totalDates }) {
   const weeklyHabitFilter = weeklyDates.filter((date) => moment(date).isSameOrAfter(habit.createdAt, 'day')).filter((date) => habit.frequency.includes((moment(date).day() + 6) % 7)).length;
   const monthlyHabitDays = monthlyDates.filter((date) => moment(date).isSameOrAfter(habit.createdAt, 'day')).filter((date) => habit.frequency.includes((moment(date).day() + 6) % 7)).length;
 
-  const lastWeekAchieved = checkDates.filter((date) => lastWeekDates.includes(date)).length;
-  const weeklyAchieved = checkDates.filter((date) => weeklyDates.includes(date)).length;
-  const thisMonthAchieved = checkDates.filter((date) => monthlyDates.includes(date)).length;
+  const lastWeekAchieved = check.filter((date) => lastWeekDates.includes(date)).length;
+  const weeklyAchieved = check.filter((date) => weeklyDates.includes(date)).length;
+  const thisMonthAchieved = check.filter((date) => monthlyDates.includes(date)).length;
 
-  const lastWeekObj = { title: 'Last week', completed: Math.round((lastWeekAchieved / lastWeekHabitFilter) * 100) || 0 };
-  const thisWeekObj = { title: 'This week', completed: Math.round((weeklyAchieved / weeklyHabitFilter) * 100) || 0 };
-  const thisMonthObj = { title: 'This Month', completed: Math.round((thisMonthAchieved / monthlyHabitDays) * 100) || 0 };
+  const lastWeekObj = { title: 'Last week', completed: ((lastWeekAchieved / lastWeekHabitFilter) * 100).toFixed(1) || 0 };
+  const thisWeekObj = { title: 'This week', completed: ((weeklyAchieved / weeklyHabitFilter) * 100).toFixed(1) || 0 };
+  const thisMonthObj = { title: 'This Month', completed: ((thisMonthAchieved / monthlyHabitDays) * 100).toFixed(1) || 0 };
 
   return (
     <div className='flex flex-col'>
