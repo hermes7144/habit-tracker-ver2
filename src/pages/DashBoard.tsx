@@ -67,8 +67,11 @@ export default function DashBoard() {
         </div>
         <div className='w-full lg:w-4/12'>
           <Calendar
-            onChange={setValue}
+            next2Label={null}
+            prev2Label={null}
             value={value}
+            onChange={setValue}
+            minDetail='month'
             calendarType='US'
             tileClassName={({ date }) => {
               if (weeklyData.find((val) => val === moment(date).format('YYYY-MM-DD'))) {

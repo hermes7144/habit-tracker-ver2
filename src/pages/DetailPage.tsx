@@ -123,7 +123,7 @@ export default function DetailPage() {
             <DetailAchievement habit={habit} totalDates={dateRange} checkDates={checkDates} />
           </div>
           <div className='w-full lg:w-4/12'>
-            <Calendar calendarType='US' tileClassName={({ date }) => (checkDates.find((val) => val === moment(date).format('YYYY-MM-DD')) ? 'highlight' : '')} />
+            <Calendar next2Label={null} prev2Label={null} minDetail='month' calendarType='US' tileClassName={({ date }) => (checkDates.find((val) => val === moment(date).format('YYYY-MM-DD')) ? 'highlight' : '')} />
           </div>
         </div>
         <div className='flex justify-center max-w-screen-2xl h-auto lg:h-[500px] shadow-lg rounded mx-2'>
