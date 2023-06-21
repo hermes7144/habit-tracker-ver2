@@ -50,6 +50,7 @@
   background: none;
 }
 
+/* 클릭못하게되면 백그라운드칼라 변하는것 막기 */
 /* .react-calendar__navigation button:disabled {
   background-color: #f0f0f0;
 } */
@@ -100,9 +101,9 @@
   line-height: 16px;
 }
 
-.react-calendar__tile:disabled {
+/* .react-calendar__tile:disabled {
   background-color: #f0f0f0;
-}
+} */
 
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
@@ -127,15 +128,15 @@
   background: #a9d4ff;
 }
 
-.react-calendar__tile--active {
+/* .react-calendar__tile--active {
   background: #006edc;
   color: white;
-}
+} */
 
-.react-calendar__tile--active:enabled:hover,
+/* .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
   background: #1087ff;
-}
+} */
 
 .react-calendar--selectRange .react-calendar__tile--hover {
   background-color: #e6e6e6;

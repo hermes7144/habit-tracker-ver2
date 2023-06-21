@@ -13,6 +13,7 @@ import Calendar from 'react-calendar';
 import DetailAchievement from '../components/DatailAchievement';
 import { CheckType, HabitType } from './DashBoard';
 import FrequencyChipDetail from '../components/FrequencyChipDetail';
+import Button from '../components/ui/Button';
 
 export default function DetailPage() {
   const location = useLocation();
@@ -38,9 +39,7 @@ export default function DetailPage() {
   };
 
   const habitDays = moment().diff(moment(habit.createdAt).format('YYYY-MM-DD'), 'days') + 1;
-
   const checkDates = checkmarks.filter((checkmark) => checkmark.habitId === habit.id && habit.frequency.includes((moment(checkmark.date).day() + 6) % 7)).map((checkmark) => checkmark.date);
-
   const startDate = moment(habit.createdAt);
 
   const getDatesInRange = (startDate) => {
@@ -60,13 +59,12 @@ export default function DetailPage() {
     return dates;
   };
 
-  let dateRange = getDatesInRange(startDate);
-
+  const dateRange = getDatesInRange(startDate);
   const isDateIncluded = dateRange.map((date) => checkDates.includes(date));
 
   let consecutiveFailures = 0;
   let initValue = 1;
-  let achievement = isDateIncluded.map((isChecked) => {
+  const achievement = isDateIncluded.map((isChecked) => {
     if (isChecked) {
       consecutiveFailures = 0;
       return (initValue *= 1.01);
@@ -76,7 +74,7 @@ export default function DetailPage() {
     }
   });
 
-  const isDesktopOrMobile = useMediaQuery({ minWidth: 768 });
+  const isDesktopOrMobile = useMediaQuery({ minWidth: 1024 });
 
   const content = isDesktopOrMobile
     ? {
@@ -95,12 +93,13 @@ export default function DetailPage() {
         width: '360px',
         height: '380px',
       };
+  const temp = () => {};
 
   return (
     <>
       <div className='mt-2'>
-        <div className={`flex flex-col md:flex-row ${window.innerWidth <= 768 ? 'items-center' : 'justify-between'} m-2 gap-4`}>
-          <div className='flex flex-col w-full lg:w-4/12 px-2 shadow-lg rounded min-h-[272px]'>
+        <div className={`flex flex-col lg:flex-row ${window.innerWidth <= 1024 ? 'items-center' : 'justify-between'} m-2 gap-4`}>
+          <div className='flex flex-col w-full lg:w-4/12 p-2 shadow-lg rounded min-h-[272px]'>
             <div className='flex justify-between p-5'>
               <div>
                 <p className='text-lg font-bold word break-all'>{habit.title}</p>
@@ -117,13 +116,17 @@ export default function DetailPage() {
             <div className='flex w-full justify-center items-center flex-1'>
               <FrequencyChipDetail frequency={habit.frequency} />
             </div>
+            <div className='flex justify-end gap-2 '>
+              <Button text={'중지'} onClick={temp} />
+              <Button text={'중지'} onClick={temp} />
+            </div>
           </div>
 
           <div className='w-full lg:max-w-md lg:w-4/12 px-2 shadow-lg rounded'>
             <DetailAchievement habit={habit} totalDates={dateRange} checkDates={checkDates} />
           </div>
           <div className='w-full lg:w-4/12'>
-            <Calendar next2Label={null} prev2Label={null} minDetail='month' calendarType='US' tileClassName={({ date }) => (checkDates.find((val) => val === moment(date).format('YYYY-MM-DD')) ? 'highlight' : '')} />
+            <Calendar next2Label={null} prev2Label={null} minDetail='month' tileDisabled={() => true} calendarType='US' tileClassName={({ date }) => (checkDates.find((val) => val === moment(date).format('YYYY-MM-DD')) ? 'highlight' : '')} />
           </div>
         </div>
         <div className='flex justify-center max-w-screen-2xl h-auto lg:h-[500px] shadow-lg rounded mx-2'>
@@ -131,12 +134,7 @@ export default function DetailPage() {
         </div>
       </div>
 
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={{
-          content,
-        }}>
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={{ content }}>
         <HabitForm closeModal={closeModal} habitProp={habit} />
       </Modal>
     </>

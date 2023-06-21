@@ -74,7 +74,7 @@ module.exports = {
         full: "100%",
       },
       backgroundImage: {
-        banner: `url('../public/images/banner.png')`
+        banner: `url('../public/images/banner.jpg')`
       }
     },
   },
