@@ -60,13 +60,27 @@ export default function DashBoard() {
 
   return (
     <div className='mt-2'>
-      <div className={`flex flex-col md:flex-row  ${window.innerWidth <= 768 ? 'items-center' : 'justify-between'} m-2 gap-4`}>
+      <div className={`flex flex-col lg:flex-row  ${window.innerWidth <= 1024 ? 'items-center' : 'justify-between'} m-2 gap-4`}>
         <div className='w-full lg:max-w-md lg:w-4/12 px-2 pt-10 shadow-lg rounded flex justify-center'>{<BarChart dates={weeklyData} labels={weeklyDataMMDD} habits={habits} checkmarks={checkmarks} />}</div>
         <div className='w-full lg:max-w-md lg:w-4/12 px-2 shadow-lg rounded'>
           <Achievements />
         </div>
         <div className='w-full lg:w-4/12'>
-          <Calendar onChange={setValue} value={value} calendarType='US' />
+          <Calendar
+            onChange={setValue}
+            value={value}
+            calendarType='US'
+            tileClassName={({ date }) => {
+              if (weeklyData.find((val) => val === moment(date).format('YYYY-MM-DD'))) {
+                if (weeklyData[0] === moment(date).format('YYYY-MM-DD')) {
+                  return 'highlight highlight--first';
+                } else if (weeklyData[weeklyData.length - 1] === moment(date).format('YYYY-MM-DD')) {
+                  return 'highlight highlight--last';
+                }
+                return 'highlight';
+              }
+            }}
+          />
         </div>
       </div>
       <div className='m-2'>

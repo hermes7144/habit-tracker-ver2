@@ -21,8 +21,3 @@ code {
 input {
   @apply p-4 outline-none border border-gray-300 my-1;
 }
-
-.highlight {
-  background: rgba(1, 118, 214, 0.3) !important;
-}
-

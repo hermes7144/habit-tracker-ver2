@@ -141,3 +141,18 @@
   background-color: #e6e6e6;
 }
 
+.highlight {
+  background: rgba(1, 118, 214) !important;
+  color: white !important;
+}
+
+.highlight--first {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.highlight--last {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
