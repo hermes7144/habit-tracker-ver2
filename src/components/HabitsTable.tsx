@@ -4,9 +4,16 @@ import moment from 'moment';
 import 'moment/locale/fr';
 import { HabitType } from '../types/types';
 
-export default function HabitsTable({ weeklyData, labels, habits, checkmarks }) {
+export default function HabitsTable({ week }) {
   const navigate = useNavigate();
-  const { addOrUpdateCheckItem, removeCheckItem } = useHabits();
+  const {
+    habitsQuery: { data: habits },
+    addOrUpdateCheckItem,
+    removeCheckItem,
+  } = useHabits();
+  const { data: checkmarks } = useHabits().checksQuery;
+
+  const filteredHabits = habits.filter((habit) => !habit.completed);
 
   const date = new Date();
   const today = moment(date).format('YYYY-MM-DD');
@@ -27,15 +34,15 @@ export default function HabitsTable({ weeklyData, labels, habits, checkmarks }) 
             <thead>
               <tr>
                 <th className={`w-5/12 px-2 align-middle border border-solid py-3 text-xs whitespace-nowrap font-bold text-center bg-blueGray-50 text-blueGray-500 border-blueGray-100`}>Habit</th>
-                {labels.map((date) => (
+                {week.map((date) => (
                   <th key={date} className={`w-1/12 px-3 align-middle border border-solid py-3 text-xs font-bold text-center whitespace-nowrap bg-blueGray-50 text-blueGray-500 border-blueGray-100`}>
-                    {date}
+                    {moment(date).format('MM-DD')}
                   </th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {habits?.map((habit: HabitType) => (
+              {filteredHabits.map((habit: HabitType) => (
                 <tr key={habit.id}>
                   <th
                     className='px-6 text-left text-xs p-4 whitespace-nowrap  text-blueGray-800 underline hover:cursor-pointer'
@@ -44,9 +51,8 @@ export default function HabitsTable({ weeklyData, labels, habits, checkmarks }) 
                     }}>
                     {habit.title}
                   </th>
-
                   {checkmarks &&
-                    weeklyData.map((date, index) => {
+                    week.map((date, index) => {
                       const freq = habit.frequency.includes(index);
                       const isChecked = checkmarks?.some((checkmark) => checkmark.habitId === habit.id && checkmark.date === date);
                       const isToday = date === String(today);

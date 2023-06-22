@@ -3,7 +3,7 @@ import { useAuthContext } from '../context/AuthContext';
 import { getHabits, addOrUpdateHabit, getChecks, addOrUpdateCheck, removeCheck, removeHabit } from '../api/firebase';
 import { CheckType, HabitType } from '../types/types';
 
-export default function useHabits(habitId?: String) {
+export default function useHabits() {
   const { uid } = useAuthContext();
   const queryClient = useQueryClient();
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import ChartWrapper from './ChartWrapper';
 import moment from 'moment';
 import 'moment/locale/fr';
+import AchievementChart from './AchievementChart ';
 
 export default function DetailAchievement({ habit, total, check }) {
   const startOfWeek = moment().startOf('week');
@@ -30,9 +30,9 @@ export default function DetailAchievement({ habit, total, check }) {
     <div className='flex flex-col'>
       <div className='text-xl text-brand text-center font-bold'>Your performance</div>
       <div className='flex justify-center'>
-        <ChartWrapper chartObj={lastWeekObj} />
-        <ChartWrapper chartObj={thisWeekObj} />
-        <ChartWrapper chartObj={thisMonthObj} />
+        <AchievementChart chartObj={lastWeekObj} />
+        <AchievementChart chartObj={thisWeekObj} />
+        <AchievementChart chartObj={thisMonthObj} />
       </div>
       <hr />
       <div className='flex justify-center items-center py-3'>

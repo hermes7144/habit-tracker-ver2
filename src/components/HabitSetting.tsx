@@ -71,8 +71,12 @@ export default function HabitSetting({ habit, startDate }) {
             </p>
           </div>
           <div className='flex gap-3 justify-center items-center'>
-            <RiPencilFill className='text-2xl text-gray-500 cursor-pointer hover:text-gray-600' onClick={openModal} />
-            <RiDeleteBin5Fill className='text-2xl text-gray-500 cursor-pointer hover:text-gray-600' onClick={handleDelete} />
+            <div className='p-2 rounded-full hover:bg-gray-300'>
+              <RiPencilFill className='text-2xl text-gray-500 cursor-pointer' onClick={openModal} />
+            </div>
+            <div className='p-2 rounded-full hover:bg-gray-300'>
+              <RiDeleteBin5Fill className='text-2xl text-gray-500 cursor-pointer hover:text-gray-600' onClick={handleDelete} />
+            </div>
           </div>
         </div>
         <div className='flex w-full justify-center items-center flex-1'>

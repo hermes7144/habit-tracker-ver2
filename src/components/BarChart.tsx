@@ -4,6 +4,8 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { HabitType } from '../types/types';
 import useHabits from '../hooks/useHabits';
+import moment from 'moment';
+import 'moment/locale/fr';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -19,10 +21,11 @@ const options = {
   },
 };
 
-export default function BarChart({ week, labels }) {
+export default function BarChart({ week }) {
   const { data: habits } = useHabits().habitsQuery;
   const { data: checkmarks } = useHabits().checksQuery;
   const filteredHabits = habits.filter((habit) => !habit.completed);
+  const labels = week.map((date) => moment(date).format('MM-DD'));
 
   const totalDate = filteredHabits.flatMap((habit: HabitType) => habit.frequency.map((freq) => week[freq]));
 
@@ -42,16 +45,16 @@ export default function BarChart({ week, labels }) {
     completedByDate[checkmark.date]++;
   });
 
-  const completionRateByDate = Object.keys(countByDate).map((date) => {
-    const completedCount = completedByDate[date];
+  const chartData = Object.keys(countByDate).map((date) => {
     const totalCount = countByDate[date];
+    const completedCount = completedByDate[date];
 
-    return totalCount ? Math.round((completedCount / totalCount) * 100) : 0;
+    return totalCount ? ((completedCount / totalCount) * 100).toFixed(1) : 0;
   });
 
   const data = {
     labels,
-    datasets: [{ data: completionRateByDate, backgroundColor: 'rgb(1, 118, 214)' }],
+    datasets: [{ data: chartData, backgroundColor: 'rgb(1, 118, 214)' }],
   };
 
   return <Bar options={options} data={data} plugins={[ChartDataLabels]} />;

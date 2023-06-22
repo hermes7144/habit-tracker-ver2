@@ -8,20 +8,6 @@ const options = {
   cutout: 30,
   responsive: true,
   plugins: {
-    datalabels: {
-      color: 'white',
-      formatter: function (value, context) {
-        //데이터 값이 0 이면 출력 안함
-
-        if (value === 0) {
-          return null;
-        } else {
-          let result = value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
-
-          return Math.round(Number(result * 10)) / 10;
-        }
-      },
-    },
     legend: {
       display: false,
     },

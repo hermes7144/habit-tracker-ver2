@@ -1,16 +1,14 @@
 import React from 'react';
-import ChartWrapper from './ChartWrapper';
 import moment from 'moment';
 import 'moment/locale/fr';
 import useHabits from '../hooks/useHabits';
+import AchievementChart from './AchievementChart ';
 
 export default function Achievements() {
   const { data: habits } = useHabits().habitsQuery;
   const { data: checkmarks } = useHabits().checksQuery;
 
-  const filteredHabits = habits?.filter((habit) => !habit.completed);
-
-  const today = moment().format('YYYY-MM-DD');
+  const today = moment();
   const dayOfWeek = (moment().day() + 6) % 7;
 
   const startOfWeek = moment().startOf('week');
@@ -19,43 +17,41 @@ export default function Achievements() {
   const lastWeekDates = Array.from({ length: 7 }, (_, i) => beforeWeek.clone().add(i, 'day').format('YYYY-MM-DD'));
   const weeklyDates = Array.from({ length: 7 }, (_, i) => startOfWeek.clone().add(i, 'day').format('YYYY-MM-DD'));
 
-  const todayTotalHabits = filteredHabits.filter((habit) => habit.frequency.includes(dayOfWeek)).length;
+  const filteredHabits = habits.filter((habit) => !habit.completed);
+  const todayHabitsCount = filteredHabits.filter((habit) => habit.frequency.includes(dayOfWeek)).length;
 
-  const lastWeekHabit = filteredHabits.flatMap((habit) =>
-    lastWeekDates.filter((date) => {
-      const habitCreatedAt = moment(habit.createdAt);
-      const currentDate = moment(date);
-      const isDateAfterHabitCreatedAt = currentDate.isSameOrAfter(habitCreatedAt, 'day');
-      const isDayInFrequency = habit.frequency.includes((currentDate.day() + 6) % 7);
-      return isDateAfterHabitCreatedAt && isDayInFrequency;
-    })
-  );
+  const isHabitCompleted = (habit, date) => {
+    const habitCreatedAt = moment(habit.createdAt);
+    const currentDate = moment(date);
+    const isDateAfterHabitCreatedAt = currentDate.isSameOrAfter(habitCreatedAt, 'day');
+    const isDayInFrequency = habit.frequency.includes(currentDate.day());
+    return isDateAfterHabitCreatedAt && isDayInFrequency;
+  };
 
-  const weeklyHabitFilter = filteredHabits.flatMap((habit) =>
-    weeklyDates.filter((date) => {
-      const habitCreatedAt = moment(habit.createdAt);
-      const currentDate = moment(date);
-      const isDateAfterHabitCreatedAt = currentDate.isSameOrAfter(habitCreatedAt, 'day');
-      const isDayInFrequency = habit.frequency.includes((currentDate.day() + 6) % 7);
-      return isDateAfterHabitCreatedAt && isDayInFrequency;
-    })
-  );
+  const countHabitCompleted = (habit, dates) => dates.filter((date) => isHabitCompleted(habit, date));
 
-  const lastWeekAchieved = checkmarks.filter((checkmark) => lastWeekDates.includes(checkmark.date)).length;
-  const weeklyAchieved = checkmarks.filter((checkmark) => weeklyDates.includes(checkmark.date)).length;
-  const todayAchieved = checkmarks.filter((checkmark) => checkmark.date.includes(today)).length;
+  const lastWeekHabitCount = filteredHabits.flatMap((habit) => countHabitCompleted(habit, lastWeekDates)).length;
+  const weekHabitCount = filteredHabits.flatMap((habit) => countHabitCompleted(habit, weeklyDates)).length;
 
-  const lastWeekObj = { title: 'last week', completed: ((lastWeekAchieved / lastWeekHabit.length) * 100).toFixed(1) || 0 };
-  const thisWeekObj = { title: 'this week', completed: ((weeklyAchieved / weeklyHabitFilter.length) * 100).toFixed(1) || 0 };
-  const todayObj = { title: 'today', completed: ((todayAchieved / todayTotalHabits) * 100).toFixed(1) || 0 };
+  const getAchievedCount = (checkmarks, dates) => checkmarks.filter((checkmark) => dates.includes(checkmark.date)).length;
+
+  const lastWeekAchievedCount = getAchievedCount(checkmarks, lastWeekDates);
+  const weeklyAchievedCount = getAchievedCount(checkmarks, weeklyDates);
+  const todayAchievedCount = getAchievedCount(checkmarks, [today.format('YYYY-MM-DD')]);
+
+  const calculateCompletionRate = (achieved, total) => ((achieved / total) * 100).toFixed(1) || 0;
+
+  const lastWeekObj = { title: 'last week', completed: calculateCompletionRate(lastWeekAchievedCount, lastWeekHabitCount) };
+  const thisWeekObj = { title: 'this week', completed: calculateCompletionRate(weeklyAchievedCount, weekHabitCount) };
+  const todayObj = { title: 'today', completed: calculateCompletionRate(todayAchievedCount, todayHabitsCount) };
 
   return (
     <div className='flex flex-col'>
       <div className='text-xl text-brand text-center font-bold my-5'>Your performance</div>
       <div className='flex justify-center'>
-        <ChartWrapper chartObj={lastWeekObj} />
-        <ChartWrapper chartObj={thisWeekObj} />
-        <ChartWrapper chartObj={todayObj} />
+        <AchievementChart chartObj={lastWeekObj} />
+        <AchievementChart chartObj={thisWeekObj} />
+        <AchievementChart chartObj={todayObj} />
       </div>
     </div>
   );
