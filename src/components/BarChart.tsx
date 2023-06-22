@@ -3,9 +3,9 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { HabitType } from '../types/types';
-import useHabits from '../hooks/useHabits';
 import moment from 'moment';
 import 'moment/locale/fr';
+import { useHabitHooks } from '../context/HabitContext';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -22,8 +22,10 @@ const options = {
 };
 
 export default function BarChart({ week }) {
+  const { useHabits } = useHabitHooks();
   const { data: habits } = useHabits().habitsQuery;
   const { data: checkmarks } = useHabits().checksQuery;
+
   const filteredHabits = habits.filter((habit) => !habit.completed);
   const labels = week.map((date) => moment(date).format('MM-DD'));
 
