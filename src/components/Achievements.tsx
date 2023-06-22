@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import 'moment/locale/fr';
 import useHabits from '../hooks/useHabits';
-import AchievementChart from './AchievementChart ';
+import AchievementChart from './AchievementChart';
 
 export default function Achievements() {
   const { data: habits } = useHabits().habitsQuery;

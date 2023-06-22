@@ -37,8 +37,8 @@ export default function DetailPage() {
     return dates;
   };
 
-  const date = getDatesInRange(startDate);
-  const isDateIncluded = date.map((date) => checkDates.includes(date));
+  const totalDates = getDatesInRange(startDate);
+  const isDateIncluded = totalDates.map((date) => checkDates.includes(date));
 
   let consecutiveFailures = 0;
   let initValue = 1;
@@ -57,14 +57,14 @@ export default function DetailPage() {
       <div className='flex flex-col lg:flex-row items-center lg:justify-between m-2 gap-4'>
         <HabitSetting habit={habit} startDate={startDate} />
         <CardWrapper>
-          <DetailAchievement habit={habit} total={date} check={checkDates} />
+          <DetailAchievement habit={habit} totalDates={totalDates} checkDates={checkDates} />
         </CardWrapper>
         <CardWrapperPlain>
           <Calendar next2Label={null} prev2Label={null} minDetail='month' tileDisabled={() => true} calendarType='US' tileClassName={({ date }) => (checkDates.find((val) => val === moment(date).format('YYYY-MM-DD')) ? 'highlight' : '')} />
         </CardWrapperPlain>
       </div>
       <div className='flex justify-center max-w-screen-2xl h-auto lg:h-[500px] shadow-lg rounded mx-2'>
-        <LineChart labels={date} data={achievement} />
+        <LineChart labels={totalDates} data={achievement} />
       </div>
     </div>
   );

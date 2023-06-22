@@ -12,14 +12,10 @@ export default function LineChart({ labels, data }) {
       title: {
         display: true,
         text: `당신의 습관은 처음보다 ${data[data.length - 1].toFixed(2)}배 더 나아졌습니다.`,
-        padding: {
-          top: 50,
-        },
+        padding: { top: 50 },
         size: 20,
       },
-      legend: {
-        display: false,
-      },
+      legend: { display: false },
     },
     responsive: true,
     scales: {
