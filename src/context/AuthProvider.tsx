@@ -6,11 +6,11 @@ import { User } from '@firebase/auth';
 import { AuthContext } from './AuthContext';
 import { useNavigate } from 'react-router-dom';
 
-type AuthContextProviderProps = {
+type AuthProviderProps = {
   children: React.ReactNode;
 };
 
-export function AuthContextProvider({ children }: AuthContextProviderProps) {
+export function AuthProvider({ children }: AuthProviderProps) {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);

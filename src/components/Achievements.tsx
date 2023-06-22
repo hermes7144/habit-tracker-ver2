@@ -1,16 +1,17 @@
 import React from 'react';
 import moment from 'moment';
 import 'moment/locale/fr';
-import useHabits from '../hooks/useHabits';
+import { useHabitHooks } from '../context/HabitContext';
+
 import AchievementChart from './AchievementChart';
 
 export default function Achievements() {
+  const { useHabits } = useHabitHooks();
   const { data: habits } = useHabits().habitsQuery;
   const { data: checkmarks } = useHabits().checksQuery;
 
   const today = moment();
   const dayOfWeek = (moment().day() + 6) % 7;
-
   const startOfWeek = moment().startOf('week');
   const beforeWeek = moment().subtract(1, 'w').startOf('week');
 
@@ -39,7 +40,14 @@ export default function Achievements() {
   const weeklyAchievedCount = getAchievedCount(checkmarks, weeklyDates);
   const todayAchievedCount = getAchievedCount(checkmarks, [today.format('YYYY-MM-DD')]);
 
-  const calculateCompletionRate = (achieved, total) => ((achieved / total) * 100).toFixed(1) || 0;
+  const calculateCompletionRate = (achieved, total) => {
+    const completionRate = (achieved / total) * 100;
+    if (Number.isFinite(completionRate)) {
+      return completionRate.toFixed(1);
+    } else {
+      return 0;
+    }
+  };
 
   const lastWeekObj = { title: 'last week', completed: calculateCompletionRate(lastWeekAchievedCount, lastWeekHabitCount) };
   const thisWeekObj = { title: 'this week', completed: calculateCompletionRate(weeklyAchievedCount, weekHabitCount) };
