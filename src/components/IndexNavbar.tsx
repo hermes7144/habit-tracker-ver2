@@ -22,7 +22,7 @@ export default function IndexNavbar() {
             </button>
           </div>
           <div className={`lg:flex flex-grow items-center bg-white ${navbarOpen ? 'block' : 'hidden'}`}>
-            {user && (
+            {/* {user && (
               <ul className='flex flex-col lg:flex-row list-none mr-auto'>
                 <li className='flex items-center'>
                   <Link to='/habits/edit' className='hover:text-blueGray-500 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold'>
@@ -30,7 +30,7 @@ export default function IndexNavbar() {
                   </Link>
                 </li>
               </ul>
-            )}
+            )} */}
             <div className='flex justify-end lg:ml-auto gap-4'>
               {user && <User user={user} />}
               {!user && (
