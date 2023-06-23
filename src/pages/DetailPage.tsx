@@ -54,6 +54,8 @@ export default function DetailPage() {
   const tileDisabled = () => true;
   const tileClassName = ({ date }) => (checkDates.find((val) => val === moment(date).format('YYYY-MM-DD')) ? 'highlight' : '');
 
+  const lineLabels = totalDates.length > 1 ? totalDates : [...totalDates, ''];
+  const lineDatas = achievement.length > 1 ? achievement : [achievement[0] || 0, achievement[0] || 0];
   return (
     <div className='mt-2'>
       <div className='flex flex-col lg:flex-row items-center lg:justify-between m-2 gap-4'>
@@ -68,7 +70,7 @@ export default function DetailPage() {
         </CardWrapper>
       </div>
       <div className='flex justify-center max-w-screen-2xl h-auto lg:h-[500px] shadow-lg rounded mx-2'>
-        <LineChart labels={totalDates} data={achievement} />
+        <LineChart labels={lineLabels} data={lineDatas} />
       </div>
     </div>
   );
