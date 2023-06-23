@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { AuthProvider } from './context/AuthProvider';
 import Navbar from './components/Navbar';
 import IndexNavbar from './components/IndexNavbar';
-import HabitProvider from './context/HabitProvider';
+import HabitsProvider from './context/HabitsProvider';
 
 function App() {
   const queryClient = new QueryClient();
@@ -12,10 +12,10 @@ function App() {
     // 여기서 쪼개면 될 거 같다.
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <HabitProvider>
+        <HabitsProvider>
           <IndexNavbar />
           <Outlet />
-        </HabitProvider>
+        </HabitsProvider>
       </AuthProvider>
     </QueryClientProvider>
   );

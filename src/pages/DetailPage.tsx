@@ -60,7 +60,7 @@ export default function DetailPage() {
     <div className='mt-2'>
       <div className='flex flex-col lg:flex-row items-center lg:justify-between m-2 gap-4'>
         <CardWrapper>
-          <HabitSetting habit={habit} startDate={startDate} />
+          <HabitSetting habit={habit} />
         </CardWrapper>
         <CardWrapper>
           <DetailAchievement habit={habit} totalDates={totalDates} checkDates={checkDates} />

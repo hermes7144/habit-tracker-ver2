@@ -5,7 +5,7 @@ import { withAllContexts, withRouter } from '../../tests/utils';
 import { Route } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/fr';
-import { mockToday } from '../../tests/mockHabits';
+import { mockCheckDates, mockHabit, mockToday, mockTotalDates } from '../../tests/mockHabits';
 
 describe('DetailAchievement', () => {
   // Fixing the values related to moment()
@@ -18,13 +18,6 @@ describe('DetailAchievement', () => {
   global.dayOfWeek = dayOfWeek;
   global.startOfWeek = startOfWeek;
 
-  const habit = {
-    createdAt: mockToday,
-    frequency: [1, 2, 3, 4, 5],
-  };
-  const totalDates = ['2023-06-19', '2023-06-20', '2023-06-21', '2023-06-22', '2023-06-23', '2023-06-24', '2023-06-25'];
-  const checkDates = ['2023-06-19', '2023-06-20', '2023-06-21'];
-
   it('renders performance charts correctly', () => {
     renderDetailAchieveMent();
     expect(screen.getByText('0%')).toBeInTheDocument();
@@ -33,6 +26,6 @@ describe('DetailAchievement', () => {
   });
 
   function renderDetailAchieveMent() {
-    return render(withAllContexts(withRouter(<Route path='/' element={<DetailAchievement habit={habit} totalDates={totalDates} checkDates={checkDates} />} />)));
+    return render(withAllContexts(withRouter(<Route path='/' element={<DetailAchievement habit={mockHabit} totalDates={mockTotalDates} checkDates={mockCheckDates} />} />)));
   }
 });

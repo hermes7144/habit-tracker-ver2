@@ -5,7 +5,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { HabitType } from '../types/types';
 import moment from 'moment';
 import 'moment/locale/fr';
-import { useHabitHooks } from '../context/HabitContext';
+import { useHabitsHooks } from '../context/HabitsContext';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -22,7 +22,7 @@ const options = {
 };
 
 export default function BarChart({ week }) {
-  const { useHabits } = useHabitHooks();
+  const { useHabits } = useHabitsHooks();
   const { data: habits } = useHabits().habitsQuery;
   const { data: checkmarks } = useHabits().checksQuery;
 

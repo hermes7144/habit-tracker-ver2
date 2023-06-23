@@ -34,6 +34,7 @@ describe('Achievements', () => {
   });
 
   afterEach(() => {
+    fakeUseHabits.mockReset();
     jest.restoreAllMocks();
   });
 

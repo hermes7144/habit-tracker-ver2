@@ -6,7 +6,7 @@ export default function FrequencyChip({ frequency }) {
     <div className='flex justify-center gap-[2px]'>
       {frequency &&
         WEEK.map((day, index) => (
-          <div key={index} className={className + (frequency.includes(index) ? 'bg-brand text-white' : 'bg-gray-300')}>
+          <div key={index} data-testid='frequency-chip day-label' className={className + (frequency.includes(index) ? 'bg-brand text-white' : 'bg-gray-300')}>
             {day}
           </div>
         ))}

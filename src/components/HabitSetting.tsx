@@ -4,15 +4,17 @@ import 'moment/locale/fr';
 import { RiDeleteBin5Fill, RiPencilFill } from 'react-icons/ri';
 import Button from '../components/ui/Button';
 import { useNavigate } from 'react-router-dom';
-import useHabits from '../hooks/useHabits';
 import Modal from 'react-modal';
 import HabitForm from '../components/HabitForm';
 import { useMediaQuery } from 'react-responsive';
 import FrequencyChip from './FrequencyChip';
+import { useHabitsHooks } from '../context/HabitsContext';
 
-export default function HabitSetting({ habit, startDate }) {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+export default function HabitSetting({ habit }) {
+  const { useHabits } = useHabitsHooks();
   const { addOrUpdateItem, removeItem } = useHabits();
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
@@ -40,23 +42,14 @@ export default function HabitSetting({ habit, startDate }) {
   const habitDays = moment().diff(moment(habit.createdAt).format('YYYY-MM-DD'), 'days') + 1;
   const isDesktopOrMobile = useMediaQuery({ minWidth: 1024 });
 
-  const content = isDesktopOrMobile
-    ? {
-        position: 'absolute',
-        top: '20%',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        width: '510px',
-        height: '380px',
-      }
-    : {
-        position: 'absolute',
-        top: '15%',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        width: '360px',
-        height: '380px',
-      };
+  const content = {
+    position: 'absolute',
+    top: isDesktopOrMobile ? '20%' : '15%',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    width: isDesktopOrMobile ? '510px' : '360px',
+    height: '380px',
+  };
 
   return (
     <>
@@ -65,7 +58,7 @@ export default function HabitSetting({ habit, startDate }) {
           <p className='text-lg font-bold word break-all'>{habit.title}</p>
           <p className='text-xs text-gray-500 break-all'>{habit.description}</p>
           <p className='text-xs text-gray-500 break-all'>
-            시작일자: {startDate.format('YYYY년 MM월 DD일')}({habitDays}일 째)
+            시작일자: {moment(habit.createdAt).format('YYYY년 MM월 DD일')}({habitDays}일 째)
           </p>
         </div>
         <div className='flex gap-3 justify-center items-center'>

@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { MemoryRouter, Routes } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { HabitContext } from '../context/HabitContext';
+import { HabitsContext } from '../context/HabitsContext';
 
 export function withRouter(routes, initialEntry = '/') {
   return <MemoryRouter initialEntry={[initialEntry]}>
@@ -14,9 +14,9 @@ export function withAllContexts(children, useHabits, user = null) {
   const testClient = createTestQueryClient();
   return (
     <AuthContext.Provider value={{ user, uid: 'uid' }}>
-      <HabitContext.Provider value={{ useHabits }}>
+      <HabitsContext.Provider value={{ useHabits }}>
         <QueryClientProvider client={testClient}>{children}</QueryClientProvider>
-      </HabitContext.Provider>
+      </HabitsContext.Provider>
     </AuthContext.Provider >
   )
 }

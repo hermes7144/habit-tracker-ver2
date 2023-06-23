@@ -19,6 +19,8 @@ describe('BarChart', () => {
     });
   });
 
+  afterEach(() => fakeUseHabits.mockReset());
+
   it('renders bar chart correctly', async () => {
     renderBarChart();
     // Wait for the chart to be rendered

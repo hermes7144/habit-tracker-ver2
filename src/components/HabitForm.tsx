@@ -1,45 +1,43 @@
 import React, { useState } from 'react';
-import useHabits from '../hooks/useHabits';
 import { AiOutlineClose } from 'react-icons/ai';
 import ButtonFull from './ui/ButtonFull';
 import { HabitType } from '../types/types';
 import { useNavigate } from 'react-router-dom';
+import { useHabitsHooks } from '../context/HabitsContext';
 
-// Initial habit
-const initialHabit = {
-  title: '',
-  description: '',
-  frequency: [],
-};
 const FREQUENCIES = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
 export default function HabitForm({ closeModal, habitProp }: { closeModal: any; habitProp: any | null }) {
+  const { useHabits } = useHabitsHooks();
   const { addOrUpdateItem } = useHabits();
-  const navigate = useNavigate();
-  const [habit, setHabit] = useState<HabitType>(habitProp || initialHabit);
 
-  const handleChange = (e) => {
+  const navigate = useNavigate();
+  const [habit, setHabit] = useState<HabitType>({
+    title: '',
+    description: '',
+    frequency: [],
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
 
     if (type === 'checkbox') {
-      const index = parseInt(value); // 체크박스 값(인덱스)를 숫자로 변환
+      const index = Number(value); // 체크박스 값(인덱스)를 숫자로 변환
 
       if (checked) {
-        // 선택된 요일을 추가
-        setHabit({ ...habit, frequency: [...habit.frequency, index] });
+        setHabit((prevHabit) => ({ ...prevHabit, frequency: [...prevHabit.frequency, index] }));
       } else {
-        // 선택 해제된 요일을 제거
-        setHabit({ ...habit, frequency: habit.frequency.filter((freq) => freq !== index) });
+        setHabit((prevHabit) => ({ ...prevHabit, frequency: prevHabit.frequency.filter((freq) => freq !== index) }));
       }
     } else {
-      setHabit({ ...habit, [name]: value });
+      setHabit((prevHabit) => ({ ...prevHabit, [name]: value }));
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!habit.frequency.length) {
+    if (habit.frequency.length === 0) {
       alert('최소 하나의 요일을 체크해주세요');
       return;
     }
@@ -66,8 +64,8 @@ export default function HabitForm({ closeModal, habitProp }: { closeModal: any; 
           </div>
           <div className='flex-auto px-4 lg:px-10 pb-5'>
             <form onSubmit={handleSubmit}>
-              <input type='text' className='w-full my-2' id='title' name='title' value={habit?.title} onChange={handleChange} placeholder='Habit Name' required />
-              <input type='text' className='w-full my-2' name='description' value={habit?.description} onChange={handleChange} placeholder='Description' />
+              <input type='text' className='w-full my-2' id='title' name='title' value={habit.title} onChange={handleChange} placeholder='Habit Name' required />
+              <input type='text' className='w-full my-2' name='description' value={habit.description} onChange={handleChange} placeholder='Description' />
 
               <span className='ml-2 text-sm font-semibold text-blueGray-600'>Frequency</span>
 

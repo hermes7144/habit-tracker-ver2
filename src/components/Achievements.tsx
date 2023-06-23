@@ -1,12 +1,12 @@
 import React from 'react';
 import moment from 'moment';
 import 'moment/locale/fr';
-import { useHabitHooks } from '../context/HabitContext';
+import { useHabitsHooks } from '../context/HabitsContext';
 
 import AchievementChart from './AchievementChart';
 
 export default function Achievements() {
-  const { useHabits } = useHabitHooks();
+  const { useHabits } = useHabitsHooks();
   const { data: habits } = useHabits().habitsQuery;
   const { data: checkmarks } = useHabits().checksQuery;
 
