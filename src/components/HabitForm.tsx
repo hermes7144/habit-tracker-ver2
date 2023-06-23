@@ -11,7 +11,7 @@ const initialHabit = {
   description: '',
   frequency: [],
 };
-const frequencies = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
+const FREQUENCIES = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
 export default function HabitForm({ closeModal, habitProp }: { closeModal: any; habitProp: any | null }) {
   const { addOrUpdateItem } = useHabits();
@@ -72,7 +72,7 @@ export default function HabitForm({ closeModal, habitProp }: { closeModal: any; 
               <span className='ml-2 text-sm font-semibold text-blueGray-600'>Frequency</span>
 
               <div className='flex justify-around mb-3'>
-                {frequencies.map((frequency, index) => {
+                {FREQUENCIES.map((frequency, index) => {
                   const isChecked = habit?.frequency.includes(index);
                   return (
                     <div id={frequency} key={index} className='flex flex-col items-center'>
@@ -82,7 +82,9 @@ export default function HabitForm({ closeModal, habitProp }: { closeModal: any; 
                   );
                 })}
               </div>
-              <ButtonFull text={habitProp ? 'Update Habit' : 'Create Habit'} />
+              <div className='w-full'>
+                <ButtonFull text={habitProp ? 'Update Habit' : 'Create Habit'} />
+              </div>
             </form>
           </div>
         </div>
