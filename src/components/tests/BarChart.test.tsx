@@ -1,10 +1,11 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import { mockHabits } from '../../tests/mockHabits';
+import { mockHabits, mockWeek } from '../../tests/mockHabits';
 import { mockCheckmarks } from '../../tests/mockCheckmarks';
 import { withAllContexts, withRouter } from '../../tests/utils';
 import { Route } from 'react-router-dom';
 import BarChart from '../BarChart';
+import 'canvas-mock';
 
 describe('BarChart', () => {
   const fakeUseHabits = jest.fn();
@@ -17,7 +18,6 @@ describe('BarChart', () => {
       };
     });
   });
-  const week = ['2023-06-19', '2023-06-20', '2023-06-21', '2023-06-22', '2023-06-23', '2023-06-24', '2023-06-25'];
 
   it('renders bar chart correctly', async () => {
     renderBarChart();
@@ -28,6 +28,6 @@ describe('BarChart', () => {
     });
   });
   function renderBarChart() {
-    return render(withAllContexts(withRouter(<Route path='/' element={<BarChart week={week} />} />), fakeUseHabits));
+    return render(withAllContexts(withRouter(<Route path='/' element={<BarChart week={mockWeek} />} />), fakeUseHabits));
   }
 });

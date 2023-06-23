@@ -18,11 +18,8 @@ export function withAllContexts(children, useHabits, user = null) {
         <QueryClientProvider client={testClient}>{children}</QueryClientProvider>
       </HabitContext.Provider>
     </AuthContext.Provider >
-
-
   )
 }
-
 
 function createTestQueryClient() {
   return new QueryClient({

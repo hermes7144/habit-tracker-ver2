@@ -5,9 +5,8 @@ import 'moment/locale/fr';
 import BarChart from '../components/BarChart';
 import Achievements from '../components/Achievements';
 import HabitsTable from '../components/HabitsTable';
-import CalendarCard from '../components/CalendarCard';
 import CardWrapper from '../components/CardWrapper';
-import CardWrapperPlain from '../components/CardWrapperPlain';
+import CalendarCard from '../components/CalendarCard';
 
 export default function DashBoard() {
   const date = new Date();
@@ -15,6 +14,16 @@ export default function DashBoard() {
   const startOfWeek = moment(value).startOf('week');
 
   const week = Array.from({ length: 7 }, (_, i) => startOfWeek.clone().add(i, 'day').format('YYYY-MM-DD'));
+
+  const tileClassName = ({ date }) => {
+    const formattedDate = moment(date).format('YYYY-MM-DD');
+    if (week.includes(formattedDate)) {
+      const isFirstDate = week[0] === formattedDate;
+      const isLastDate = week[week.length - 1] === formattedDate;
+      const classNames = `highlight${isFirstDate ? ' highlight--first' : ''}${isLastDate ? ' highlight--last' : ''}`;
+      return classNames;
+    }
+  };
 
   return (
     <Suspense fallback={<p>Loading...</p>}>
@@ -26,9 +35,9 @@ export default function DashBoard() {
           <CardWrapper>
             <Achievements />
           </CardWrapper>
-          <CardWrapperPlain>
-            <CalendarCard value={value} onChange={onChange} week={week} />
-          </CardWrapperPlain>
+          <CardWrapper plain>
+            <CalendarCard value={value} onChange={onChange} tileClassName={tileClassName} />
+          </CardWrapper>
         </div>
         <HabitsTable week={week} />
       </div>

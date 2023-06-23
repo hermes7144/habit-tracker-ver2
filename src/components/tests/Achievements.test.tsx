@@ -1,13 +1,13 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import moment from 'moment';
+import 'moment/locale/fr';
 import Achievements from '../Achievements';
-import { mockHabits } from '../../tests/mockHabits';
+import { mockHabits, mockToday } from '../../tests/mockHabits';
 import { mockCheckmarks } from '../../tests/mockCheckmarks';
 import { withAllContexts, withRouter } from '../../tests/utils';
 import { Route } from 'react-router-dom';
-
-// Mocking HabitContext
+import 'canvas-mock';
 
 describe('Achievements', () => {
   const fakeUseHabits = jest.fn();
@@ -21,10 +21,10 @@ describe('Achievements', () => {
     });
 
     // Fixing the values related to moment()
-    const today = moment('2023-06-22');
-    const dayOfWeek = (moment('2023-06-22').day() + 6) % 7;
-    const startOfWeek = moment('2023-06-22').startOf('week');
-    const beforeWeek = moment('2023-06-22').subtract(1, 'w').startOf('week');
+    const today = moment(mockToday);
+    const dayOfWeek = (moment(mockToday).day() + 6) % 7;
+    const startOfWeek = moment(mockToday).startOf('week');
+    const beforeWeek = moment(mockToday).subtract(1, 'w').startOf('week');
 
     // Assigning the fixed values to the variables
     global.today = today;

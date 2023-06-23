@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import CardWrapperCol from './CardWrapperCol';
 import moment from 'moment';
 import 'moment/locale/fr';
 import { RiDeleteBin5Fill, RiPencilFill } from 'react-icons/ri';
-import FrequencyChipDetail from '../components/FrequencyChipDetail';
 import Button from '../components/ui/Button';
 import { useNavigate } from 'react-router-dom';
 import useHabits from '../hooks/useHabits';
 import Modal from 'react-modal';
 import HabitForm from '../components/HabitForm';
 import { useMediaQuery } from 'react-responsive';
+import FrequencyChip from './FrequencyChip';
 
 export default function HabitSetting({ habit, startDate }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -61,31 +60,29 @@ export default function HabitSetting({ habit, startDate }) {
 
   return (
     <>
-      <CardWrapperCol>
-        <div className='flex justify-between p-5'>
-          <div>
-            <p className='text-lg font-bold word break-all'>{habit.title}</p>
-            <p className='text-xs text-gray-500 break-all'>{habit.description}</p>
-            <p className='text-xs text-gray-500 break-all'>
-              시작일자: {startDate.format('YYYY년 MM월 DD일')}({habitDays}일 째)
-            </p>
+      <div className='flex justify-between p-5'>
+        <div>
+          <p className='text-lg font-bold word break-all'>{habit.title}</p>
+          <p className='text-xs text-gray-500 break-all'>{habit.description}</p>
+          <p className='text-xs text-gray-500 break-all'>
+            시작일자: {startDate.format('YYYY년 MM월 DD일')}({habitDays}일 째)
+          </p>
+        </div>
+        <div className='flex gap-3 justify-center items-center'>
+          <div className='p-2 rounded-full hover:bg-gray-300 cursor-pointer' onClick={openModal}>
+            <RiPencilFill className='text-2xl text-gray-500' />
           </div>
-          <div className='flex gap-3 justify-center items-center'>
-            <div className='p-2 rounded-full hover:bg-gray-300 cursor-pointer' onClick={openModal}>
-              <RiPencilFill className='text-2xl text-gray-500' />
-            </div>
-            <div className='p-2 rounded-full hover:bg-gray-300 cursor-pointer' onClick={handleDelete}>
-              <RiDeleteBin5Fill className='text-2xl text-gray-500 hover:text-gray-600' />
-            </div>
+          <div className='p-2 rounded-full hover:bg-gray-300 cursor-pointer' onClick={handleDelete}>
+            <RiDeleteBin5Fill className='text-2xl text-gray-500 hover:text-gray-600' />
           </div>
         </div>
-        <div className='flex w-full justify-center items-center flex-1'>
-          <FrequencyChipDetail frequency={habit.frequency} />
-        </div>
-        <div className='flex justify-end gap-2'>
-          <Button text={`습관 ${habit.completed ? '재시작' : '완료'}`} onClick={handleComplete} />
-        </div>
-      </CardWrapperCol>
+      </div>
+      <div className='flex w-full justify-center items-center flex-1'>
+        <FrequencyChip frequency={habit.frequency} />
+      </div>
+      <div className='flex justify-end gap-2'>
+        <Button text={`습관 ${habit.completed ? '재시작' : '완료'}`} onClick={handleComplete} />
+      </div>
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={{ content }}>
         <HabitForm closeModal={closeModal} habitProp={habit} />
       </Modal>
