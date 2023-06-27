@@ -10,13 +10,43 @@ export default function Achievements() {
   const { data: habits } = useHabits().habitsQuery;
   const { data: checkmarks } = useHabits().checksQuery;
 
-  const today = moment();
-  const dayOfWeek = (moment().day() + 6) % 7;
-  const startOfWeek = moment().startOf('week');
-  const beforeWeek = moment().subtract(1, 'w').startOf('week');
+  const today = new Date();
+  const dayOfWeek = (today.getDay() + 6) % 7;
 
-  const lastWeekDates = Array.from({ length: 7 }, (_, i) => beforeWeek.clone().add(i, 'day').format('YYYY-MM-DD'));
-  const weeklyDates = Array.from({ length: 7 }, (_, i) => startOfWeek.clone().add(i, 'day').format('YYYY-MM-DD'));
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const getStartOfWeek = (date) => {
+    const startOfWeek = new Date(date);
+    const diff = (date.getDay() - 1 + 7) % 7;
+    startOfWeek.setDate(date.getDate() - diff);
+    return startOfWeek;
+  };
+
+  const getWeekDates = (date) => {
+    const weekDates = [];
+    const currentDate = new Date(date);
+
+    // 첫째 요일까지 이동
+    currentDate.setDate(currentDate.getDate() - ((currentDate.getDay() + 6) % 7));
+
+    // 첫째 요일부터 마지막 요일까지의 날짜를 배열에 추가
+    for (let i = 0; i < 7; i++) {
+      weekDates.push(formatDate(currentDate));
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return weekDates;
+  };
+
+  const startOfWeek = getStartOfWeek(today);
+
+  const thisWeekDates = getWeekDates(startOfWeek);
+  const lastWeekDates = getWeekDates(new Date(startOfWeek.getTime() - 7 * 24 * 60 * 60 * 1000));
 
   const filteredHabits = habits.filter((habit) => !habit.completed);
   const todayHabitsCount = filteredHabits.filter((habit) => habit.frequency.includes(dayOfWeek)).length;
@@ -32,21 +62,23 @@ export default function Achievements() {
   const countHabitCompleted = (habit, dates) => dates.filter((date) => isHabitCompleted(habit, date));
 
   const lastWeekHabitCount = filteredHabits.flatMap((habit) => countHabitCompleted(habit, lastWeekDates)).length;
-  const weekHabitCount = filteredHabits.flatMap((habit) => countHabitCompleted(habit, weeklyDates)).length;
+  const weekHabitCount = filteredHabits.flatMap((habit) => countHabitCompleted(habit, thisWeekDates)).length;
 
-  const getAchievedCount = (checkmarks, dates) => checkmarks.filter((checkmark) => dates.includes(checkmark.date)).length;
+  const getAchievedCount = (checkmarks, dates) => dates.reduce((count, date) => count + checkmarks.filter((checkmark) => checkmark.date === date).length, 0);
 
+  console.log(lastWeekDates);
+  console.log(thisWeekDates);
   const lastWeekAchievedCount = getAchievedCount(checkmarks, lastWeekDates);
-  const weeklyAchievedCount = getAchievedCount(checkmarks, weeklyDates);
-  const todayAchievedCount = getAchievedCount(checkmarks, [today.format('YYYY-MM-DD')]);
+  const weeklyAchievedCount = getAchievedCount(checkmarks, thisWeekDates);
+
+  console.log(lastWeekAchievedCount);
+  console.log(weeklyAchievedCount);
+
+  const todayAchievedCount = getAchievedCount(checkmarks, [formatDate(today)]);
 
   const calculateCompletionRate = (achieved, total) => {
     const completionRate = (achieved / total) * 100;
-    if (Number.isFinite(completionRate)) {
-      return completionRate.toFixed(1);
-    } else {
-      return 0;
-    }
+    return Number.isFinite(completionRate) ? completionRate.toFixed(1) : 0;
   };
 
   const lastWeekObj = { title: 'last week', completed: calculateCompletionRate(lastWeekAchievedCount, lastWeekHabitCount) };
