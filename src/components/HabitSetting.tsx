@@ -35,7 +35,6 @@ export default function HabitSetting({ habit }) {
           navigate('/');
         },
       });
-      navigate('/');
     }
   };
 
@@ -62,10 +61,10 @@ export default function HabitSetting({ habit }) {
           </p>
         </div>
         <div className='flex gap-3 justify-center items-center'>
-          <div className='p-2 rounded-full hover:bg-gray-300 cursor-pointer' onClick={openModal}>
+          <div className='p-2 rounded-full hover:bg-gray-300 cursor-pointer' aria-label='updateButton' onClick={openModal}>
             <RiPencilFill className='text-2xl text-gray-500' />
           </div>
-          <div className='p-2 rounded-full hover:bg-gray-300 cursor-pointer' onClick={handleDelete}>
+          <div className='p-2 rounded-full hover:bg-gray-300 cursor-pointer' aria-label='deleteButton' onClick={handleDelete}>
             <RiDeleteBin5Fill className='text-2xl text-gray-500 hover:text-gray-600' />
           </div>
         </div>

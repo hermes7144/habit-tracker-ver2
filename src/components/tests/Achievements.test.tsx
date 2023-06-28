@@ -1,7 +1,5 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import moment from 'moment';
-import 'moment/locale/fr';
 import Achievements from '../Achievements';
 import { mockHabits, mockToday } from '../../tests/mockHabits';
 import { mockCheckmarks } from '../../tests/mockCheckmarks';
@@ -9,12 +7,13 @@ import { withAllContexts, withRouter } from '../../tests/utils';
 import { Route } from 'react-router-dom';
 import MockDate from 'mockdate';
 
+const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
 describe('Achievements', () => {
   const fakeUseHabits = jest.fn();
 
   beforeEach(() => {
     MockDate.set(mockToday);
-    console.log(new Date());
 
     fakeUseHabits.mockImplementation(() => {
       return {
@@ -27,6 +26,8 @@ describe('Achievements', () => {
   afterEach(() => {
     fakeUseHabits.mockReset();
     jest.restoreAllMocks();
+
+    errorSpy.mockRestore();
   });
 
   it('renders performance charts correctly', () => {

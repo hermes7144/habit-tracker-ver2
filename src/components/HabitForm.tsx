@@ -12,18 +12,19 @@ export default function HabitForm({ closeModal, habitProp }: { closeModal: any; 
   const { addOrUpdateItem } = useHabits();
 
   const navigate = useNavigate();
-  const [habit, setHabit] = useState<HabitType>({
-    title: '',
-    description: '',
-    frequency: [],
-  });
+  const [habit, setHabit] = useState<HabitType>(
+    habitProp || {
+      title: '',
+      description: '',
+      frequency: [],
+    }
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
 
     if (type === 'checkbox') {
       const index = Number(value); // 체크박스 값(인덱스)를 숫자로 변환
-
       if (checked) {
         setHabit((prevHabit) => ({ ...prevHabit, frequency: [...prevHabit.frequency, index] }));
       } else {

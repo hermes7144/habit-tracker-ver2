@@ -38,21 +38,31 @@ describe('HabitSetting', () => {
     expect(screen.getByText(startDateText)).toBeInTheDocument();
   });
 
-  it('calls addOrUpdateItem.mutate when complete button is clicked', () => {
+  it('calls removeItem.mutate and navigate when delete button is clicked', () => {
+    renderHabitSetting();
+
+    const deleteButton = screen.getByLabelText('deleteButton');
+    userEvent.click(deleteButton);
+    expect(removeItem).toHaveBeenCalledWith(mockHabit.id);
+    expect(window.location.pathname).toBe('/');
+  });
+
+  it('calls addOrUpdateItem.mutate, closeModal, and navigate when complete button is clicked', () => {
     renderHabitSetting();
 
     const completeButton = screen.getByText('습관 완료');
     userEvent.click(completeButton);
-    expect(addOrUpdateItem).toHaveBeenCalled();
+    expect(addOrUpdateItem).toHaveBeenCalledWith(
+      { ...mockHabit, completed: !mockHabit.completed },
+      expect.objectContaining({
+        onSuccess: expect.any(Function),
+      })
+    );
+    expect(addOrUpdateItem.mock.calls[0][1].onSuccess).toBeDefined();
+    addOrUpdateItem.mock.calls[0][1].onSuccess();
+    expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+    expect(window.location.pathname).toBe('/');
   });
-
-  // it('calls removeItem.mutate when delete button is clicked', () => {
-  //   renderHabitSetting();
-  //   const deleteButton = screen.getByLabelText('Delete Habit');
-  //   userEvent.click(deleteButton);
-
-  //   expect(removeItem).toHaveBeenCalled();
-  // });
 
   function renderHabitSetting() {
     return render(withAllContexts(withRouter(<Route path='/' element={<HabitSetting habit={mockHabit} />} />), fakeUseHabits));

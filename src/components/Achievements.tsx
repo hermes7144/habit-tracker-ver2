@@ -66,19 +66,13 @@ export default function Achievements() {
 
   const getAchievedCount = (checkmarks, dates) => dates.reduce((count, date) => count + checkmarks.filter((checkmark) => checkmark.date === date).length, 0);
 
-  console.log(lastWeekDates);
-  console.log(thisWeekDates);
   const lastWeekAchievedCount = getAchievedCount(checkmarks, lastWeekDates);
   const weeklyAchievedCount = getAchievedCount(checkmarks, thisWeekDates);
-
-  console.log(lastWeekAchievedCount);
-  console.log(weeklyAchievedCount);
-
   const todayAchievedCount = getAchievedCount(checkmarks, [formatDate(today)]);
 
   const calculateCompletionRate = (achieved, total) => {
     const completionRate = (achieved / total) * 100;
-    return Number.isFinite(completionRate) ? completionRate.toFixed(1) : 0;
+    return Number.isFinite(completionRate) ? completionRate.toFixed(1) : 0.0;
   };
 
   const lastWeekObj = { title: 'last week', completed: calculateCompletionRate(lastWeekAchievedCount, lastWeekHabitCount) };

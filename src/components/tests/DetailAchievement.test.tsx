@@ -3,8 +3,6 @@ import { render, screen } from '@testing-library/react';
 import DetailAchievement from '../DetailAchievement';
 import { withAllContexts, withRouter } from '../../tests/utils';
 import { Route } from 'react-router-dom';
-import moment from 'moment';
-import 'moment/locale/fr';
 import { mockCheckDates, mockHabit, mockToday, mockTotalDates } from '../../tests/mockHabits';
 import MockDate from 'mockdate';
 

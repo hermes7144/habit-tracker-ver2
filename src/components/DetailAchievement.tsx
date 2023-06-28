@@ -60,9 +60,6 @@ export default function DetailAchievement({ habit, totalDates, checkDates }) {
   const thisWeekDates = getWeekDates(startOfWeek);
   const lastWeekDates = getWeekDates(new Date(startOfWeek.getTime() - 7 * 24 * 60 * 60 * 1000));
 
-  console.log('thisWeekDates', thisWeekDates);
-  console.log('lastWeekDates', lastWeekDates);
-
   const startOfMonth = new Date();
   startOfMonth.setDate(1);
 
@@ -74,10 +71,6 @@ export default function DetailAchievement({ habit, totalDates, checkDates }) {
   const lastWeekAchieved = getAchievedCount(lastWeekDates, checkDates);
   const weeklyAchieved = getAchievedCount(thisWeekDates, checkDates);
   const thisMonthAchieved = getAchievedCount(monthlyDates, checkDates);
-
-  console.log(thisMonthAchieved);
-
-  console.log(monthlyHabitDays);
 
   const lastWeekObj = { title: 'Last week', completed: getCompletedPercentage(lastWeekAchieved, lastWeekHabitFilter) };
   const thisWeekObj = { title: 'This week', completed: getCompletedPercentage(weeklyAchieved, weeklyHabitFilter) };

@@ -63,10 +63,12 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "jest-canvas-mock": "^2.5.2",
     "mockdate": "^3.0.5",
     "tailwindcss": "^3.3.2"
   },
   "jest": {
+
     "coveragePathIgnorePatterns": [
       "src/App.tsx",
       "src/index.tsx",
@@ -79,3 +81,4 @@
     ]
   }
 }
+
