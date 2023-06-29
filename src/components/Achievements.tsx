@@ -5,7 +5,7 @@ import { useHabitsHooks } from '../context/HabitsContext';
 
 import AchievementChart from './AchievementChart';
 
-export default function Achievements() {
+export default function Achievements(): any {
   const { useHabits } = useHabitsHooks();
   const { data: habits } = useHabits().habitsQuery;
   const { data: checkmarks } = useHabits().checksQuery;

@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 import HabitForm from '../HabitForm';
 import { withAllContexts, withRouter } from '../../tests/utils';
 import { Route } from 'react-router-dom';
-import { act } from 'react-dom/test-utils';
 
 describe('HabitForm', () => {
   const fakeUseHabits = jest.fn();

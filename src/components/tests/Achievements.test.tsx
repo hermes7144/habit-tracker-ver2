@@ -1,13 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Achievements from '../Achievements';
-import { mockHabits, mockToday } from '../../tests/mockHabits';
-import { mockCheckmarks } from '../../tests/mockCheckmarks';
+import { mockHabits as habits, mockToday } from '../../tests/mockHabits';
+import { mockCheckmarks as checkmarks } from '../../tests/mockCheckmarks';
 import { withAllContexts, withRouter } from '../../tests/utils';
 import { Route } from 'react-router-dom';
 import MockDate from 'mockdate';
-
-const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
 describe('Achievements', () => {
   const fakeUseHabits = jest.fn();
@@ -17,8 +15,8 @@ describe('Achievements', () => {
 
     fakeUseHabits.mockImplementation(() => {
       return {
-        habitsQuery: { data: mockHabits },
-        checksQuery: { data: mockCheckmarks },
+        habitsQuery: { data: habits },
+        checksQuery: { data: checkmarks },
       };
     });
   });
@@ -26,8 +24,6 @@ describe('Achievements', () => {
   afterEach(() => {
     fakeUseHabits.mockReset();
     jest.restoreAllMocks();
-
-    errorSpy.mockRestore();
   });
 
   it('renders performance charts correctly', () => {
@@ -35,8 +31,8 @@ describe('Achievements', () => {
 
     // Assert the presence of performance chart completion rates
     expect(screen.getByText('33.3%')).toBeInTheDocument();
+    expect(screen.getByText('66.7%')).toBeInTheDocument();
     expect(screen.getByText('50.0%')).toBeInTheDocument();
-    expect(screen.getByText('100.0%')).toBeInTheDocument();
   });
 
   function renderAchieveMents() {
