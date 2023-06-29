@@ -34,6 +34,7 @@ export default function HabitsTable({ week }) {
       if (checkmark) removeCheckItem.mutate(checkmark.id);
     }
   };
+
   return (
     <div className='m-2'>
       <div className={`relative flex flex-col min-w-0 break-words w-full shadow-lg rounded`}>
@@ -50,29 +51,46 @@ export default function HabitsTable({ week }) {
               </tr>
             </thead>
             <tbody>
-              {filteredHabits.map((habit: HabitType) => (
-                <tr key={habit.id}>
-                  <th
-                    className='px-6 text-left text-xs p-4 whitespace-nowrap  text-blueGray-800 underline hover:cursor-pointer'
-                    onClick={() => {
-                      navigate(`/habits/${habit.id}`, { state: { habit, checkmarks } });
-                    }}>
-                    {habit.title}
-                  </th>
-                  {checkmarks &&
-                    week.map((date, index) => {
-                      const freq = habit.frequency.includes(index);
-                      const isChecked = checkmarks?.some((checkmark) => checkmark.habitId === habit.id && checkmark.date === date);
-                      const isToday = date === String(today);
+              {filteredHabits.map((habit: HabitType) => {
+                return (
+                  <tr key={habit.id}>
+                    <th
+                      className='px-6 text-left text-xs p-4 whitespace-nowrap underline hover:cursor-pointer'
+                      onClick={() => {
+                        navigate(`/habits/${habit.id}`, { state: { habit, checkmarks } });
+                      }}>
+                      {habit.title}
+                    </th>
+                    {checkmarks &&
+                      week.map((date, index) => {
+                        const freq = habit.frequency.includes(index);
+                        const isChecked = checkmarks?.some((checkmark) => checkmark.habitId === habit.id && checkmark.date === date);
+                        const isToday = date === String(today);
 
-                      return (
-                        <td className='text-center' key={date}>
-                          {freq && <input type='checkbox' data-testid={`${habit.id}-${date}`} className={isToday ? '' : 'opacity-50 bg-gray-100'} checked={isChecked} disabled={!isToday} onChange={(e) => handleChange(e, habit.id, date)} />}
-                        </td>
-                      );
-                    })}
-                </tr>
-              ))}
+                        let isTargetTimePast;
+                        if (isToday && habit.limitTime) {
+                          const currentTime = new Date();
+                          const targetTime = new Date();
+                          const targetTimeString = habit.limitTime; // 유동적으로 바뀌는 시간 값
+
+                          // targetTimeString에서 시간 값을 추출
+                          const [targetHour, targetMinute] = targetTimeString.split(':').map(Number);
+
+                          targetTime.setHours(targetHour, targetMinute, 0, 0);
+
+                          // 현재 시간과 targetTime의 시간을 비교
+                          isTargetTimePast = targetTime < currentTime;
+                        }
+
+                        return (
+                          <td className='text-center' key={date}>
+                            {freq && <input type='checkbox' id={`${habit.id}-${date}`} data-testid={`${habit.id}-${date}`} className={isToday ? (isTargetTimePast ? 'bg-orange-200' : '') : 'opacity-50 bg-gray-100'} checked={isChecked} disabled={!isToday} onChange={(e) => handleChange(e, habit.id, date)} />}
+                          </td>
+                        );
+                      })}
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
