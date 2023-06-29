@@ -4,12 +4,19 @@ import ButtonFull from './ui/ButtonFull';
 import { HabitType } from '../types/types';
 import { useNavigate } from 'react-router-dom';
 import { useHabitsHooks } from '../context/HabitsContext';
+import TimePicker from 'react-time-picker';
+import 'react-time-picker/dist/TimePicker.css';
+import 'react-clock/dist/Clock.css';
 
 const FREQUENCIES = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
 export default function HabitForm({ closeModal, habitProp }: { closeModal: any; habitProp: any | null }) {
   const { useHabits } = useHabitsHooks();
   const { addOrUpdateItem } = useHabits();
+  const [time, setTime] = useState(habitProp?.limitTime || '22:00'); // 초기 시간 설정
+  const onChange = (newTime) => {
+    setTime(newTime);
+  };
 
   const navigate = useNavigate();
   const [habit, setHabit] = useState<HabitType>(
@@ -42,7 +49,9 @@ export default function HabitForm({ closeModal, habitProp }: { closeModal: any; 
       alert('최소 하나의 요일을 체크해주세요');
       return;
     }
-    addOrUpdateItem.mutate(habit, {
+    const habitSetting = { ...habit, limitTime: time };
+
+    addOrUpdateItem.mutate(habitSetting, {
       onSuccess: () => {
         closeModal();
         navigate('/');
@@ -67,7 +76,12 @@ export default function HabitForm({ closeModal, habitProp }: { closeModal: any; 
             <form onSubmit={handleSubmit}>
               <input type='text' className='w-full my-2' id='title' name='title' value={habit.title} onChange={handleChange} placeholder='Habit Name' required />
               <input type='text' className='w-full my-2' name='description' value={habit.description} onChange={handleChange} placeholder='Description' />
-
+              <div className='flex items-center gap-10'>
+                <label className='text-blueGray-600 font-semibold'>LIMIT TIME</label>
+                <div className='bg-white'>
+                  <TimePicker clearAriaLabel='Clear value' clockAriaLabel='Toggle clock' hourAriaLabel='Hour' minuteAriaLabel='Minute' onChange={onChange} value={time} />
+                </div>
+              </div>
               <span className='ml-2 text-sm font-semibold text-blueGray-600'>Frequency</span>
 
               <div className='flex justify-around mb-3'>
