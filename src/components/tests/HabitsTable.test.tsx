@@ -30,7 +30,6 @@ describe('HabitsTable', () => {
     renderHabitsTable();
 
     const habit1Title = screen.getByText('Habit 1');
-
     expect(habit1Title).toBeInTheDocument();
 
     week.forEach((day) => {

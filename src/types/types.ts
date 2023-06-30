@@ -7,6 +7,7 @@ export type HabitType = {
   createdAt?: any;
   completed?: boolean;
   limitTime?: string;
+  notTodo?: boolean;
 };
 
 export type CheckType = {

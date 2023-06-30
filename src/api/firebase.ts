@@ -81,13 +81,6 @@ export async function removeHabit(userId, habitId) {
   return null;
 }
 
-export async function getCheck(userId: any, habitId) {
-  return get(ref(database, `checkmarks/${userId}/${habitId}`)).then((snapshot) => {
-    const items: CheckType[] = snapshot.val() || {};
-    return Object.values(items);
-  });
-}
-
 export async function getChecks(userId: any) {
   return get(ref(database, `checkmarks/${userId}`)).then((snapshot) => {
     const items: CheckType[] = snapshot.val() || {};

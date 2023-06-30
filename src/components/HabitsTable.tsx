@@ -84,7 +84,7 @@ export default function HabitsTable({ week }) {
 
                         return (
                           <td className='text-center' key={date}>
-                            {freq && <input type='checkbox' id={`${habit.id}-${date}`} data-testid={`${habit.id}-${date}`} className={isToday ? (isTargetTimePast ? 'bg-orange-200' : '') : 'opacity-50 bg-gray-100'} checked={isChecked} disabled={!isToday} onChange={(e) => handleChange(e, habit.id, date)} />}
+                            {freq && <input type='checkbox' id={`${habit.id}-${date}`} data-testid={`${habit.id}-${date}`} className={isToday ? (isTargetTimePast ? 'bg-red-200' : '') : 'opacity-50 bg-gray-100'} checked={isChecked} disabled={!isToday} onChange={(e) => handleChange(e, habit.id, date)} />}
                           </td>
                         );
                       })}
