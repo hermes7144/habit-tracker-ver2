@@ -31,15 +31,11 @@ export default function HabitForm({ closeModal, habitProp }: { closeModal: any; 
     const { name, value, type, checked } = e.target;
 
     if (type === 'checkbox') {
-      if (name) {
-        setHabit((prevHabit) => ({ ...prevHabit, notTodo: checked }));
+      const index = Number(value); // 체크박스 값(인덱스)를 숫자로 변환
+      if (checked) {
+        setHabit((prevHabit) => ({ ...prevHabit, frequency: [...prevHabit.frequency, index] }));
       } else {
-        const index = Number(value); // 체크박스 값(인덱스)를 숫자로 변환
-        if (checked) {
-          setHabit((prevHabit) => ({ ...prevHabit, frequency: [...prevHabit.frequency, index] }));
-        } else {
-          setHabit((prevHabit) => ({ ...prevHabit, frequency: prevHabit.frequency.filter((freq) => freq !== index) }));
-        }
+        setHabit((prevHabit) => ({ ...prevHabit, frequency: prevHabit.frequency.filter((freq) => freq !== index) }));
       }
     } else {
       setHabit((prevHabit) => ({ ...prevHabit, [name]: value }));
@@ -80,21 +76,11 @@ export default function HabitForm({ closeModal, habitProp }: { closeModal: any; 
             <form onSubmit={handleSubmit}>
               <input type='text' className='w-full my-2' id='title' name='title' value={habit.title} onChange={handleChange} placeholder='Habit Name' required />
               <input type='text' className='w-full my-2' name='description' value={habit.description} onChange={handleChange} placeholder='Description' />
-              <div className='flex justify-between'>
-                <div className='flex items-center gap-2'>
-                  <label className='text-blueGray-600 font-semibold'>Limit Time</label>
-                  <div className='bg-white'>
-                    <TimePicker clearAriaLabel='Clear value' clockAriaLabel='Toggle clock' hourAriaLabel='Hour' minuteAriaLabel='Minute' onChange={onChange} value={time} />
-                  </div>
+              <div className='flex items-center gap-10'>
+                <label className='text-blueGray-600 font-semibold'>Limit Time</label>
+                <div className='bg-white'>
+                  <TimePicker clearAriaLabel='Clear value' clockAriaLabel='Toggle clock' hourAriaLabel='Hour' minuteAriaLabel='Minute' onChange={onChange} value={time} />
                 </div>
-                {!habitProp && (
-                  <div className='flex items-center gap-2'>
-                    <label htmlFor='notTodo' className='text-blueGray-600 font-semibold'>
-                      NotTodo
-                    </label>
-                    <input type='checkbox' id='notTodo' name='notTodo' checked={habit.notTodo} onChange={handleChange} />
-                  </div>
-                )}
               </div>
               <span className='ml-2 text-sm font-semibold text-blueGray-600'>Frequency</span>
 
