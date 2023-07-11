@@ -52,39 +52,35 @@ const isHabitCompleted = (habit, date) => {
 
 const countHabitCompleted = (habit, dates) => dates.filter((date) => isHabitCompleted(habit, date));
 
+const getAchievedCount = (checkmarks, dates) => dates.reduce((count, date) => count + checkmarks.filter((checkmark) => checkmark.date === date).length, 0);
+
+const calculateCompletionRate = (achieved, total) => {
+  const completionRate = (achieved / total) * 100;
+  return Number.isFinite(completionRate) ? completionRate.toFixed(1) : 0.0;
+};
+
 export default function Achievements(): any {
   const { useHabits } = useHabitsHooks();
   const { data: habits } = useHabits().habitsQuery;
   const { data: checkmarks } = useHabits().checksQuery;
 
-  const filteredHabits = habits.filter((habit) => !habit.completed);
+  const filteredHabits = habits.filter((habit) => !habit.status);
   const todayHabitsCount = filteredHabits.filter((habit) => habit.frequency.includes(dayOfWeek)).length;
 
   const lastWeekHabitCount = filteredHabits.flatMap((habit) => countHabitCompleted(habit, lastWeekDates)).length;
   const weekHabitCount = filteredHabits.flatMap((habit) => countHabitCompleted(habit, thisWeekDates)).length;
 
-  const getAchievedCount = (checkmarks, dates) => dates.reduce((count, date) => count + checkmarks.filter((checkmark) => checkmark.date === date).length, 0);
-
   const lastWeekAchievedCount = getAchievedCount(checkmarks, lastWeekDates);
   const weeklyAchievedCount = getAchievedCount(checkmarks, thisWeekDates);
   const todayAchievedCount = getAchievedCount(checkmarks, [formatDate(today)]);
-
-  const calculateCompletionRate = (achieved, total) => {
-    const completionRate = (achieved / total) * 100;
-    return Number.isFinite(completionRate) ? completionRate.toFixed(1) : 0.0;
-  };
-
-  const lastWeekObj = { title: 'last week', completed: calculateCompletionRate(lastWeekAchievedCount, lastWeekHabitCount) };
-  const thisWeekObj = { title: 'this week', completed: calculateCompletionRate(weeklyAchievedCount, weekHabitCount) };
-  const todayObj = { title: 'today', completed: calculateCompletionRate(todayAchievedCount, todayHabitsCount) };
 
   return (
     <div className='flex flex-col'>
       <div className='text-xl text-brand text-center font-bold my-5'>Your performance</div>
       <div className='flex justify-center'>
-        <AchievementChart chartObj={lastWeekObj} />
-        <AchievementChart chartObj={thisWeekObj} />
-        <AchievementChart chartObj={todayObj} />
+        <AchievementChart title='last week' percentage={calculateCompletionRate(lastWeekAchievedCount, lastWeekHabitCount)} />
+        <AchievementChart title='this week' percentage={calculateCompletionRate(weeklyAchievedCount, weekHabitCount)} />
+        <AchievementChart title='today' percentage={calculateCompletionRate(todayAchievedCount, todayHabitsCount)} />
       </div>
     </div>
   );

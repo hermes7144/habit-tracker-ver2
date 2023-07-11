@@ -1,13 +1,13 @@
 import DoughnutChart from './DoughnutChart';
 
-export default function AchievementChart({ chartObj }) {
+export default function AchievementChart({ title, percentage }) {
   return (
     <div className='flex flex-col items-center w-4/12'>
-      <span className='text-xl py-3 text-gray-400'>{chartObj.completed}%</span>
+      <span className='text-xl py-3 text-gray-400'>{percentage}%</span>
       <div className='max-w-[90px]'>
-        <DoughnutChart chartObj={chartObj} />
+        <DoughnutChart percentage={percentage} />
       </div>
-      <span className='text-gray-400'>{chartObj.title}</span>
+      <span className='text-gray-400'>{title}</span>
     </div>
   );
 }

@@ -4,8 +4,6 @@ import 'moment/locale/fr';
 import AchievementChart from './AchievementChart';
 
 export default function DetailAchievement({ habit, totalDates, checkDates }) {
-  console.log('DetailAchievement');
-
   const lastWeekHabitFilter = getHabitFilter(lastWeekDates, habit.createdAt, habit.frequency);
   const weeklyHabitFilter = getHabitFilter(thisWeekDates, habit.createdAt, habit.frequency);
   const monthlyHabitDays = getHabitFilter(monthlyDates, habit.createdAt, habit.frequency);
@@ -14,19 +12,15 @@ export default function DetailAchievement({ habit, totalDates, checkDates }) {
   const weeklyAchieved = getAchievedCount(thisWeekDates, checkDates);
   const thisMonthAchieved = getAchievedCount(monthlyDates, checkDates);
 
-  const lastWeekObj = { title: 'Last week', completed: getCompletedPercentage(lastWeekAchieved, lastWeekHabitFilter) };
-  const thisWeekObj = { title: 'This week', completed: getCompletedPercentage(weeklyAchieved, weeklyHabitFilter) };
-  const thisMonthObj = { title: 'This Month', completed: getCompletedPercentage(thisMonthAchieved, monthlyHabitDays) };
-
   const achievement = ((checkDates.length / totalDates.length) * 100).toFixed(1);
 
   return (
     <div className='flex flex-col'>
       <div className='text-xl text-brand text-center font-bold'>Your performance</div>
       <div className='flex justify-center'>
-        <AchievementChart chartObj={lastWeekObj} />
-        <AchievementChart chartObj={thisWeekObj} />
-        <AchievementChart chartObj={thisMonthObj} />
+        <AchievementChart title='Last week' percentage={getCompletedPercentage(lastWeekAchieved, lastWeekHabitFilter)} />
+        <AchievementChart title='This week' percentage={getCompletedPercentage(weeklyAchieved, weeklyHabitFilter)} />
+        <AchievementChart title='This Month' percentage={getCompletedPercentage(thisMonthAchieved, monthlyHabitDays)} />
       </div>
       <hr />
       <div className='flex justify-center items-center py-3'>
@@ -35,6 +29,7 @@ export default function DetailAchievement({ habit, totalDates, checkDates }) {
     </div>
   );
 }
+
 const getHabitFilter = (dates, createdAt, frequency) => dates.filter((date) => moment(date).isSameOrAfter(createdAt, 'day')).filter((date) => frequency.includes((moment(date).day() + 6) % 7)).length;
 const getAchievedCount = (dates, checkDates) => checkDates.filter((date) => dates.includes(date)).length;
 const getCompletedPercentage = (achieved, habitFilter) => {
