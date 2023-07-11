@@ -49,7 +49,7 @@ export default function HabitForm({ closeModal, habitProp }: { closeModal: any; 
       alert('최소 하나의 요일을 체크해주세요');
       return;
     }
-    const habitSetting = { ...habit, limitTime: time };
+    const habitSetting = { ...habit, status: false, limitTime: time };
 
     addOrUpdateItem.mutate(habitSetting, {
       onSuccess: () => {

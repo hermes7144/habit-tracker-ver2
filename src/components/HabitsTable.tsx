@@ -4,7 +4,7 @@ import 'moment/locale/fr';
 import { HabitType } from '../types/types';
 import { useHabitsHooks } from '../context/HabitsContext';
 
-export default function HabitsTable({ week }) {
+export default function HabitsTable({ week, filter }) {
   const navigate = useNavigate();
   const { useHabits } = useHabitsHooks();
   const {
@@ -21,7 +21,7 @@ export default function HabitsTable({ week }) {
     return `${year}-${month}-${day}`;
   };
 
-  const filteredHabits = habits.filter((habit) => !habit.completed);
+  const filtered = filterValue(filter, habits);
 
   const date = new Date();
   const today = formatDate(date);
@@ -51,7 +51,7 @@ export default function HabitsTable({ week }) {
               </tr>
             </thead>
             <tbody>
-              {filteredHabits.map((habit: HabitType) => {
+              {filtered.map((habit: HabitType) => {
                 return (
                   <tr key={habit.id}>
                     <th
@@ -97,4 +97,15 @@ export default function HabitsTable({ week }) {
       </div>
     </div>
   );
+}
+
+function filterValue(filter, habits) {
+  if (habits === null) return;
+  if (filter === 'all') {
+    return habits;
+  } else if (filter === 'active') {
+    return habits.filter((habit) => habit.status === false);
+  } else if (filter === 'completed') {
+    return habits.filter((habit) => habit.status === true);
+  }
 }

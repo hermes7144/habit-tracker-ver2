@@ -47,7 +47,7 @@ describe('HabitsTable', () => {
       withAllContexts(
         withRouter(
           <>
-            <Route path='/' element={<HabitsTable week={week} />} />
+            <Route path='/' element={<HabitsTable week={week} filter={'all'} />} />
             <Route path={`/habits/1`} element={<LocationStateDisplay />} />
           </>
         ),
@@ -79,6 +79,6 @@ describe('HabitsTable', () => {
   });
 
   function renderHabitsTable() {
-    return render(withAllContexts(withRouter(<Route path='/' element={<HabitsTable week={week} />} />), fakeUseHabits));
+    return render(withAllContexts(withRouter(<Route path='/' element={<HabitsTable week={week} filter={'all'} />} />), fakeUseHabits));
   }
 });

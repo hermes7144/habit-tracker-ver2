@@ -7,6 +7,7 @@ import Achievements from '../components/Achievements';
 import HabitsTable from '../components/HabitsTable';
 import CardWrapper from '../components/CardWrapper';
 import CalendarCard from '../components/CalendarCard';
+import HabitFilter from '../components/HabitFilter';
 
 export default function DashBoard() {
   const date = new Date();
@@ -20,9 +21,16 @@ export default function DashBoard() {
     if (week.includes(formattedDate)) {
       const isFirstDate = week[0] === formattedDate;
       const isLastDate = week[week.length - 1] === formattedDate;
-      const classNames = `highlight${isFirstDate ? ' highlight--first' : ''}${isLastDate ? ' highlight--last' : ''}`;
+      const classNames = `highlight ${isFirstDate ? 'highlight--first' : ''}${isLastDate ? 'highlight--last' : ''}`;
       return classNames;
     }
+  };
+
+  const filters = ['all', 'active', 'completed'];
+  const [filter, setFilter] = useState(filters[1]);
+
+  const handleFilter = (index) => {
+    setFilter(filters[index]);
   };
 
   return (
@@ -39,7 +47,10 @@ export default function DashBoard() {
             <CalendarCard value={value} onChange={onChange} tileClassName={tileClassName} />
           </CardWrapper>
         </div>
-        <HabitsTable week={week} />
+        <div>
+          <HabitFilter filters={filters} filter={filter} onFilter={handleFilter} />
+          <HabitsTable week={week} filter={filter} />
+        </div>
       </div>
     </Suspense>
   );

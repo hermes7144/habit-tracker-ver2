@@ -26,7 +26,7 @@ export default function BarChart({ week }) {
   const { data: habits } = useHabits().habitsQuery;
   const { data: checkmarks } = useHabits().checksQuery;
 
-  const filteredHabits = habits.filter((habit) => !habit.completed);
+  const filteredHabits = habits.filter((habit) => !habit.status);
   const labels = week.map((date) => moment(date).format('MM-DD'));
 
   const totalDate = filteredHabits.flatMap((habit: HabitType) => habit.frequency.map((freq) => week[freq]));

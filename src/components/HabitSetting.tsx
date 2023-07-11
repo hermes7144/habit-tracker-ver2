@@ -28,7 +28,7 @@ export default function HabitSetting({ habit }) {
 
   const handleComplete = () => {
     if (window.confirm('완료하시겠습니까?')) {
-      const completeHabit = { ...habit, completed: !habit.completed };
+      const completeHabit = { ...habit, status: !habit.status };
       addOrUpdateItem.mutate(completeHabit, {
         onSuccess: () => {
           closeModal();
@@ -73,7 +73,7 @@ export default function HabitSetting({ habit }) {
         <FrequencyChip frequency={habit.frequency} />
       </div>
       <div className='flex justify-end gap-2'>
-        <Button text={`습관 ${habit.completed ? '재시작' : '완료'}`} onClick={handleComplete} />
+        <Button text={`습관 ${habit.status ? '재시작' : '완료'}`} onClick={handleComplete} />
       </div>
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={{ content }}>
         <HabitForm closeModal={closeModal} habitProp={habit} />
