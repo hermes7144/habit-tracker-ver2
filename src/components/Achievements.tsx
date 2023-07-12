@@ -61,8 +61,10 @@ const calculateCompletionRate = (achieved, total) => {
 
 export default function Achievements(): any {
   const { useHabits } = useHabitsHooks();
-  const { data: habits } = useHabits().habitsQuery;
-  const { data: checkmarks } = useHabits().checksQuery;
+  const { habitsQuery, checksQuery } = useHabits();
+
+  const habits = habitsQuery.data;
+  const checkmarks = checksQuery.data;
 
   const filteredHabits = habits.filter((habit) => !habit.status);
   const todayHabitsCount = filteredHabits.filter((habit) => habit.frequency.includes(dayOfWeek)).length;

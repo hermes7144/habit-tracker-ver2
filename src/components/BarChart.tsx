@@ -23,8 +23,10 @@ const options = {
 
 export default function BarChart({ week }) {
   const { useHabits } = useHabitsHooks();
-  const { data: habits } = useHabits().habitsQuery;
-  const { data: checkmarks } = useHabits().checksQuery;
+  const { habitsQuery, checksQuery } = useHabits();
+
+  const habits = habitsQuery.data;
+  const checkmarks = checksQuery.data;
 
   const filteredHabits = habits.filter((habit) => !habit.status);
   const labels = week.map((date) => moment(date).format('MM-DD'));
