@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 export default function LandingPage() {
-  alert('ttt');
+  window.confirm('ttt');
   return (
     <>
       <main>
